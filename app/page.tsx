@@ -1,19 +1,13 @@
-'use client'
-import styles from './page.module.scss'
-import React, {useEffect, useState} from "react";
-import {useTheme} from "@/Providers/ThemeProvider";
-import classNames from "classnames";
-import {FullScreenLoading} from "@/Providers/FullScreenLoading";
+import styles from './page.module.scss';
+import Link from 'next/link';
+import {MainPageSlider} from "@/components/MainPageSlider/MainPageSlider";
 
 export default function Home() {
-
-
-
-  // if(isLoading) return <Loading  />
-
   return (
-      <>
-        <div className={styles.main}>Ничего</div>
-      </>
-  )
+    <>
+      <main className={styles.main}>
+		<MainPageSlider />
+      </main>
+    </>
+  );
 }

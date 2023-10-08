@@ -1,5 +1,30 @@
+.logo {
+  padding-top: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-default);
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+  max-width: max-content;
 
+  .stars {
+    letter-spacing: 2px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .line {
+    height: 5px;
+    width: 85%;
+    border-radius: 6px;
+    background: var(--primary-default);
+  }
+}
 
-.main{
+.main {
   background: var(--bg-color);
 }
+
+

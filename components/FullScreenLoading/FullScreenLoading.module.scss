@@ -1,12 +1,12 @@
 .background {
   background: var(--bg-color);
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 .h1 {
@@ -14,6 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--bebas-neue);
   flex-direction: column;
 
 
@@ -88,6 +89,7 @@
 
 .description {
   //margin-top: auto;
+  font-family: var(--poppins);
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;

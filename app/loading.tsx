@@ -1,5 +1,5 @@
-import {FullScreenLoading} from "@/Providers/FullScreenLoading";
+import {FullScreenLoading} from '../components/FullScreenLoading';
 
-export default function Loading (){
-    return (<FullScreenLoading />)
+export default function Loading() {
+  return <FullScreenLoading />;
 }

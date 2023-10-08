@@ -1,0 +1,34 @@
+
+.title {
+  margin-top: 7.5rem;
+  font-size: 4rem;
+  .neutralText{
+    color: var(--neutral-text);
+  }
+  .primaryText{
+    color: var(--primary-default);
+  }
+}
+
+.buttons{
+  margin-top: 8rem;
+  display: flex;
+  gap: 25px;
+  .button{
+    color: var(--neutral-grey);
+    cursor: pointer;
+    font-size: 1.5rem;
+    &__active{
+      color: var(--primary-default);
+      font-size: 2rem;
+    }
+  }
+
+}
+
+.description{
+  color: var(--neutral-grey);
+  font-size: 1.5rem;
+  font-family: var(--poppins);
+  font-weight: 400;
+}

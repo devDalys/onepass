@@ -1,6 +1,5 @@
 'use client'
 import styles from './FullScreenLoading.module.scss'
-import {Theme} from "@/Providers/ThemeProvider/ThemeContext";
 import {FC} from "react";
 import classNames from "classnames";
 

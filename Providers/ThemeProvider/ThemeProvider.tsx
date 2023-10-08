@@ -1,8 +1,10 @@
 'use client'
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from './ThemeContext';
-import {FullScreenLoading} from "@/Providers/FullScreenLoading";
-
+import {FullScreenLoading} from "../../components/FullScreenLoading";
+import dynamic from "next/dynamic";
+import classNames from "classnames";
+import styles from './ThemeProvider.module.scss'
 let defaultTheme: Theme;
 
 if (typeof window !== 'undefined') {
@@ -14,7 +16,7 @@ interface ThemeProviderProps {
     children: React.ReactNode
 }
 
-export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
+const Component: FC<ThemeProviderProps> = (props) => {
     const {
         initialTheme,
         children,
@@ -29,18 +31,21 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
     }), [theme]);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
+        const timeout = setTimeout(() => {
             setIsLoading(false)
-        }
+            clearTimeout(timeout)
+        }, 1000)
     }, [])
 
     return (
         <ThemeContext.Provider value={defaultProps}>
-            {isLoading && <FullScreenLoading />}
-            <div className={isLoading ? '' : theme}>
+            <div className={classNames(theme, styles.root)}>
+                {isLoading && <FullScreenLoading />}
                 {children}
             </div>
         </ThemeContext.Provider>
     );
 };
+
+export const ThemeProvider = dynamic(() => Promise.resolve(Component), {ssr: false})
 
