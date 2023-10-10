@@ -1,0 +1,16 @@
+.layout{
+  display: flex;
+  width: 100%;
+  min-height: 80vh;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  height: 100%;
+}
+
+.span{
+  color: var(--primary-default);
+  font-size: 30px;
+  padding: 2px 41px;
+  border-right: 2px solid var(--neutral-grey);
+}

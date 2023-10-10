@@ -1,4 +1,6 @@
 .logo {
+  user-select: none;
+  pointer-events: none;
   padding-top: 2.8rem;
   display: flex;
   flex-direction: column;
