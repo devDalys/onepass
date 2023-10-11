@@ -8,10 +8,16 @@ export const BUTTON_THEME = {
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   theme: (typeof BUTTON_THEME)[keyof typeof BUTTON_THEME];
+  className: string;
 }
 
 export const Button = (props: Props) => {
-  const {theme, ...anyprops} = props;
+  const {theme, className, ...buttonProps} = props;
 
-  return <button className={classNames(styles.button, styles[theme])} {...anyprops}></button>;
+  return (
+    <button
+      className={classNames(styles.button, styles[theme], className)}
+      {...buttonProps}
+    ></button>
+  );
 };

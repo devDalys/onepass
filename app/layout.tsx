@@ -5,6 +5,7 @@ import {Poppins} from 'next/font/google';
 import {ThemeProvider} from '@/Providers/ThemeProvider';
 import styles from './page.module.scss';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 const inter = Bebas_Neue({
   subsets: ['latin'],
@@ -30,14 +31,16 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={classNames(inter.variable, poppins.variable)}>
         <ThemeProvider>
           <div className={'root'}>
-            <div className={styles.logo}>
-              <span className={styles.stars}>
-                <p className={styles.stars__star}>*</p>
-                <p className={styles.stars__star}>*</p>
-                <p className={styles.stars__star}>*</p>
-              </span>
-              <span className={styles.line} />
-            </div>
+            <Link href="/">
+              <div className={styles.logo}>
+                <span className={styles.stars}>
+                  <p className={styles.stars__star}>*</p>
+                  <p className={styles.stars__star}>*</p>
+                  <p className={styles.stars__star}>*</p>
+                </span>
+                <span className={styles.line} />
+              </div>
+            </Link>
             {children}
           </div>
         </ThemeProvider>

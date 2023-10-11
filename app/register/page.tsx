@@ -1,3 +1,10 @@
+import {AuthPage} from '@/components/AuthPage';
+import {RegisterForm} from '@/components/RegisterForm';
+
 export default function page() {
-  return <div>Register</div>;
+  return (
+    <AuthPage text="Register">
+      <RegisterForm />
+    </AuthPage>
+  );
 }

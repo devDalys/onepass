@@ -1,7 +1,6 @@
 'use client';
 import styles from './NotFoundPage.module.scss';
-import {Button} from '@/components/Button';
-import {redirect} from 'next/navigation';
+import {Button} from '@/ui-kit';
 import Link from 'next/link';
 
 export const NotFoundPage = () => {

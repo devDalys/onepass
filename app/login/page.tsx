@@ -1,3 +1,9 @@
+import {AuthPage} from '@/components/AuthPage';
+
 export default function page() {
-  return <div>Login</div>;
+  return (
+    <AuthPage text="Login">
+      <div>логин</div>
+    </AuthPage>
+  );
 }

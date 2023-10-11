@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {MainPageSlider} from '@/components/MainPageSlider/MainPageSlider';
 import Loading from '@/app/loading';
 import * as Slides from '@/components/MainPageSlider/Slides';
-import {Button, BUTTON_THEME} from '@/components/Button';
+import {Button, BUTTON_THEME} from '@/ui-kit';
 
 export default function Home() {
   return (

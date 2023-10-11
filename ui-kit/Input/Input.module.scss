@@ -1,0 +1,27 @@
+.inputWrapper{
+  position: relative;
+}
+
+.label{
+  position: absolute;
+  top: 5px;
+  left: 0.6rem;
+  color: var(--neutral-text);
+  font-size: 0.8rem;
+}
+
+.input{
+  margin-top: 20px;
+  border: 2px solid var(--neutral-input);
+  outline: none;
+  color: var(--neutral-text);
+  padding: 0.6rem;
+  border-radius: 0.625rem;
+  min-height: 2.5rem;
+  min-width: 21rem;
+  background: var(--neutral-card);
+  &::placeholder{
+    color: var(--neutral-grey);
+    font-family: var(--poppins);
+  }
+}
