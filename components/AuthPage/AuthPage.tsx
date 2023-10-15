@@ -7,10 +7,12 @@ interface Props {
 
 export const AuthPage = ({children, text}: Props) => {
   return (
-    <section>
-      <h1 className={styles.title}>{text}</h1>
-      <h2 className={styles.subtitle}>Let’s get you setup with a new account!</h2>
-      {children}
+    <section className={styles.section}>
+      <div className={styles.form}>
+        <h1 className={styles.title}>{text}</h1>
+        <h2 className={styles.subtitle}>Let’s get you setup with a new account!</h2>
+        {children}
+      </div>
     </section>
   );
 };

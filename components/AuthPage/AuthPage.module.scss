@@ -12,3 +12,13 @@
   color: var(--neutral-grey);
   font-weight: 400;
 }
+
+.section{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.form{
+  padding-left: 10%;
+  padding-top: 5%;
+}
