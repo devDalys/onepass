@@ -5,9 +5,10 @@ import {useEffect, useState} from 'react';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   aliasText: string;
+  errorText?: string;
 }
 
-export const Input: React.FC<Props> = ({aliasText, ...inputProps}) => {
+export const Input: React.FC<Props> = ({aliasText, errorText, ...inputProps}) => {
   const [id, setId] = useState('');
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -21,6 +22,7 @@ export const Input: React.FC<Props> = ({aliasText, ...inputProps}) => {
         {aliasText}
       </label>
       <input {...inputProps} id={id} className={styles.input} />
+      {!!errorText && <span className={styles.error}>{errorText}</span>}
     </div>
   );
 };

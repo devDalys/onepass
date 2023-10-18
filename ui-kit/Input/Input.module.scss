@@ -1,5 +1,9 @@
 .inputWrapper{
   position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 18px;
+
 }
 
 .label{
@@ -25,4 +29,13 @@
     color: var(--neutral-grey);
     font-family: var(--poppins);
   }
+}
+
+.error{
+  left: 0.6rem;
+  font-size: 0.8rem;
+  font-family: var(--poppins);
+  color: var(--primary-default);
+  position: absolute;
+  bottom: 0;
 }

@@ -37,22 +37,37 @@ export const RegisterForm = () => {
       <Controller
         control={control}
         name="name"
-        render={({field: {ref, ...field}}) => (
-          <Input aliasText="Name" placeholder="Jhon Doe" {...field} />
+        render={({field: {ref, ...field}, fieldState}) => (
+          <Input
+            aliasText="Name"
+            placeholder="Jhon Doe"
+            {...field}
+            errorText={fieldState.error?.message}
+          />
         )}
       />
       <Controller
         control={control}
         name="email"
-        render={({field: {ref, ...field}}) => (
-          <Input aliasText="Email" placeholder="johndoe@email.com" {...field} />
+        render={({field: {ref, ...field}, fieldState}) => (
+          <Input
+            aliasText="Email"
+            placeholder="johndoe@email.com"
+            {...field}
+            errorText={fieldState.error?.message}
+          />
         )}
       />
       <Controller
         control={control}
         name="password"
-        render={({field: {ref, ...field}}) => (
-          <Input aliasText="Password" placeholder="Password" {...field} />
+        render={({field: {ref, ...field}, fieldState}) => (
+          <Input
+            aliasText="Password"
+            placeholder="Password"
+            {...field}
+            errorText={fieldState.error?.message}
+          />
         )}
       />
       <Button theme="default" type="submit" className={styles.button}>
