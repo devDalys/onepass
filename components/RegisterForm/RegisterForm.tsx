@@ -4,6 +4,8 @@ import {Button, Input} from '@/ui-kit';
 import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {fetchData} from '@/utils';
+import {_api} from '@/api';
 
 interface Form {
   name: string;
@@ -28,8 +30,9 @@ export const RegisterForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: Form) => {
-    console.log(data);
+  const onSubmit = async (data: Form) => {
+    const result = _api.post('/auth/register', data);
+    console.log(result);
   };
 
   return (
