@@ -4,7 +4,6 @@ import {Button, Input} from '@/ui-kit';
 import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {fetchData} from '@/utils';
 import {_api} from '@/api';
 
 interface Form {
@@ -12,7 +11,6 @@ interface Form {
   email: string;
   password: string;
 }
-
 const schema = yup.object().shape({
   name: yup.string().min(3).max(20).required(),
   email: yup.string().email().required(),
@@ -31,8 +29,7 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = async (data: Form) => {
-    const result = _api.post('/auth/register', data);
-    console.log(result);
+    await _api().post('/auth/register', data);
   };
 
   return (
@@ -68,6 +65,7 @@ export const RegisterForm = () => {
           <Input
             aliasText="Password"
             placeholder="Password"
+            type="password"
             {...field}
             errorText={fieldState.error?.message}
           />

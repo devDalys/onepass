@@ -1,8 +1,7 @@
 'use client';
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from './ThemeContext';
-import {FullScreenLoading} from '../../components/FullScreenLoading';
-import dynamic from 'next/dynamic';
+import {FullScreenLoading} from '@/components/FullScreenLoading';
 import classNames from 'classnames';
 import styles from './ThemeProvider.module.scss';
 let defaultTheme: Theme;
@@ -45,5 +44,3 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
     </ThemeContext.Provider>
   );
 };
-
-// export const ThemeProvider = dynamic(() => Promise.resolve(Component), {ssr: true});
