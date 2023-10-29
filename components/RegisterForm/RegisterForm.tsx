@@ -5,6 +5,7 @@ import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
+import React from 'react';
 
 interface Form {
   name: string;
@@ -28,8 +29,18 @@ export const RegisterForm = () => {
     resolver: yupResolver(schema),
   });
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const onSubmit = async (data: Form) => {
-    await _api().post('/auth/register', data);
+    try {
+      setIsLoading(true);
+      const result = await _api().post('/auth/register', data);
+      console.log(result);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -41,6 +52,7 @@ export const RegisterForm = () => {
           <Input
             aliasText="Name"
             placeholder="Jhon Doe"
+            autoComplete="name"
             {...field}
             errorText={fieldState.error?.message}
           />
@@ -53,6 +65,7 @@ export const RegisterForm = () => {
           <Input
             aliasText="Email"
             placeholder="johndoe@email.com"
+            autoComplete="email"
             {...field}
             errorText={fieldState.error?.message}
           />
@@ -66,12 +79,13 @@ export const RegisterForm = () => {
             aliasText="Password"
             placeholder="Password"
             type="password"
+            autoComplete="new-password"
             {...field}
             errorText={fieldState.error?.message}
           />
         )}
       />
-      <Button theme="default" type="submit" className={styles.button}>
+      <Button isLoading={isLoading} theme="default" type="submit" className={styles.button}>
         Register
       </Button>
     </form>
