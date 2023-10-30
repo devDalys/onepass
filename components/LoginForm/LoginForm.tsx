@@ -6,6 +6,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
 import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
+import {setCookie} from 'cookies-next';
 
 interface Form {
   email: string;
@@ -27,7 +28,9 @@ export const LoginForm = () => {
     resolver: yupResolver(schema),
   });
   const onSubmit = async (data: Form) => {
-    await _api().post('/auth/login', data);
+    await _api()
+      .post('/auth/login', data)
+      .then((data) => setCookie('token', data.data.token, {maxAge: 3600000}));
   };
 
   return (
@@ -39,6 +42,7 @@ export const LoginForm = () => {
           <Input
             aliasText="Email"
             placeholder="johndoe@email.com"
+            autoComplete="email"
             {...field}
             errorText={fieldState.error?.message}
           />
@@ -51,6 +55,7 @@ export const LoginForm = () => {
           <Input
             aliasText="Password"
             placeholder="Password"
+            autoComplete="current-password"
             {...field}
             type="password"
             errorText={fieldState.error?.message}

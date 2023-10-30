@@ -1,15 +1,12 @@
 'use client';
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, {FC, useMemo, useState} from 'react';
 import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from './ThemeContext';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import classNames from 'classnames';
 import styles from './ThemeProvider.module.scss';
-let defaultTheme: Theme;
+import {getCookie} from 'cookies-next';
 
-if (typeof window !== 'undefined') {
-  defaultTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.DARK;
-}
-
+const defaultTheme = (getCookie(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.DARK;
 interface ThemeProviderProps {
   initialTheme?: Theme;
   children: React.ReactNode;
@@ -29,18 +26,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
     [theme],
   );
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setIsLoading(false);
-    }
-  }, []);
-
   return (
     <ThemeContext.Provider value={defaultProps}>
-      <div className={classNames({[theme]: !isLoading}, styles.root)}>
-        {isLoading && <FullScreenLoading />}
-        {children}
-      </div>
+      <div className={classNames({[theme]: !isLoading}, styles.root)}>{children}</div>
     </ThemeContext.Provider>
   );
 };

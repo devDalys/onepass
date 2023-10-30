@@ -12,6 +12,7 @@ const inter = Bebas_Neue({
   weight: '400',
   variable: '--bebas-neue',
   display: 'swap',
+  preload: true,
 });
 const poppins = Poppins({
   subsets: ['latin'],
