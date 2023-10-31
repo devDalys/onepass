@@ -6,6 +6,9 @@ import {ThemeProvider} from '@/Providers/ThemeProvider';
 import styles from './page.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
+import {cookies} from 'next/headers';
+import {LOCAL_STORAGE_THEME_KEY, Theme} from '@/Providers/ThemeProvider/ThemeContext';
+import {getCookie} from 'cookies-next';
 
 const inter = Bebas_Neue({
   subsets: ['latin'],
@@ -26,11 +29,12 @@ export const metadata: Metadata = {
   description: 'Единственный менеджер паролей, который вам когда-либо понадобится.',
 };
 
+const theme = cookies().get(LOCAL_STORAGE_THEME_KEY)?.value as Theme;
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
       <body className={classNames(inter.variable, poppins.variable)}>
-        <ThemeProvider>
+        <ThemeProvider initialTheme={theme}>
           <div className={'root'}>
             <Link href="/">
               <div className={styles.logo}>

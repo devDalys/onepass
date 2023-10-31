@@ -7,6 +7,7 @@ import {_api} from '@/api';
 import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
 import {setCookie} from 'cookies-next';
+import {ONE_MONTH} from '@/utils/consts';
 
 interface Form {
   email: string;
@@ -30,7 +31,7 @@ export const LoginForm = () => {
   const onSubmit = async (data: Form) => {
     await _api()
       .post('/auth/login', data)
-      .then((data) => setCookie('token', data.data.token, {maxAge: 3600000}));
+      .then((data) => setCookie('token', data.data.token, {maxAge: ONE_MONTH}));
   };
 
   return (
