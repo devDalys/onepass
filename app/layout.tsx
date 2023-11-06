@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import {cookies} from 'next/headers';
 import {LOCAL_STORAGE_THEME_KEY, Theme} from '@/Providers/ThemeProvider/ThemeContext';
-import {getCookie} from 'cookies-next';
 
 const inter = Bebas_Neue({
   subsets: ['latin'],
