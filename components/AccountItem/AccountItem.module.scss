@@ -1,0 +1,38 @@
+.item {
+  height: 100%;
+  max-height: 5rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem 1rem 1rem;
+  //background: var(--neutral-input);
+  border: 2px solid var(--neutral-input);
+  margin-bottom: 1.25rem;
+  border-radius: 0.625rem;
+  background: var(--neutral-card);
+  cursor: pointer;
+}
+
+.iconWrapper {
+  border-radius: 0.625rem;
+  background: var(--neutral-input);
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.5rem;
+}
+
+.icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.socialName {
+  color:var(--neutral-input);
+  font-size: 1.25rem;
+}
+
+.copyIcon{
+  margin-left: auto;
+}
