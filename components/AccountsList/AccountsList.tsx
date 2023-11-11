@@ -1,4 +1,4 @@
-import styles from '@/app/accounts/styles.module.scss';
+import styles from './AccountsList.module.scss';
 import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
 
 interface Props {

@@ -3,24 +3,40 @@ import {cookies} from 'next/headers';
 import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
 import styles from './styles.module.scss';
 import AccountList from '@/components/AccountsList/AccountsList';
-import Counters from '@/components/Counters';
+import HeaderBlock from '@/components/HeaderBlock';
 import NavMenu from '@/components/NavMenu/NavMenu';
+import {AxiosError} from 'axios';
+import {deleteCookie} from 'cookies-next';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock';
+
+const token = cookies().get('token')?.value;
 
 const getAccounts = async (): Promise<IAccountItem[]> => {
-  const data = await _api(cookies().get('token')?.value).get('/accounts');
+  const data = await _api(token).get('/accounts');
   return Object.values(data.data.body);
 };
 
+const getMe = async (): Promise<Profile> => {
+  const data = await _api(token).get('/auth/me');
+
+  if (data instanceof AxiosError) {
+    deleteCookie('token');
+  }
+
+  return data.data;
+};
+
 export default async function AccountsPage() {
-  const data = await getAccounts();
+  const accounts = await getAccounts();
+  const profile = await getMe();
 
   return (
     <>
       <div className={styles.header}>
-        <Counters accounts={data} />
+        <HeaderBlock accounts={accounts} profile={profile} />
         <NavMenu />
       </div>
-      <AccountList accounts={data} />
+      <AccountList accounts={accounts} />
     </>
   );
 }

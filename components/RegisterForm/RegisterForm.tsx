@@ -35,7 +35,6 @@ export const RegisterForm = () => {
     try {
       setIsLoading(true);
       const result = await _api().post('/auth/register', data);
-      console.log(result);
     } catch (e) {
       console.error(e);
     } finally {

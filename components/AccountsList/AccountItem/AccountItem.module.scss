@@ -4,12 +4,15 @@
   display: flex;
   align-items: center;
   padding: 1rem 2rem 1rem 1rem;
-  //background: var(--neutral-input);
   border: 2px solid var(--neutral-input);
-  margin-bottom: 1.25rem;
   border-radius: 0.625rem;
   background: var(--neutral-card);
   cursor: pointer;
+  transition: filter 0.5s;
+
+  &:hover{
+    filter: saturate(200%);
+  }
 }
 
 .iconWrapper {
