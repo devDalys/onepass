@@ -1,14 +1,20 @@
+@import '@/app/mixins';
+
 .wrapper{
-  width: 100%;
+  width: 50%;
   display: flex;
   align-items: center;
   //justify-content: space-between;
   gap: 1rem;
   margin: 1.5rem 0;
+
+  @include for-mobile{
+    width: 100%;
+  }
 }
 
 .counter{
-  width: 20%;
+  width: 49%;
   height: 10rem;
   display: flex;
   flex-direction: column;

@@ -4,6 +4,7 @@ import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
 import styles from './styles.module.scss';
 import AccountList from '@/components/AccountsList/AccountsList';
 import Counters from '@/components/Counters';
+import NavMenu from '@/components/NavMenu/NavMenu';
 
 const getAccounts = async (): Promise<IAccountItem[]> => {
   const data = await _api(cookies().get('token')?.value).get('/accounts');
@@ -15,7 +16,10 @@ export default async function AccountsPage() {
 
   return (
     <>
-      <Counters accounts={data} />
+      <div className={styles.header}>
+        <Counters accounts={data} />
+        <NavMenu />
+      </div>
       <AccountList accounts={data} />
     </>
   );

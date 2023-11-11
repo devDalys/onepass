@@ -1,5 +1,6 @@
 @import 'theme/dark.css';
 @import 'theme/light.css';
+@import './mixins.scss';
 
 * {
   box-sizing: border-box;
@@ -14,6 +15,9 @@
   height: 100%;
   font-family: var(--bebas-neue);
   min-height: 100vh;
+  @include for-mobile{
+    padding: 1rem;
+  }
 }
 
 html,

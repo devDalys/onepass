@@ -1,0 +1,96 @@
+@import '@/app/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  border-radius: 0.625rem;
+  @include for-mobile {
+    position: fixed;
+    bottom: 1rem;
+    margin: 0 auto;
+    height: auto;
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-between;
+    background: var(--neutral-card);
+    border-radius: 0.625rem;
+    padding: 0.5rem;
+  }
+
+
+}
+
+.add, .item {
+  display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  padding: 0.9rem;
+  background: var(--neutral-card);
+  border-left: 2px solid var(--neutral-input);
+  border-right: 2px solid var(--neutral-input);
+  transition: filter 0.5s;
+
+  &:first-child {
+    border-radius: 0.625rem 0.625rem 0 0;
+    border-top: 2px solid var(--neutral-input);
+  }
+
+  &:last-child {
+    border-radius: 0 0 0.625rem 0.625rem;
+    border-bottom: 2px solid var(--neutral-input);
+
+  }
+  @include for-mobile{
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  &:hover{
+    filter: saturate(200%);
+    transition: filter 0.5s;
+  }
+
+}
+
+.item{
+  @include for-mobile{
+    width: 38%;
+    &:nth-child(0){
+      order: 0;
+    }
+    &:nth-child(3){
+      order: 3;
+    }
+    &:nth-child(1n){
+      border: 0;
+    }
+  }
+}
+
+.add.add {
+  background: var(--primary-default);
+  @include for-mobile{
+    order: 1;
+    border-radius: 50%;
+    width: 3.75rem;
+    height: 3.75rem;
+    border: 0;
+    transform: translateY(-1.5rem);
+    filter: drop-shadow(0px 5px 10px rgba(255, 100, 100, 0.30));
+  }
+
+}
+
+.text {
+  flex: 1;
+  margin-left: 2rem;
+  color: var(--neutral-text);
+  @include for-mobile{
+    display: none;
+  }
+
+}

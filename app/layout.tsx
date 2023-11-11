@@ -1,4 +1,4 @@
-import './globals.css';
+import './globals.scss';
 import type {Metadata} from 'next';
 import {Bebas_Neue} from 'next/font/google';
 import {Poppins} from 'next/font/google';
