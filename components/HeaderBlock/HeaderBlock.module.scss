@@ -37,6 +37,8 @@
 .avatar{
   border: 2px solid var(--primary-default);
   border-radius: 0.625rem;
+  max-width: 6rem;
+  object-fit: cover;
   @include for-mobile{
     height: 4rem;
     width: fit-content;
@@ -80,4 +82,9 @@
     padding-top: 1rem;
   }
 
+}
+
+.logout{
+  margin-top: auto;
+  width: 100%;
 }

@@ -8,6 +8,7 @@ import NavMenu from '@/components/NavMenu/NavMenu';
 import {AxiosError} from 'axios';
 import {deleteCookie} from 'cookies-next';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
+import {AUTH_TOKEN} from '@/utils/consts';
 
 const token = cookies().get('token')?.value;
 
@@ -20,7 +21,7 @@ const getMe = async (): Promise<Profile> => {
   const data = await _api(token).get('/auth/me');
 
   if (data instanceof AxiosError) {
-    deleteCookie('token');
+    deleteCookie(AUTH_TOKEN);
   }
 
   return data.data;

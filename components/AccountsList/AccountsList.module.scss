@@ -1,5 +1,11 @@
+@import '@/app/mixins';
+
 .wrapper{
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @include for-mobile{
+    padding-bottom: 10rem;
+  }
 }

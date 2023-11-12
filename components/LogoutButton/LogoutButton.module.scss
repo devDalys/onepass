@@ -1,0 +1,15 @@
+@import '@/app/mixins';
+
+.button{
+  padding: 0.5rem;
+  background: var(--primary-default);
+  outline: none;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  color: var(--neutral-text);
+  font-size: 1rem;
+  font-family: var(--bebas-neue);
+  @include for-mobile{
+    display: none;
+  }
+}

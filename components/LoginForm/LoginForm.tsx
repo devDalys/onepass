@@ -8,6 +8,7 @@ import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
 import {setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
+import {useRouter} from 'next/navigation';
 
 interface Form {
   email: string;
@@ -28,10 +29,16 @@ export const LoginForm = () => {
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
   });
+
+  const router = useRouter();
+
   const onSubmit = async (data: Form) => {
     await _api()
       .post('/auth/login', data)
-      .then((data) => setCookie('token', data.data.token, {maxAge: ONE_MONTH}));
+      .then((data) => {
+        setCookie('token', data.data.token, {maxAge: ONE_MONTH});
+        router.push('/accounts');
+      });
   };
 
   return (
