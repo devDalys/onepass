@@ -28,8 +28,9 @@ export const metadata: Metadata = {
   description: 'Единственный менеджер паролей, который вам когда-либо понадобится.',
 };
 
-const theme = cookies().get(LOCAL_STORAGE_THEME_KEY)?.value as Theme;
 export default function RootLayout({children}: {children: React.ReactNode}) {
+  const theme = cookies().get(LOCAL_STORAGE_THEME_KEY)?.value as Theme;
+
   return (
     <html lang="en">
       <body className={classNames(inter.variable, poppins.variable)}>
