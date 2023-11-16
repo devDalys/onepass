@@ -7,6 +7,18 @@
   padding: 0;
   margin: 0;
 }
+body::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--neutral-grey);        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--primary-default);    /* color of the scroll thumb */
+  border-radius: 20rem;       /* roundness of the scroll thumb */
+}
 
 .root {
   width: 100%;

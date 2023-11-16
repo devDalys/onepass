@@ -1,0 +1,38 @@
+.input{
+  outline: none;
+  border: 0;
+  background: transparent;
+  flex: 1;
+  color: #fff;
+  font-size: 1rem;
+
+  &::placeholder{
+    color: var(--neutral-grey);
+    font-size: 1rem;
+	font-family: var(--poppins);
+  }
+
+}
+
+.searchIcon{
+  padding-right: 0.5rem;
+}
+
+.form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  border: 1px solid var(--neutral-input);
+  background: var(--neutral-card);
+  backdrop-filter: blur(15px);
+  border-radius: 0.625rem;
+  padding: 0.5rem 1.25rem;
+
+  &:active, &:focus-within{
+  border: 1px solid var(--primary-default);
+  font-family: var(--poppins);
+  color: #fff;
+  font-size: 1rem;
+}
+}
