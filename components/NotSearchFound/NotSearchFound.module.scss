@@ -1,0 +1,15 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+
+  h2{
+    color: #fff;
+  }
+
+  p{
+    color: var(--neutral-grey);
+    margin-top: 0.6rem;
+  }
+}
