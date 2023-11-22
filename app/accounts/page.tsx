@@ -1,35 +1,21 @@
-import {_api} from '@/api';
-import {cookies} from 'next/headers';
-import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
+import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import styles from './styles.module.scss';
 import AccountList from '@/components/AccountsList/AccountsList';
-import HeaderBlock from '@/components/HeaderBlock';
 import NavMenu from '@/components/NavMenu/NavMenu';
-import {AxiosError} from 'axios';
-import {deleteCookie} from 'cookies-next';
-import {Profile} from '@/components/HeaderBlock/HeaderBlock';
-import {AUTH_TOKEN} from '@/utils/consts';
-
-const token = cookies().get('token')?.value;
+import HeaderBlock, {Profile} from '@/components/HeaderBlock/HeaderBlock';
+import {fetchClient} from '@/api/fetchClient';
 
 const getAccounts = async (): Promise<IAccountItem[]> => {
-  const data = await _api(token).get('/accounts');
-  return Object.values(data.data.body);
+  const data = await fetchClient('/accounts');
+  return Object.values(data.body);
 };
 
-const getMe = async (): Promise<Profile> => {
-  const data = await _api(token).get('/auth/me');
-
-  if (data instanceof AxiosError) {
-    deleteCookie(AUTH_TOKEN);
-  }
-
-  return data.data;
+const getProfile = async (): Promise<Profile> => {
+  return await fetchClient('/auth/me');
 };
-
 export default async function AccountsPage() {
   const accounts = await getAccounts();
-  const profile = await getMe();
+  const profile = await getProfile();
 
   return (
     <>

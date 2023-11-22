@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {getCookies} from 'cookies-next';
 
 export const _api = (token?: string) =>
   axios.create({

@@ -10,6 +10,8 @@ import {cookies} from 'next/headers';
 import {LOCAL_STORAGE_THEME_KEY, Theme} from '@/Providers/ThemeProvider/ThemeContext';
 import {ContextProvider} from '@/Providers/ContextProvider';
 
+export const dynamic = 'force-dynamic';
+
 const inter = Bebas_Neue({
   subsets: ['latin'],
   weight: '400',
@@ -36,21 +38,19 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en">
       <body className={classNames(inter.variable, poppins.variable)}>
         <ThemeProvider initialTheme={theme}>
-          <ContextProvider>
-            <div className={'root'}>
-              <Link href="/">
-                <div className={styles.logo}>
-                  <span className={styles.stars}>
-                    <p className={styles.stars__star}>*</p>
-                    <p className={styles.stars__star}>*</p>
-                    <p className={styles.stars__star}>*</p>
-                  </span>
-                  <span className={styles.line} />
-                </div>
-              </Link>
-              {children}
-            </div>
-          </ContextProvider>
+          <div className={'root'}>
+            <Link href="/">
+              <div className={styles.logo}>
+                <span className={styles.stars}>
+                  <p className={styles.stars__star}>*</p>
+                  <p className={styles.stars__star}>*</p>
+                  <p className={styles.stars__star}>*</p>
+                </span>
+                <span className={styles.line} />
+              </div>
+            </Link>
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

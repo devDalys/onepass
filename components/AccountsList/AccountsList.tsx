@@ -26,7 +26,7 @@ export default function AccountList({accounts}: Props) {
     await navigator.clipboard.writeText(text);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!!inputState?.length) {
       setAccounts(() =>
         [...accounts].filter((item) =>

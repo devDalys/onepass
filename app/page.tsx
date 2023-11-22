@@ -4,6 +4,7 @@ import {MainPageSlider} from '@/components/MainPageSlider/MainPageSlider';
 import Loading from '@/app/loading';
 import * as Slides from '@/components/MainPageSlider/Slides';
 import {Button, BUTTON_THEME} from '@/ui-kit';
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (
