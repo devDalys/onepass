@@ -5,10 +5,11 @@ export function middleware(request: NextRequest) {
   const publicRoutes = ['/', '/login', '/register'];
   const privateRoutes = {
     accounts: '/accounts',
+    logout: '/logout',
   };
+  const href = request.nextUrl.pathname;
 
   if (request.cookies.has(AUTH_TOKEN)) {
-    const href = request.nextUrl.pathname;
     if (publicRoutes.includes(href)) {
       return NextResponse.redirect(new URL(privateRoutes.accounts, request.url));
     }

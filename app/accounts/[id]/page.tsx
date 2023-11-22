@@ -3,7 +3,7 @@ import {_api} from '@/api';
 import {cookies} from 'next/headers';
 
 const getAccounts = async (token: string): Promise<IAccountItem[]> => {
-  const data = await _api(token).get('/accounts');
+  const data = await _api.get('/accounts');
   return Object.values(data.data.body);
 };
 

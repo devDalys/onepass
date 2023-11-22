@@ -3,15 +3,19 @@ import styles from './styles.module.scss';
 import AccountList from '@/components/AccountsList/AccountsList';
 import NavMenu from '@/components/NavMenu/NavMenu';
 import HeaderBlock, {Profile} from '@/components/HeaderBlock/HeaderBlock';
-import {fetchClient} from '@/api/fetchClient';
+import {_api} from '@/api';
+import {cookies} from 'next/headers';
 
 const getAccounts = async (): Promise<IAccountItem[]> => {
-  const data = await fetchClient('/accounts');
-  return Object.values(data.body);
+  const data = await _api.get('/accounts');
+  return Object.values(data.data.body);
 };
+const cookie = cookies().get('token');
 
 const getProfile = async (): Promise<Profile> => {
-  return await fetchClient('/auth/me');
+  const data = await _api.get('/auth/me');
+
+  return data.data;
 };
 export default async function AccountsPage() {
   const accounts = await getAccounts();

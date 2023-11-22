@@ -33,12 +33,10 @@ export const LoginForm = () => {
   const router = useRouter();
 
   const onSubmit = async (data: Form) => {
-    await _api()
-      .post('/auth/login', data)
-      .then((data) => {
-        setCookie('token', data.data.token, {maxAge: ONE_MONTH});
-        router.push('/accounts');
-      });
+    await _api.post('/auth/login', data).then((data) => {
+      setCookie('token', data.data.token, {maxAge: ONE_MONTH});
+      router.push('/accounts');
+    });
   };
 
   return (

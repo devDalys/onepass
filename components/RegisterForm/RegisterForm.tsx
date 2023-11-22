@@ -34,7 +34,7 @@ export const RegisterForm = () => {
   const onSubmit = async (data: Form) => {
     try {
       setIsLoading(true);
-      const result = await _api().post('/auth/register', data);
+      const result = await _api.post('/auth/register', data);
     } catch (e) {
       console.error(e);
     } finally {

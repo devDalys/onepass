@@ -11,6 +11,7 @@ import {LOCAL_STORAGE_THEME_KEY, Theme} from '@/Providers/ThemeProvider/ThemeCon
 import {ContextProvider} from '@/Providers/ContextProvider';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const inter = Bebas_Neue({
   subsets: ['latin'],
