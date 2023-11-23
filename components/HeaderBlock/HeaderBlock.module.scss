@@ -17,12 +17,13 @@
   width: 49%;
   height: 10rem;
   display: flex;
-  flex-direction: column;
   padding: 1.2rem;
   border: 2px solid var(--neutral-text);
+  flex-direction: column;
   border-radius: 0.625rem;
   background: var(--neutral-card);
 }
+
 
 .text{
   color: var(--neutral-text);
@@ -31,7 +32,8 @@
 
 .length{
   color: var(--primary-default);
-  font-size: 4rem;
+  font-size: 3.5rem;
+  line-height: 1;
 }
 
 .avatar{

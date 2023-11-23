@@ -2,6 +2,7 @@ import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import styles from './HeaderBlock.module.scss';
 import NoProfile from '@/assets/images/no-profile.svg';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
+import {ThemeSwitcher} from '@/components/ThemeSwitcher';
 
 export interface Profile {
   name: string;
@@ -24,6 +25,7 @@ const CountsBlock = ({text, length}: CounterProps) => {
     <div className={styles.counter}>
       <span className={styles.length}>{length}</span>
       <span className={styles.text}>{text}</span>
+      <ThemeSwitcher />
     </div>
   );
 };

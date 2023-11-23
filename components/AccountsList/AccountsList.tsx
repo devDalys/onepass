@@ -1,10 +1,10 @@
 'use client';
 import styles from './AccountsList.module.scss';
 import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
-import {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
-import {AccountsContext, useAccountsContext} from '@/Providers/ContextProvider';
+import {useAccountsContext} from '@/Providers/ContextProvider';
 
 interface Props {
   accounts: IAccountItem[];

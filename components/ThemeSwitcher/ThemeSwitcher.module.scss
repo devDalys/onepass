@@ -1,0 +1,26 @@
+.button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.625rem;
+  border: 1px solid var(--neutral-grey);
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  width: 50%;
+}
+
+.icon{
+  border-radius: 0.625rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--neutral-grey);
+}
+
+.active{
+  background: var(--primary-default);
+  color: white;
+
+}

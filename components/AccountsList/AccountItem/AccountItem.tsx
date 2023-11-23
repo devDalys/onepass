@@ -20,14 +20,7 @@ export default function AccountItem(props: Props) {
     <Link href={'/accounts/' + props._id} key={props._id}>
       <div className={styles.item}>
         <div className={styles.iconWrapper}>
-          <img
-            src={
-              `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${props.socialName}.com&size=64` ??
-              notfound.src
-            }
-            className={styles.icon}
-            alt={props.socialName}
-          />
+          <span className={styles.icon}>{props.socialName[0]}</span>
         </div>
         <span className={styles.socialName}>{props.socialName}</span>
         <img
