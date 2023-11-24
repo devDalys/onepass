@@ -1,7 +1,8 @@
 'use client';
 import {useContext} from 'react';
-import {LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext} from './ThemeContext';
+import {Theme, ThemeContext} from './ThemeContext';
 import {setCookie} from 'cookies-next';
+import {LOCAL_STORAGE_THEME_KEY} from '@/Providers/ThemeProvider/index';
 
 interface UseThemeResult {
   toggleTheme: () => void;

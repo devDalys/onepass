@@ -6,10 +6,12 @@
   border: 1px solid var(--neutral-grey);
   padding: 0.2rem 0.5rem;
   cursor: pointer;
-  width: 50%;
+  width: 7rem;
+  position: relative;
+
 }
 
-.icon{
+.icon {
   border-radius: 0.625rem;
   width: 2rem;
   height: 2rem;
@@ -17,10 +19,64 @@
   align-items: center;
   justify-content: center;
   color: var(--neutral-grey);
+
+  &:before {
+    position: absolute;
+    content: '';
+    background: var(--primary-default);
+    border-radius: 0.625rem;
+  }
+
+  svg {
+    z-index: 1;
+  }
 }
 
-.active{
+.leftAnimation {
+  color: white;
+  &:before {
+    right: 0.5rem;
+    z-index: 0;
+    width: 2rem;
+    height: 2rem;
+    animation: leftAnimation 0.2s linear forwards;
+  }
+}
+
+
+.rightAnimation {
+  color: white;
+  &:before {
+    left: 0.5rem;
+    z-index: 0;
+    width: 2rem;
+    height: 2rem;
+    animation: rightAnimation 0.2s linear forwards;
+  }
+}
+
+
+@keyframes leftAnimation {
+
+  0% {
+    right: 0.5rem;
+  }
+  100% {
+    right: 64%;
+  }
+}
+
+@keyframes rightAnimation {
+
+  0% {
+    left: 0.5rem;
+  }
+  100% {
+    left: 64%;
+  }
+}
+
+.active {
   background: var(--primary-default);
   color: white;
-
 }

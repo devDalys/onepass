@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './ThemeSwitcher.module.scss';
 import {useTheme} from '@/Providers/ThemeProvider';
 import classNames from 'classnames';
@@ -111,13 +111,29 @@ const Soon = (
 
 export const ThemeSwitcher = () => {
   const {toggleTheme, theme} = useTheme();
+  const [firstRender, setFirstRender] = useState(true);
+
+  const onToggleTheme = () => {
+    firstRender && setFirstRender(false);
+    toggleTheme();
+  };
 
   return (
-    <button onClick={toggleTheme} className={styles.button}>
-      <span className={classNames(styles.icon, {[styles.active]: theme === Theme.LIGHT})}>
+    <button onClick={onToggleTheme} className={styles.button}>
+      <span
+        className={classNames(styles.icon, {
+          [styles.active]: theme === Theme.LIGHT && firstRender,
+          [styles.leftAnimation]: theme === Theme.LIGHT && !firstRender,
+        })}
+      >
         {Soon}
       </span>
-      <span className={classNames(styles.icon, {[styles.active]: theme === Theme.DARK})}>
+      <span
+        className={classNames(styles.icon, {
+          [styles.active]: theme === Theme.DARK && firstRender,
+          [styles.rightAnimation]: theme === Theme.DARK && !firstRender,
+        })}
+      >
         {Moon}
       </span>
     </button>

@@ -2,13 +2,14 @@ import './globals.scss';
 import type {Metadata} from 'next';
 import {Bebas_Neue} from 'next/font/google';
 import {Poppins} from 'next/font/google';
-import {ThemeProvider} from '@/Providers/ThemeProvider';
+import {LOCAL_STORAGE_THEME_KEY, ThemeProvider} from '@/Providers/ThemeProvider';
 import styles from './page.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
 import {cookies} from 'next/headers';
-import {LOCAL_STORAGE_THEME_KEY, Theme} from '@/Providers/ThemeProvider/ThemeContext';
+import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
 import {ContextProvider} from '@/Providers/ContextProvider';
+import {getCookie} from 'cookies-next';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
