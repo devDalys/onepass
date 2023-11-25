@@ -9,7 +9,7 @@
   &::placeholder{
     color: var(--neutral-grey);
     font-size: 1rem;
-	font-family: var(--poppins);
+	font-family: var(--play);
   }
 
 }
@@ -31,7 +31,7 @@
 
   &:active, &:focus-within{
   border: 1px solid var(--primary-default);
-  font-family: var(--poppins);
+  font-family: var(--play);
   color: #fff;
   font-size: 1rem;
 }

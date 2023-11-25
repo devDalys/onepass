@@ -27,14 +27,14 @@
   background: var(--neutral-card);
   &::placeholder{
     color: var(--neutral-grey);
-    font-family: var(--poppins);
+    font-family: var(--play);
   }
 }
 
 .error{
   left: 0.6rem;
   font-size: 0.8rem;
-  font-family: var(--poppins);
+  font-family: var(--play);
   color: var(--primary-default);
   position: absolute;
   bottom: 0;

@@ -8,24 +8,24 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import {cookies} from 'next/headers';
 import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
-import {ContextProvider} from '@/Providers/ContextProvider';
-import {getCookie} from 'cookies-next';
-
+import localFont from 'next/font/local';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-const inter = Bebas_Neue({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--bebas-neue',
+const inter = localFont({
+  variable: '--play',
   display: 'swap',
   preload: true,
-});
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-  variable: '--poppins',
+  src: [
+    {
+      path: '../assets/fonts/Play-Bold.ttf',
+      weight: '700',
+    },
+    {
+      path: '../assets/fonts/Play-Regular.ttf',
+      weight: '400',
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 
   return (
     <html lang="en">
-      <body className={classNames(inter.variable, poppins.variable)}>
+      <body className={classNames(inter.variable)}>
         <ThemeProvider initialTheme={theme}>
           <div className={'root'}>
             <Link href="/">

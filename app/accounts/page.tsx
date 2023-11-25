@@ -10,7 +10,6 @@ const getAccounts = async (): Promise<IAccountItem[]> => {
   const data = await _api.get('/accounts');
   return Object.values(data.data.body);
 };
-const cookie = cookies().get('token');
 
 const getProfile = async (): Promise<Profile> => {
   const data = await _api.get('/auth/me');

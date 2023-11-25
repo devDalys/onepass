@@ -3,12 +3,13 @@
 .button{
   padding: 0.5rem;
   background: var(--primary-default);
+  font-weight: 700;
   outline: none;
   border-radius: 0.625rem;
   cursor: pointer;
   color: var(--neutral-text);
   font-size: 1rem;
-  font-family: var(--bebas-neue);
+  font-family: var(--play);
   @include for-mobile{
     display: none;
   }
