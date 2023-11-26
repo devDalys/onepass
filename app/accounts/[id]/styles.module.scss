@@ -1,0 +1,42 @@
+.header{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.h1{
+  font-size: 4rem;
+  line-height: normal;
+  font-weight: 700;
+  color: var(--neutral-text);
+}
+
+.actions{
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hidden{
+  visibility: hidden;
+}
+.form{
+  margin-top: 3rem;
+  width: 50%;
+}
+
+.input{
+  input{
+    transition: all 0.5s;
+	cursor: inherit;
+  }
+}
+
+.editMode{
+  input{
+    border-color: transparent;
+    pointer-events: auto;
+    transition: all 0.5s;
+    cursor: default;
+
+  }
+}

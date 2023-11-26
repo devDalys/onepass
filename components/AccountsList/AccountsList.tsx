@@ -6,18 +6,14 @@ import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {useAccountsContext} from '@/Providers/ContextProvider';
 
-interface Props {
-  accounts: IAccountItem[];
-}
-
-export default function AccountList({accounts}: Props) {
-  const [accountsState, setAccounts] = useState<IAccountItem[]>(accounts);
+export default function AccountList() {
+  const [accountsState, setAccounts] = useState<IAccountItem[]>();
   const [inputState, setInputState] = useState<string>('');
 
-  const {setAccounts: setContext} = useAccountsContext();
+  const {setAccounts: setContext, accounts} = useAccountsContext();
 
   useEffect(() => {
-    if (!!accounts.length) {
+    if (!!accounts?.length) {
       setContext?.(accounts);
     }
   }, [accounts, setContext]);
@@ -27,7 +23,7 @@ export default function AccountList({accounts}: Props) {
   };
 
   useEffect(() => {
-    if (!!inputState?.length) {
+    if (!!inputState?.length && accounts?.length) {
       setAccounts(() =>
         [...accounts].filter((item) =>
           item.socialName.toLowerCase().startsWith(inputState.toLowerCase()),
@@ -45,10 +41,8 @@ export default function AccountList({accounts}: Props) {
         value={inputState}
         onChange={(e) => setInputState(e.target.value)}
       />
-      {!accountsState.length && <NotSearchFound />}
-      {accountsState.map((item) => (
-        <AccountItem key={item._id} {...item} onCopy={onCopy} />
-      ))}
+      {!accountsState?.length && <NotSearchFound />}
+      {accountsState?.map((item) => <AccountItem key={item._id} {...item} onCopy={onCopy} />)}
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import './globals.scss';
 import type {Metadata} from 'next';
-import {Bebas_Neue} from 'next/font/google';
-import {Poppins} from 'next/font/google';
 import {LOCAL_STORAGE_THEME_KEY, ThemeProvider} from '@/Providers/ThemeProvider';
 import styles from './page.module.scss';
 import classNames from 'classnames';
@@ -9,6 +7,7 @@ import Link from 'next/link';
 import {cookies} from 'next/headers';
 import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
 import localFont from 'next/font/local';
+import favicon from './favicon.png';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
@@ -31,6 +30,9 @@ const inter = localFont({
 export const metadata: Metadata = {
   title: 'One Pass',
   description: 'Единственный менеджер паролей, который вам когда-либо понадобится.',
+  icons: {
+    icon: favicon.src,
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

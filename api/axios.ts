@@ -34,6 +34,7 @@ _api.interceptors.response.use(null, async (error: AxiosError) => {
     } else {
       const lib = await import('cookies-next');
       lib.deleteCookie(AUTH_TOKEN);
+      window.location.replace('/login');
     }
   }
 
