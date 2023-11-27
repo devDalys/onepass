@@ -1,0 +1,43 @@
+.label {
+  width: 4rem;
+  border-radius: 2.125rem;
+  height: 1.5rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-default);
+  left: 0;
+  transition: all 0.3s;
+  border-radius: 2.125rem;
+  &:before{
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    content: '';
+    top: 9%;
+    background: #fff;
+    transition: all 0.3s;
+  }
+
+}
+
+.checkbox {
+  visibility: hidden;
+  &:not(:checked) + .slider {
+    background: var(--neutral-grey);
+  }
+
+  &:not(:checked) + .slider:before {
+    left: 10%;
+  }
+
+  &:checked + .slider:before {
+	left: 60%;
+  }
+}

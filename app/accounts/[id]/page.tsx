@@ -5,7 +5,7 @@ import {useAccountsContext} from '@/Providers/ContextProvider';
 import {useEffect, useState} from 'react';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import styles from './styles.module.scss';
-import {Button, Input} from '@/ui-kit';
+import {Button, Checkbox, Input} from '@/ui-kit';
 import {useForm, Controller} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -33,7 +33,8 @@ export default function AccountPage({params}: {params: {id: string}}) {
   const [currentAccount, setCurrentAccount] = useState<IAccountItem>();
   const [isLoading, setIsLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
-  const {control, getValues, reset} = useForm<Form>({
+
+  const {control, reset, formState} = useForm<Form>({
     defaultValues: {
       login: '',
       password: '',
@@ -56,13 +57,17 @@ export default function AccountPage({params}: {params: {id: string}}) {
     }
   }, []);
 
+  const handleReset = () => {
+    reset({
+      login: currentAccount?.login,
+      password: currentAccount?.password,
+      socialName: currentAccount?.socialName,
+    });
+  };
+
   useEffect(() => {
     if (currentAccount) {
-      reset({
-        login: currentAccount.login,
-        password: currentAccount.password,
-        socialName: currentAccount.socialName,
-      });
+      handleReset();
     }
   }, [currentAccount, reset]);
 
@@ -71,9 +76,24 @@ export default function AccountPage({params}: {params: {id: string}}) {
   return (
     <>
       <div className={styles.header}>
-        <h1 className={styles.h1}>{currentAccount?.socialName}</h1>
+        <div className={styles.title}>
+          <h1 className={styles.h1}>{currentAccount?.socialName}</h1>
+          <div className={styles.checker}>
+            edit mode
+            <Checkbox
+              value={isEditMode}
+              setValue={() => {
+                setIsEditMode((state) => !state);
+                handleReset();
+              }}
+            />
+          </div>
+        </div>
         <div className={styles.actions}>
-          <Button theme="default" onClick={() => setIsEditMode((state) => !state)}>
+          <Button
+            theme="default"
+            className={classNames({[styles.hidden]: !formState.isDirty || !isEditMode})}
+          >
             SAVE
           </Button>
           <Button theme="outline">DELETE</Button>
