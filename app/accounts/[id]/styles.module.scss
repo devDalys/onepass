@@ -1,3 +1,6 @@
+@import '@/app/mixins';
+
+
 .header{
   display: flex;
   align-items: baseline;
@@ -17,6 +20,7 @@
   display: flex;
   align-items: baseline;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .h1{
@@ -29,7 +33,27 @@
 .actions{
   display: flex;
   gap: 0.5rem;
+  @include for-mobile{
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 }
+
+.desktop{
+  @include for-mobile{
+    display: none;
+  }
+}
+
+.mobile{
+  @include for-desktop{
+    display: none;
+  }
+}
+
+
 
 .hidden{
   visibility: hidden;
@@ -37,6 +61,9 @@
 .form{
   margin-top: 3rem;
   width: 50%;
+  @include for-mobile{
+    width: 100%;
+  }
 }
 
 .input{
@@ -54,4 +81,8 @@
     cursor: default;
 
   }
+}
+
+.wrapper{
+  padding-bottom: 10rem;
 }

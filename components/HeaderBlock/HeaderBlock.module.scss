@@ -21,6 +21,10 @@
   flex-direction: column;
   border-radius: 0.625rem;
   background: var(--neutral-card);
+  @include for-mobile {
+    padding: 0.5rem;
+    justify-content: space-between;
+  }
 }
 
 
@@ -42,7 +46,7 @@
   max-width: 6rem;
   object-fit: cover;
   @include for-mobile{
-    height: 4rem;
+    height: 6rem;
     width: fit-content;
   }
 }
@@ -61,8 +65,9 @@
   border-radius: 0.625rem;
   background: var(--neutral-card);
 
-  @include for-mobile{
+  @include for-mobile {
     flex-direction: column;
+    padding: 0.5rem;
   }
 }
 
@@ -73,6 +78,9 @@
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
+  @include for-mobile{
+
+  }
 }
 
 .name{
@@ -87,7 +95,7 @@
 
   @include for-mobile{
     padding-left: 0;
-    padding-top: 1rem;
+    width: 100%;
   }
 
 }

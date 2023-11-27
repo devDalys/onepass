@@ -2,7 +2,7 @@
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {_api} from '@/api';
 import {useAccountsContext} from '@/Providers/ContextProvider';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import styles from './styles.module.scss';
 import {Button, Checkbox, Input} from '@/ui-kit';
@@ -43,6 +43,18 @@ export default function AccountPage({params}: {params: {id: string}}) {
     resolver: yupResolver(schema),
   });
 
+  const ActionButtons = ({type}: {type: 'desktop' | 'mobile'}) => (
+    <div className={classNames(styles.actions, styles[type])}>
+      <Button
+        theme="default"
+        className={classNames({[styles.hidden]: !formState.isDirty || !isEditMode})}
+      >
+        SAVE
+      </Button>
+      <Button theme="outline">DELETE</Button>
+    </div>
+  );
+
   useEffect(() => {
     if (!accounts?.length) {
       _api
@@ -57,24 +69,24 @@ export default function AccountPage({params}: {params: {id: string}}) {
     }
   }, []);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     reset({
       login: currentAccount?.login,
       password: currentAccount?.password,
       socialName: currentAccount?.socialName,
     });
-  };
+  }, [currentAccount, reset]);
 
   useEffect(() => {
     if (currentAccount) {
       handleReset();
     }
-  }, [currentAccount, reset]);
+  }, [currentAccount, handleReset, reset]);
 
   if (isLoading) return <FullScreenLoading />;
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.title}>
           <h1 className={styles.h1}>{currentAccount?.socialName}</h1>
@@ -89,15 +101,7 @@ export default function AccountPage({params}: {params: {id: string}}) {
             />
           </div>
         </div>
-        <div className={styles.actions}>
-          <Button
-            theme="default"
-            className={classNames({[styles.hidden]: !formState.isDirty || !isEditMode})}
-          >
-            SAVE
-          </Button>
-          <Button theme="outline">DELETE</Button>
-        </div>
+        <ActionButtons type="desktop" />
       </div>
       <div className={styles.form}>
         <Controller
@@ -139,7 +143,8 @@ export default function AccountPage({params}: {params: {id: string}}) {
             />
           )}
         />
+        <ActionButtons type="mobile" />
       </div>
-    </>
+    </div>
   );
 }
