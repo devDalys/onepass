@@ -9,6 +9,7 @@ import styles from './LoginForm.module.scss';
 import {setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
 import {useRouter} from 'next/navigation';
+import {useSnackbar} from '@/Providers/SnackbarProvider';
 
 interface Form {
   email: string;
@@ -31,9 +32,11 @@ export const LoginForm = () => {
   });
 
   const router = useRouter();
+  const {showSnackbar} = useSnackbar();
 
   const onSubmit = async (data: Form) => {
     await _api.post('/auth/login', data).then((data) => {
+      showSnackbar('Вы успешно вошли !');
       setCookie('token', data.data.token, {maxAge: ONE_MONTH});
       router.push('/accounts');
     });

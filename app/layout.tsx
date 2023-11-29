@@ -8,6 +8,7 @@ import {cookies} from 'next/headers';
 import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
 import localFont from 'next/font/local';
 import favicon from './favicon.png';
+import {SnackbarProvider} from '@/Providers/SnackbarProvider/SnackbarProvider';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
@@ -42,19 +43,21 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en">
       <body className={classNames(inter.variable)}>
         <ThemeProvider initialTheme={theme}>
-          <div className={'root'}>
-            <Link href="/">
-              <div className={styles.logo}>
-                <span className={styles.stars}>
-                  <p className={styles.stars__star}>*</p>
-                  <p className={styles.stars__star}>*</p>
-                  <p className={styles.stars__star}>*</p>
-                </span>
-                <span className={styles.line} />
-              </div>
-            </Link>
-            {children}
-          </div>
+          <SnackbarProvider>
+            <div className={'root'}>
+              <Link href="/">
+                <div className={styles.logo}>
+                  <span className={styles.stars}>
+                    <p className={styles.stars__star}>*</p>
+                    <p className={styles.stars__star}>*</p>
+                    <p className={styles.stars__star}>*</p>
+                  </span>
+                  <span className={styles.line} />
+                </div>
+              </Link>
+              {children}
+            </div>
+          </SnackbarProvider>
         </ThemeProvider>
       </body>
     </html>

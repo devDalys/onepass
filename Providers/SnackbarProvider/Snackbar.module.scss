@@ -1,0 +1,33 @@
+.snackbar{
+  display: none;
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  background: var(--primary-default);
+  color: #fff;
+  padding: 1rem 0.5rem;
+  border-radius: 0.625rem;
+  font-weight: 700;
+  font-family: var(--play);
+}
+
+.snackBarvisible{
+  display: flex;
+  animation: snackBarAnimation 2s forwards;
+
+}
+
+@keyframes snackBarAnimation {
+  0%{
+    left: -10rem;
+  }
+  10%{
+    left: 2rem;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}

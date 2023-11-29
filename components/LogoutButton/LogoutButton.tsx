@@ -6,6 +6,7 @@ import {deleteCookie} from 'cookies-next';
 import {AUTH_TOKEN} from '@/utils/consts';
 import {useRouter} from 'next/navigation';
 import classNames from 'classnames';
+import {useSnackbar} from '@/Providers/SnackbarProvider';
 
 interface LogoutButtonProps {
   className?: string;
@@ -13,7 +14,9 @@ interface LogoutButtonProps {
 
 export default function LogoutButton({className}: LogoutButtonProps) {
   const router = useRouter();
+  const {showSnackbar} = useSnackbar();
   const onClick = () => {
+    showSnackbar('До встречи :(');
     deleteCookie(AUTH_TOKEN);
     router.push('/');
   };

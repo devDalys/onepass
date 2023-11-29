@@ -10,7 +10,7 @@ import {useForm, Controller} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import classNames from 'classnames';
-import {Simulate} from 'react-dom/test-utils';
+import {useSnackbar} from '@/Providers/SnackbarProvider';
 const getAccounts = async (token: string): Promise<IAccountItem[]> => {
   const data = await _api.get('/accounts');
   return Object.values(data.data.body);
@@ -33,6 +33,7 @@ export default function AccountPage({params}: {params: {id: string}}) {
   const [currentAccount, setCurrentAccount] = useState<IAccountItem>();
   const [isLoading, setIsLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
+  const {showSnackbar} = useSnackbar();
 
   const {control, reset, formState} = useForm<Form>({
     defaultValues: {
@@ -51,7 +52,9 @@ export default function AccountPage({params}: {params: {id: string}}) {
       >
         SAVE
       </Button>
-      <Button theme="outline">DELETE</Button>
+      <Button theme="outline" onClick={() => showSnackbar('Аккаунт удалён')}>
+        DELETE
+      </Button>
     </div>
   );
 
