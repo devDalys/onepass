@@ -4,7 +4,6 @@ import React from 'react';
 import styles from './LogoutButton.module.scss';
 import {deleteCookie} from 'cookies-next';
 import {AUTH_TOKEN} from '@/utils/consts';
-import {useRouter} from 'next/navigation';
 import classNames from 'classnames';
 import {useSnackbar} from '@/Providers/SnackbarProvider';
 
@@ -13,12 +12,11 @@ interface LogoutButtonProps {
 }
 
 export default function LogoutButton({className}: LogoutButtonProps) {
-  const router = useRouter();
   const {showSnackbar} = useSnackbar();
   const onClick = () => {
-    showSnackbar('До встречи :(');
+    showSnackbar('Вы успешно вышли из аккаунта');
     deleteCookie(AUTH_TOKEN);
-    router.push('/');
+    window.location.replace('/');
   };
 
   return (

@@ -9,7 +9,6 @@ import {useAccountsContext} from '@/Providers/ContextProvider';
 export default function AccountList() {
   const [accountsState, setAccounts] = useState<IAccountItem[]>();
   const [inputState, setInputState] = useState<string>('');
-
   const {setAccounts: setContext, accounts} = useAccountsContext();
 
   useEffect(() => {

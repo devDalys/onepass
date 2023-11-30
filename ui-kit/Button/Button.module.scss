@@ -8,6 +8,9 @@
   cursor: pointer;
   transition: filter 0.3s;
   font-weight: 700;
+  &:disabled{
+    filter: grayscale(1);
+  }
 }
 
 .outline{

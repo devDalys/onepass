@@ -10,7 +10,7 @@ import localFont from 'next/font/local';
 import favicon from './favicon.png';
 import {SnackbarProvider} from '@/Providers/SnackbarProvider/SnackbarProvider';
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 1;
 
 const inter = localFont({
   variable: '--play',
