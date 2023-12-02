@@ -7,15 +7,9 @@ import {Button, Checkbox, Input} from '@/ui-kit';
 import {useSnackbar} from '@/Providers/SnackbarProvider';
 import {useCallback, useEffect, useState} from 'react';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
-import {notFound} from 'next/navigation';
+import {notFound, useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
-
-interface Form {
-  login: string;
-  socialName: string;
-  password: string;
-}
 
 interface Props {
   currentAccount?: IAccountItem;
@@ -31,9 +25,11 @@ const schema = yup.object().shape({
 export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) => {
   const {showSnackbar} = useSnackbar();
   const [isEditMode, setIsEditMode] = useState(isCreateMode);
+  const [currAccount, setCurrentAccount] = useState(currentAccount);
   const notFound = !currentAccount && !isCreateMode;
+  const router = useRouter();
 
-  const {control, reset, formState, watch, handleSubmit} = useForm<Form>({
+  const {control, reset, formState, watch, handleSubmit} = useForm<IAccountItem>({
     defaultValues: {
       login: '',
       password: '',
@@ -46,17 +42,37 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
 
   const handleReset = useCallback(() => {
     reset({
-      login: currentAccount?.login,
-      password: currentAccount?.password,
-      socialName: currentAccount?.socialName,
+      login: currAccount?.login,
+      password: currAccount?.password,
+      socialName: currAccount?.socialName,
+      _id: currAccount?._id,
     });
-  }, [currentAccount, reset]);
-  const handleSubmitForm = (form: Form) => {
-    isCreateMode &&
-      _api.post('/accounts/add', form).then(() => {
-        showSnackbar('Вы успешно добавили аккаунт');
-        reset();
+  }, [currAccount, reset]);
+  const handleSubmitForm = (form: IAccountItem) => {
+    _api
+      .request<{body: IAccountItem}>({
+        data: form,
+        url: isCreateMode ? '/accounts/add' : '/accounts/update',
+        method: isCreateMode ? 'POST' : 'PUT',
+      })
+      .then((data) => {
+        isCreateMode
+          ? showSnackbar('Вы успешно добавили аккаунт')
+          : showSnackbar('Вы успешно обновили аккаунт');
+        if (!isCreateMode) {
+          reset(data.data.body);
+          setCurrentAccount(data.data.body);
+          setIsEditMode(false);
+        }
       });
+  };
+
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    _api.delete(`/accounts/delete/${currAccount?._id}`).then(() => {
+      showSnackbar('Аккаунт успешно удалён');
+      router.replace('/accounts');
+    });
   };
 
   useEffect(() => {
@@ -78,7 +94,7 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
         SAVE
       </Button>
       {!isCreateMode && (
-        <Button theme="outline" onClick={() => showSnackbar('Аккаунт удалён')}>
+        <Button theme="outline" onClick={handleDelete}>
           DELETE
         </Button>
       )}
