@@ -1,4 +1,6 @@
-.snackbar{
+@import '@/app/mixins';
+
+.snackbar {
   display: none;
   position: fixed;
   bottom: 2rem;
@@ -9,25 +11,51 @@
   border-radius: 0.625rem;
   font-weight: 700;
   font-family: var(--play);
+  @include for-mobile {
+    z-index: 3;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    border-radius: 0.625rem 0.625rem 0 0;
+  }
 }
 
-.snackBarvisible{
+.snackBarvisible {
   display: flex;
   animation: snackBarAnimation 2s forwards;
 
+  @include for-mobile {
+    animation: snackBarAnimationMobile 2s forwards;
+  }
 }
 
 @keyframes snackBarAnimation {
-  0%{
+  0% {
     left: -10rem;
   }
-  10%{
+  10% {
     left: 2rem;
   }
-  50%{
+  50% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 0;
+  }
+}
+
+@keyframes snackBarAnimationMobile {
+  0% {
+    opacity: 1;
+    bottom: -10rem;
+  }
+  20% {
+    bottom: 0;
+  }
+  70% {
+    bottom: 0;
+  }
+  100% {
+    bottom: -10rem;
   }
 }

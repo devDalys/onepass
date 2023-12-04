@@ -2,18 +2,9 @@
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {_api} from '@/api';
 import {useAccountsContext} from '@/Providers/ContextProvider';
-import {useCallback, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
-import styles from './styles.module.scss';
-import {Button, Checkbox, Input} from '@/ui-kit';
-import {useForm, Controller} from 'react-hook-form';
-import * as yup from 'yup';
-import {yupResolver} from '@hookform/resolvers/yup';
-import classNames from 'classnames';
-import {useSnackbar} from '@/Providers/SnackbarProvider';
 import {AccountCreator} from '@/components/AccountCreator/AccountCreator';
-import {notFound} from 'next/navigation';
-import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 
 export default function AccountPage({params}: {params: {id: string}}) {
   const {accounts} = useAccountsContext();

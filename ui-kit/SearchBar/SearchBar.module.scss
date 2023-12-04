@@ -1,4 +1,4 @@
-.input{
+.input {
   outline: none;
   border: 0;
   background: transparent;
@@ -6,19 +6,19 @@
   color: #fff;
   font-size: 1rem;
 
-  &::placeholder{
+  &::placeholder {
     color: var(--neutral-grey);
     font-size: 1rem;
-	font-family: var(--play);
+    font-family: var(--play);
   }
-
 }
 
-.searchIcon{
+.searchIcon {
   padding-right: 0.5rem;
+  width: max-content;
 }
 
-.form{
+.form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,10 +29,11 @@
   border-radius: 0.625rem;
   padding: 0.5rem 1.25rem;
 
-  &:active, &:focus-within{
-  border: 1px solid var(--primary-default);
-  font-family: var(--play);
-  color: #fff;
-  font-size: 1rem;
-}
+  &:active,
+  &:focus-within {
+    border: 1px solid var(--primary-default);
+    font-family: var(--play);
+    color: #fff;
+    font-size: 1rem;
+  }
 }

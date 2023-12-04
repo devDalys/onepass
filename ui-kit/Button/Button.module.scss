@@ -1,4 +1,4 @@
-.button{
+.button {
   font-size: 1.5rem;
   font-family: var(--play);
   padding: 5px 20px;
@@ -8,24 +8,23 @@
   cursor: pointer;
   transition: filter 0.3s;
   font-weight: 700;
-  &:disabled{
+  &:disabled {
     filter: grayscale(1);
   }
 }
 
-.outline{
+.outline {
   background: transparent;
   color: var(--primary-default);
   border: 2px solid var(--primary-default);
 }
 
-.default{
+.default {
   background: var(--primary-default);
   color: white;
   border: 2px solid var(--primary-default);
-
 }
 
-.loading{
+.loading {
   filter: grayscale(1);
 }

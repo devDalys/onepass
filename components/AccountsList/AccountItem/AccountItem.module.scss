@@ -10,7 +10,7 @@
   cursor: pointer;
   transition: filter 0.5s;
 
-  &:hover{
+  &:hover {
     filter: saturate(200%);
   }
 }
@@ -35,11 +35,11 @@
 }
 
 .socialName {
-  color:var(--neutral-input);
+  color: var(--neutral-input);
   font-size: 1.25rem;
 }
 
-.copyIcon{
+.copyIcon {
   padding: 1rem 0 1rem 1rem;
   margin-left: auto;
 }

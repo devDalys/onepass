@@ -10,15 +10,15 @@ export default function NavMenu({}: NavMenuProps) {
   return (
     <div className={styles.wrapper}>
       <Link className={styles.add} href={'/accounts/add'}>
-        <img src={Add.src} className={styles.icon} />
+        <Add className={styles.icon} />
         <span className={styles.text}>New account</span>
       </Link>
       <Link className={styles.item} href={'/accounts'}>
-        <img src={Home.src} className={styles.icon} />
+        <Home className={styles.icon} />
         <span className={styles.text}>Accounts</span>
       </Link>
       <Link className={styles.item} href={'/profile'}>
-        <img src={User.src} className={styles.icon} />
+        <User className={styles.icon} />
         <span className={styles.text}>Profile</span>
       </Link>
     </div>

@@ -14,7 +14,7 @@
   left: 0;
   transition: all 0.3s;
   border-radius: 2.125rem;
-  &:before{
+  &:before {
     position: absolute;
     width: 1.2rem;
     height: 1.2rem;
@@ -24,7 +24,6 @@
     background: #fff;
     transition: all 0.3s;
   }
-
 }
 
 .checkbox {
@@ -38,6 +37,6 @@
   }
 
   &:checked + .slider:before {
-	left: 60%;
+    left: 60%;
   }
 }

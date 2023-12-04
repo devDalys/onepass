@@ -7,7 +7,7 @@ interface NotSearchFoundProps {}
 export default function NotSearchFound({}: NotSearchFoundProps) {
   return (
     <article className={styles.wrapper}>
-      <img src={NotFound.src} alt="Nothing found" />
+      <NotFound alt="Nothing found" />
 
       <h2>NO Results</h2>
       <p>We couldn’t find anything. Try searching for something else.</p>

@@ -1,13 +1,12 @@
 @import '@/app/mixins';
 
-
-.header{
+.header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
 }
 
-.checker{
+.checker {
   width: 100%;
   display: flex;
   align-items: center;
@@ -16,24 +15,24 @@
   font-size: 1.5rem;
 }
 
-.title{
+.title {
   display: flex;
   align-items: baseline;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.h1{
+.h1 {
   font-size: 4rem;
   line-height: normal;
   font-weight: 700;
   color: var(--neutral-text);
 }
 
-.actions{
+.actions {
   display: flex;
   gap: 0.5rem;
-  @include for-mobile{
+  @include for-mobile {
     margin-top: 2rem;
     width: 100%;
     display: flex;
@@ -41,48 +40,47 @@
   }
 }
 
-.desktop{
-  @include for-mobile{
+.desktop {
+  @include for-mobile {
     display: none;
   }
 }
 
-.mobile{
-  @include for-desktop{
+.mobile {
+  @include for-desktop {
     display: none;
   }
 }
 
-
-
-.hidden{
+.hidden {
   visibility: hidden;
 }
-.form{
+.form {
   margin-top: 3rem;
   width: 50%;
-  @include for-mobile{
+  @include for-mobile {
     width: 100%;
   }
 }
 
-.input{
-  input{
+.input {
+  div {
     transition: all 0.5s;
-	cursor: inherit;
+  }
+  input {
+    cursor: inherit;
   }
 }
 
-.editMode{
-  input{
+.editMode {
+  div {
     border-color: transparent;
     pointer-events: auto;
     transition: all 0.5s;
     cursor: default;
-
   }
 }
 
-.wrapper{
+.wrapper {
   padding-bottom: 10rem;
 }

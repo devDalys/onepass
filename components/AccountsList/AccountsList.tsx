@@ -5,11 +5,13 @@ import {useEffect, useState} from 'react';
 import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {useAccountsContext} from '@/Providers/ContextProvider';
+import {useSnackbar} from '@/Providers/SnackbarProvider';
 
 export default function AccountList() {
   const [accountsState, setAccounts] = useState<IAccountItem[]>();
   const [inputState, setInputState] = useState<string>('');
   const {setAccounts: setContext, accounts} = useAccountsContext();
+  const {showSnackbar} = useSnackbar();
 
   useEffect(() => {
     if (!!accounts?.length) {
@@ -19,6 +21,7 @@ export default function AccountList() {
 
   const onCopy = async (text: string) => {
     await navigator.clipboard.writeText(text);
+    showSnackbar('Пароль скопирован');
   };
 
   useEffect(() => {

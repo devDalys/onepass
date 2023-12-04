@@ -1,6 +1,5 @@
 'use client';
-import copy from '@/assets/images/Copy.svg';
-import notfound from '@/assets/images/not-found.svg';
+import Copy from '@/assets/images/Copy.svg';
 import styles from './AccountItem.module.scss';
 import Link from 'next/link';
 export interface IAccountItem {
@@ -23,14 +22,15 @@ export default function AccountItem(props: Props) {
           <span className={styles.icon}>{props.socialName[0]}</span>
         </div>
         <span className={styles.socialName}>{props.socialName}</span>
-        <img
-          src={copy.src}
+        <div
           className={styles.copyIcon}
-          onClick={(event) => {
+          onClick={(event: any) => {
             event.preventDefault();
             props.onCopy(props.password);
           }}
-        />
+        >
+          <Copy />
+        </div>
       </div>
     </Link>
   );

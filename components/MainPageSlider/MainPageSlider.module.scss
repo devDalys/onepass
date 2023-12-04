@@ -1,33 +1,31 @@
-
 .title {
   font-size: 4rem;
   user-select: none;
   pointer-events: none;
-  .neutralText{
+  .neutralText {
     color: var(--neutral-text);
   }
-  .primaryText{
+  .primaryText {
     color: var(--primary-default);
   }
 }
 
-.buttons{
+.buttons {
   margin-top: 11%;
   display: flex;
   gap: 25px;
-  .button{
+  .button {
     color: var(--neutral-grey);
     cursor: pointer;
     font-size: 1.5rem;
-    &__active{
+    &__active {
       color: var(--primary-default);
       font-size: 2rem;
     }
   }
-
 }
 
-.description{
+.description {
   color: var(--neutral-grey);
   font-size: 1.5rem;
   font-family: var(--play);

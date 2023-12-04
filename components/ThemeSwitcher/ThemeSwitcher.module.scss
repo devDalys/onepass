@@ -1,4 +1,4 @@
-.button{
+.button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,7 +8,6 @@
   cursor: pointer;
   width: 7rem;
   position: relative;
-
 }
 
 .icon {
@@ -43,7 +42,6 @@
   }
 }
 
-
 .rightAnimation {
   color: white;
   &:before {
@@ -55,9 +53,7 @@
   }
 }
 
-
 @keyframes leftAnimation {
-
   0% {
     right: 0.5rem;
   }
@@ -67,7 +63,6 @@
 }
 
 @keyframes rightAnimation {
-
   0% {
     left: 0.5rem;
   }

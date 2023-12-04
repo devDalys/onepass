@@ -3,6 +3,9 @@
   --primary-default: #ff6464;
   --neutral-text: #fff;
   --neutral-grey: #bababa;
-  --neutral-input: #F1F1F1;
+  --neutral-input: #f1f1f1;
   --neutral-card: #767a90;
+
+  --navmenu-bg: #767a90;
+  --navmenu-shadow: #545974;
 }

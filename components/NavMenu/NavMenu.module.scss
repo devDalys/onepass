@@ -14,17 +14,16 @@
     width: 90%;
     flex-direction: row;
     justify-content: space-between;
-    background: var(--neutral-card);
+    background: var(--navmenu-bg);
     border-radius: 0.625rem;
     padding: 0.5rem;
-    box-shadow: 3px 33px 0 50px #545974;
+    box-shadow: 3px 33px 0 50px var(--navmenu-shadow);
     z-index: 1;
   }
-
-
 }
 
-.add, .item {
+.add,
+.item {
   display: flex;
   width: 100%;
   height: auto;
@@ -43,31 +42,30 @@
   &:last-child {
     border-radius: 0 0 0.625rem 0.625rem;
     border-bottom: 2px solid var(--neutral-input);
-
   }
-  @include for-mobile{
+  @include for-mobile {
     border-radius: 0;
     display: flex;
     justify-content: center;
+    background: var(--navmenu-bg);
   }
 
-  &:hover{
+  &:hover {
     filter: saturate(200%);
     transition: filter 0.5s;
   }
-
 }
 
-.item{
-  @include for-mobile{
+.item {
+  @include for-mobile {
     width: 38%;
-    &:nth-child(0){
+    &:nth-child(0) {
       order: 0;
     }
-    &:nth-child(3){
+    &:nth-child(3) {
       order: 3;
     }
-    &:nth-child(1n){
+    &:nth-child(1n) {
       border: 0;
     }
   }
@@ -75,16 +73,18 @@
 
 .add.add {
   background: var(--primary-default);
-  @include for-mobile{
+  .text {
+    color: #fff;
+  }
+  @include for-mobile {
     order: 1;
     border-radius: 50%;
     width: 3.75rem;
     height: 3.75rem;
     border: 0;
     transform: translateY(-1.5rem);
-    filter: drop-shadow(0px 5px 10px rgba(255, 100, 100, 0.30));
+    filter: drop-shadow(0px 5px 10px rgba(255, 100, 100, 0.3));
   }
-
 }
 
 .text {
@@ -92,8 +92,14 @@
   font-weight: 700;
   margin-left: 2rem;
   color: var(--neutral-text);
-  @include for-mobile{
+  @include for-mobile {
     display: none;
   }
+}
 
+.icon {
+  fill: var(--neutral-text);
+  @include for-mobile {
+    fill: #fff;
+  }
 }

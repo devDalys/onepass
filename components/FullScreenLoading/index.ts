@@ -1,1 +1,1 @@
-export {FullScreenLoading} from './FullScreenLoading'
+export {FullScreenLoading} from './FullScreenLoading';

@@ -1,12 +1,11 @@
-.inputWrapper{
+.wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   padding-bottom: 18px;
-
 }
 
-.label{
+.label {
   position: absolute;
   top: 5px;
   left: 0.6rem;
@@ -15,27 +14,49 @@
   user-select: none;
 }
 
-.input{
+.inputWrapper {
   margin-top: 20px;
   border: 2px solid var(--neutral-input);
-  outline: none;
-  color: var(--neutral-text);
-  padding: 0.6rem;
   border-radius: 0.625rem;
   min-height: 2.5rem;
   min-width: 21rem;
   background: var(--neutral-card);
-  &::placeholder{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input {
+  padding: 0.6rem 0 0.6rem 0.6rem;
+  outline: none;
+  color: var(--neutral-text);
+  border: none;
+  border-radius: 0.625rem;
+  flex: 1;
+  background: var(--neutral-card);
+  &::placeholder {
     color: var(--neutral-grey);
     font-family: var(--play);
   }
 }
 
-.error{
+.error {
   left: 0.6rem;
   font-size: 0.8rem;
   font-family: var(--play);
   color: var(--primary-default);
   position: absolute;
   bottom: 0;
+}
+
+.passwordActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+.icon {
+  width: 1.3rem;
+  cursor: pointer;
 }

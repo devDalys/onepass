@@ -22,7 +22,6 @@
   font-family: var(--play);
   flex-direction: column;
 
-
   .text {
     display: flex;
     gap: 5px;
@@ -39,7 +38,7 @@
   }
 }
 
-.logo{
+.logo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,13 +47,12 @@
   font-size: 2.5rem;
   margin-bottom: 5px;
 
-
-  .stars{
+  .stars {
     letter-spacing: 2px;
     font-weight: 700;
     height: 40px;
     display: flex;
-    &__star{
+    &__star {
       animation-name: star;
       animation-duration: 5s;
       animation-iteration-count: infinite;
@@ -62,7 +60,7 @@
       animation-timing-function: linear;
     }
   }
-  .line{
+  .line {
     height: 5px;
     width: 65px;
     border-radius: 6px;
@@ -73,22 +71,21 @@
     animation-direction: alternate;
     animation-timing-function: linear;
   }
-
 }
 @keyframes line {
-  from{
+  from {
     transform: scaleX(1);
   }
-  to{
+  to {
     transform: scaleX(1.5);
   }
 }
 
 @keyframes star {
-  from{
+  from {
     transform: rotate(0deg);
   }
-  to{
+  to {
     transform: rotate(360deg);
   }
 }

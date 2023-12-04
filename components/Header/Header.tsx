@@ -9,6 +9,7 @@ import {useAccountsContext} from '@/Providers/ContextProvider';
 import {useEffect, useState} from 'react';
 import {NotFoundPage} from '@/components/NotFoundPage';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
+import {usePathname, useRouter, useSearchParams} from 'next/navigation';
 
 const getAccounts = async (): Promise<IAccountItem[]> => {
   const data = await _api.get('/accounts');
@@ -25,15 +26,24 @@ export default function Header() {
   const {setAccounts, accounts} = useAccountsContext();
   const [profile, setProfile] = useState<Profile>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isFirstRender, setFirstRender] = useState(true);
+  const searchParams = useSearchParams();
+  const revalidate = Boolean(searchParams.get('revalidate'));
+
   useEffect(() => {
-    setIsLoading(true);
-    Promise.all([getAccounts(), getProfile()])
-      .then(([accounts, profile]) => {
-        setAccounts?.(accounts);
-        setProfile(profile);
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
+    if (isFirstRender || revalidate) {
+      setIsLoading(true);
+      Promise.all([getAccounts(), getProfile()])
+        .then(([accounts, profile]) => {
+          setAccounts?.(accounts);
+          setProfile(profile);
+        })
+        .finally(() => {
+          setIsLoading(false);
+          setFirstRender(false);
+        });
+    }
+  }, [revalidate, searchParams]);
 
   if (isLoading || !profile || !accounts?.length) return <FullScreenLoading />;
 

@@ -71,7 +71,7 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
     event.preventDefault();
     _api.delete(`/accounts/delete/${currAccount?._id}`).then(() => {
       showSnackbar('Аккаунт успешно удалён');
-      router.replace('/accounts');
+      router.push('/accounts/?revalidate=1');
     });
   };
 
@@ -158,6 +158,7 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
               <Input
                 aliasText="Password"
                 readOnly={!isEditMode}
+                type={isEditMode ? 'text' : 'password'}
                 {...field}
                 className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
                 errorText={fieldState.error?.message}

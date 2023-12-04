@@ -7,7 +7,7 @@ interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 export const SearchBar = (props: SearchBarProps) => {
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
-      <img src={Search.src} className={styles.searchIcon} />
+      <Search className={styles.searchIcon} />
       <input {...props} className={styles.input} />
       <button></button>
     </form>
