@@ -16,7 +16,7 @@ const getAccounts = async (): Promise<IAccountItem[]> => {
   return Object.values(data.data.body);
 };
 
-const getProfile = async (): Promise<Profile> => {
+export const getProfile = async (): Promise<Profile> => {
   const data = await _api.get('/auth/me');
 
   return data.data;

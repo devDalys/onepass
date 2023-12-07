@@ -1,0 +1,31 @@
+.profile{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 5rem;
+  align-items: center;
+}
+
+.avatar{
+  width: 10rem;
+  height: 10rem;
+  margin: 0 auto;
+  border: 2px solid var(--primary-default);
+  border-radius: 0.675rem;
+  object-fit: cover;
+}
+
+.fullName{
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--neutral-text);
+}
+
+.email{
+  color: var(--neutral-grey);
+}
+
+.hideAvatar{
+  visibility: hidden;
+}

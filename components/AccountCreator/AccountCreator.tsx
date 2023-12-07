@@ -3,7 +3,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import classNames from 'classnames';
 import styles from './AccountCreator.module.scss';
-import {Button, Checkbox, Input} from '@/ui-kit';
+import {Button, Checkbox, Input, PageTitle} from '@/ui-kit';
 import {useSnackbar} from '@/Providers/SnackbarProvider';
 import {useCallback, useEffect, useState} from 'react';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
@@ -108,7 +108,7 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         <div className={styles.header}>
           <div className={styles.title}>
-            <h1 className={styles.h1}>{currentAccount?.socialName || socialName}</h1>
+            <PageTitle>{currentAccount?.socialName || socialName}</PageTitle>
             {!isCreateMode && (
               <div className={styles.checker}>
                 edit mode
