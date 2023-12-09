@@ -99,7 +99,9 @@
 
 .icon {
   fill: var(--neutral-text);
+  height: 1.5rem;
   @include for-mobile {
     fill: #fff;
   }
 }
+

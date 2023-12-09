@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 3rem;
   align-items: center;
 }
 
@@ -13,7 +13,26 @@
   color: var(--neutral-text);
 }
 
-.email{
+.email {
   color: var(--neutral-grey);
 }
 
+.actions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.action {
+  color: var(--neutral-text);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+
+  > svg {
+    color: var(--primary-default);
+    height: 1.5rem;
+  }
+}
