@@ -1,18 +1,23 @@
 'use client';
 import {Image, PageTitle} from '@/ui-kit';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {getProfile} from '@/components/Header/Header';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 import styles from './page.module.scss';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import User from '@/assets/images/User.svg';
-import Sun from '@/assets/images/sun.svg';
-import Moon from '@/assets/images/moon.svg';
+import Sun from '@/assets/images/Sun.svg';
+import Moon from '@/assets/images/Moon.svg';
 import Lock from '@/assets/images/Lock.svg';
+import {useTheme} from '@/Providers/ThemeProvider';
+import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
+import LogoutButton from '@/components/LogoutButton/LogoutButton';
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile>();
   const [isLoading, setIsLoading] = useState(true);
+  const {theme, toggleTheme} = useTheme();
+  const isLightTheme = useMemo(() => theme === Theme.LIGHT, [theme]);
 
   useEffect(() => {
     getProfile()
@@ -31,18 +36,22 @@ export default function ProfilePage() {
         {/*<LogoutButton />*/}
       </div>
       <div className={styles.actions}>
-        <div className={styles.action}>
-          <User />
-          Update Profile
+        <div>
+          <div className={styles.action}>
+            <User />
+            Update Profile
+          </div>
+          <div className={styles.action}>
+            <Lock />
+            Change Master Password
+          </div>
+          <div className={styles.action} onClick={() => toggleTheme()}>
+            {isLightTheme ? <Sun /> : <Moon />}
+            Switch to {isLightTheme ? 'Dark' : 'Light'} Theme
+          </div>
         </div>
-        <div className={styles.action}>
-          <Lock />
-          Change Master Password
-        </div>
-        <div className={styles.action}>
-          <Sun />
-          Switch to Light Mode
-        </div>
+
+        <LogoutButton className={styles.logout} />
       </div>
     </>
   );

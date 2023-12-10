@@ -9,7 +9,6 @@ export const SearchBar = (props: SearchBarProps) => {
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
       <Search className={styles.searchIcon} />
       <input {...props} className={styles.input} />
-      <button></button>
     </form>
   );
 };

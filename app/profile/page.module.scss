@@ -20,7 +20,9 @@
 .actions {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 3rem;
+  width: 100%;
+  align-items: center;
 }
 
 .action {
@@ -30,9 +32,16 @@
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   > svg {
     color: var(--primary-default);
     height: 1.5rem;
+    margin-right: 0.5rem;
   }
+}
+
+.logout{
+  margin-top: 2rem;
+  width: 10rem;
 }
