@@ -33,6 +33,15 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 0.5rem ;
+  border-radius: 0.625rem;
+  transition: all 0.2s;
+  &:hover{
+    background: var(--primary-default);
+    > svg {
+      color: #fff;
+    }
+  }
 
   > svg {
     color: var(--primary-default);
