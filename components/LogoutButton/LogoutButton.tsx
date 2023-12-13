@@ -5,7 +5,7 @@ import styles from './LogoutButton.module.scss';
 import {deleteCookie} from 'cookies-next';
 import {AUTH_TOKEN} from '@/utils/consts';
 import classNames from 'classnames';
-import {useSnackbar} from '@/Providers/SnackbarProvider';
+import {useSnackbar} from '@/providers/SnackbarProvider';
 
 interface LogoutButtonProps {
   className?: string;

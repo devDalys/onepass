@@ -1,9 +1,9 @@
 'use client';
 import React, {useState} from 'react';
 import styles from './ThemeSwitcher.module.scss';
-import {useTheme} from '@/Providers/ThemeProvider';
+import {useTheme} from '@/providers/ThemeProvider';
 import classNames from 'classnames';
-import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
+import {Theme} from '@/providers/ThemeProvider/ThemeContext';
 
 const Moon = (
   <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">

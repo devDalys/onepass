@@ -9,7 +9,7 @@ import styles from './LoginForm.module.scss';
 import {setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
 import {useRouter} from 'next/navigation';
-import {useSnackbar} from '@/Providers/SnackbarProvider';
+import {useSnackbar} from '@/providers/SnackbarProvider';
 
 interface Form {
   email: string;

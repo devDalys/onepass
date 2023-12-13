@@ -1,14 +1,15 @@
 import './globals.scss';
 import type {Metadata} from 'next';
-import {LOCAL_STORAGE_THEME_KEY, ThemeProvider} from '@/Providers/ThemeProvider';
+import {LOCAL_STORAGE_THEME_KEY, ThemeProvider} from '@/providers/ThemeProvider';
 import styles from './page.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
 import {cookies} from 'next/headers';
-import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
+import {Theme} from '@/providers/ThemeProvider/ThemeContext';
 import localFont from 'next/font/local';
 import favicon from './favicon.png';
-import {SnackbarProvider} from '@/Providers/SnackbarProvider/SnackbarProvider';
+import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
+
 export const dynamic = 'force-dynamic';
 export const revalidate = 1;
 

@@ -9,8 +9,8 @@ import User from '@/assets/images/User.svg';
 import Sun from '@/assets/images/Sun.svg';
 import Moon from '@/assets/images/Moon.svg';
 import Lock from '@/assets/images/Lock.svg';
-import {useTheme} from '@/Providers/ThemeProvider';
-import {Theme} from '@/Providers/ThemeProvider/ThemeContext';
+import {useTheme} from '@/providers/ThemeProvider';
+import {Theme} from '@/providers/ThemeProvider/ThemeContext';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
 
 export default function ProfilePage() {

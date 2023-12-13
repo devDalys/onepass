@@ -1,7 +1,7 @@
 'use client';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {_api} from '@/api';
-import {useAccountsContext} from '@/Providers/ContextProvider';
+import {useAccountsContext} from '@/providers/ContextProvider';
 import {useEffect, useState} from 'react';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountCreator} from '@/components/AccountCreator/AccountCreator';

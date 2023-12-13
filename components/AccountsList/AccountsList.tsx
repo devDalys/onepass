@@ -4,8 +4,8 @@ import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {useEffect, useState} from 'react';
 import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
-import {useAccountsContext} from '@/Providers/ContextProvider';
-import {useSnackbar} from '@/Providers/SnackbarProvider';
+import {useAccountsContext} from '@/providers/ContextProvider';
+import {useSnackbar} from '@/providers/SnackbarProvider';
 
 export default function AccountList() {
   const [accountsState, setAccounts] = useState<IAccountItem[]>();

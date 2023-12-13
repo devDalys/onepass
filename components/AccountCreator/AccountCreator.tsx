@@ -4,7 +4,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import classNames from 'classnames';
 import styles from './AccountCreator.module.scss';
 import {Button, Checkbox, Input, PageTitle} from '@/ui-kit';
-import {useSnackbar} from '@/Providers/SnackbarProvider';
+import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useCallback, useEffect, useState} from 'react';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {notFound, useRouter} from 'next/navigation';

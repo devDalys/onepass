@@ -1,4 +1,4 @@
-.profile{
+.profile {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.fullName{
+.fullName {
   margin-top: 1rem;
   font-size: 1.5rem;
   font-weight: 700;
@@ -33,10 +33,10 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 0.5rem ;
+  padding: 0.5rem;
   border-radius: 0.625rem;
   transition: all 0.2s;
-  &:hover{
+  &:hover {
     background: var(--primary-default);
     > svg {
       color: #fff;
@@ -50,7 +50,7 @@
   }
 }
 
-.logout{
+.logout {
   margin-top: 2rem;
   width: 10rem;
 }

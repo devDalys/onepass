@@ -1,8 +1,7 @@
 import {Metadata} from 'next';
-import {getCookie} from 'cookies-next';
 import {NotFoundPage} from '@/components/NotFoundPage';
 import {cookies} from 'next/headers';
-import {ContextProvider} from '@/Providers/ContextProvider';
+import {ContextProvider} from '@/providers/ContextProvider';
 import Header from '@/components/Header/Header';
 
 export const metadata: Metadata = {

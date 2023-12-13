@@ -5,7 +5,7 @@ import NavMenu from '@/components/NavMenu/NavMenu';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {_api} from '@/api';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
-import {useAccountsContext} from '@/Providers/ContextProvider';
+import {useAccountsContext} from '@/providers/ContextProvider';
 import {useEffect, useState} from 'react';
 import {NotFoundPage} from '@/components/NotFoundPage';
 import {FullScreenLoading} from '@/components/FullScreenLoading';

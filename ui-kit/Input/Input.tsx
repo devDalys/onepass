@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Copy from '@/assets/images/Copy.svg';
 import EyeOpen from '@/assets/images/eye_open.svg';
 import EyeClose from '@/assets/images/eye_close.svg';
-import {useSnackbar} from '@/Providers/SnackbarProvider';
+import {useSnackbar} from '@/providers/SnackbarProvider';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   aliasText: string;
