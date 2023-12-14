@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {AccountsContext} from '@/Providers/ContextProvider/Context';
+import {AccountsContext} from '@/providers/ContextProvider/Context';
 
 export {AccountsContext} from './Context';
 export {ContextProvider} from './ContextProvider';

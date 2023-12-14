@@ -9,6 +9,8 @@ import {Theme} from '@/providers/ThemeProvider/ThemeContext';
 import localFont from 'next/font/local';
 import favicon from './favicon.png';
 import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
+import Script from 'next/script';
+import React from 'react';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 1;
@@ -42,6 +44,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 
   return (
     <html lang="en">
+      <Script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></Script>
       <body className={classNames(inter.variable)}>
         <ThemeProvider initialTheme={theme}>
           <SnackbarProvider>

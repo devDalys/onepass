@@ -2,7 +2,7 @@
 import {useContext} from 'react';
 import {Theme, ThemeContext} from './ThemeContext';
 import {setCookie} from 'cookies-next';
-import {LOCAL_STORAGE_THEME_KEY} from '@/Providers/ThemeProvider/index';
+import {LOCAL_STORAGE_THEME_KEY} from '@/providers/ThemeProvider/index';
 
 interface UseThemeResult {
   toggleTheme: () => void;
