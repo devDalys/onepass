@@ -1,14 +1,12 @@
 'use client';
 import React, {useEffect} from 'react';
-import styles from './YandexLogin.module.scss';
-import Script from 'next/script';
 interface YandexLoginProps {}
 
 export default function YandexLogin({}: YandexLoginProps) {
   useEffect(() => {
     window.YaAuthSuggest.init(
       {
-        client_id: 'e71127097a24409ea67c8f8f7924c6e6',
+        client_id: process.env['CLIENT_ID'],
         response_type: 'token',
         redirect_uri: 'http://localhost:8000/login',
       },

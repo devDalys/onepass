@@ -10,21 +10,13 @@ import {setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
 import {useRouter} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import * as VKID from '@vkid/sdk';
-import {useEffect, useMemo, useRef} from 'react';
-import YandexLogin from '@/components/YandexLogin';
+import YandexLogin from '@/components/YandexLogin/YandexLogin';
+import VkLogin from '@/components/VkLogin/VkLogin';
 
 interface Form {
   email: string;
   password: string;
 }
-const APP_ID = 51815095;
-const REDIRECT_URL = 'https://www.rustore.ru';
-
-VKID.Config.set({
-  app: APP_ID, // Идентификатор приложения.
-  redirectUrl: REDIRECT_URL, // Адрес для перехода после авторизации.
-});
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -43,11 +35,6 @@ export const LoginForm = () => {
 
   const router = useRouter();
   const {showSnackbar} = useSnackbar();
-  const ref = useRef<HTMLDivElement>(null);
-  const oneTap = useMemo(() => new VKID.OneTap(), []);
-  useEffect(() => {
-    ref.current && oneTap.render({container: ref.current});
-  }, []);
 
   const onSubmit = async (data: Form) => {
     await _api.post('/auth/login', data).then((data) => {
@@ -86,10 +73,13 @@ export const LoginForm = () => {
           />
         )}
       />
-      <Button className={styles.button} theme="default" type="submit">
-        Login
-      </Button>
-      <YandexLogin />
+      <div className={styles.buttons}>
+        <Button className={styles.button} theme="default" type="submit">
+          Login
+        </Button>
+        <VkLogin />
+        <YandexLogin />
+      </div>
     </form>
   );
 };

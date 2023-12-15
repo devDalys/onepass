@@ -19,7 +19,7 @@ const nextConfig = {
 
     return config;
   },
-  serverRuntimeConfig: {},
+  reactStrictMode: false,
 };
 
 module.exports = nextConfig;
