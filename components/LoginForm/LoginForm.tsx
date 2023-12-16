@@ -6,9 +6,9 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
 import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
-import {setCookie} from 'cookies-next';
+import {getCookie, setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
-import {useRouter} from 'next/navigation';
+import {usePathname, useRouter} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
@@ -18,12 +18,18 @@ interface Form {
   password: string;
 }
 
+interface Props {
+  CLIENT_ID: string;
+  APP_ID: number;
+  redirectUrl: string;
+}
+
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(5).max(20).required(),
 });
 
-export const LoginForm = () => {
+export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   const {control, handleSubmit} = useForm<Form>({
     defaultValues: {
       email: '',
@@ -35,6 +41,8 @@ export const LoginForm = () => {
 
   const router = useRouter();
   const {showSnackbar} = useSnackbar();
+  const pathName = usePathname();
+  console.log(window.location.hash);
 
   const onSubmit = async (data: Form) => {
     await _api.post('/auth/login', data).then((data) => {
@@ -77,8 +85,9 @@ export const LoginForm = () => {
         <Button className={styles.button} theme="default" type="submit">
           Login
         </Button>
-        <VkLogin />
-        <YandexLogin />
+        <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
+        <YandexLogin CLIENT_ID={CLIENT_ID} />
+        <button onClick={() => window.close()}>Закрыть</button>
       </div>
     </form>
   );

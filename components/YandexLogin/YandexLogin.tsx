@@ -1,16 +1,18 @@
 'use client';
 import React, {useEffect} from 'react';
-interface YandexLoginProps {}
+interface YandexLoginProps {
+  CLIENT_ID: string;
+}
 
-export default function YandexLogin({}: YandexLoginProps) {
+export default function YandexLogin({CLIENT_ID}: YandexLoginProps) {
   useEffect(() => {
     window.YaAuthSuggest.init(
       {
-        client_id: process.env['CLIENT_ID'],
+        client_id: CLIENT_ID,
         response_type: 'token',
-        redirect_uri: 'http://localhost:8000/login',
+        redirect_uri: 'http://localhost:8000/login?',
       },
-      'http://localhost:8000/login',
+      'http://localhost:8000/login?',
       {
         view: 'button',
         parentId: 'container',

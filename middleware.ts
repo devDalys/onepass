@@ -7,10 +7,11 @@ export function middleware(request: NextRequest) {
     accounts: '/accounts',
     logout: '/logout',
   };
-  const href = request.nextUrl.pathname;
+  const pathname = request.nextUrl.pathname;
+  console.log(request);
 
   if (request.cookies.has(AUTH_TOKEN)) {
-    if (publicRoutes.includes(href)) {
+    if (publicRoutes.includes(pathname)) {
       return NextResponse.redirect(new URL(privateRoutes.accounts, request.url));
     }
   }

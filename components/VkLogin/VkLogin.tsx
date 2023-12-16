@@ -2,16 +2,16 @@
 import React, {useEffect, useMemo, useRef} from 'react';
 import * as VKID from '@vkid/sdk';
 
-interface VkLoginProps {}
+interface VkLoginProps {
+  APP_ID: number;
+  redirectUrl: string;
+}
 
-const APP_ID = process.env['VK_APP_ID'];
-const REDIRECT_URL = process.env['REDIRECT_URL'];
-
-VKID.Config.set({
-  app: APP_ID, // Идентификатор приложения.
-  redirectUrl: REDIRECT_URL, // Адрес для перехода после авторизации.
-});
-export default function VkLogin({}: VkLoginProps) {
+export default function VkLogin({APP_ID, redirectUrl}: VkLoginProps) {
+  VKID.Config.set({
+    app: APP_ID, // Идентификатор приложения.
+    redirectUrl: redirectUrl, // Адрес для перехода после авторизации.
+  });
   const ref = useRef<HTMLDivElement>(null);
   const oneTap = useMemo(() => new VKID.OneTap(), []);
 
