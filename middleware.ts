@@ -8,7 +8,6 @@ export function middleware(request: NextRequest) {
     logout: '/logout',
   };
   const pathname = request.nextUrl.pathname;
-  console.log(request);
 
   if (request.cookies.has(AUTH_TOKEN)) {
     if (publicRoutes.includes(pathname)) {

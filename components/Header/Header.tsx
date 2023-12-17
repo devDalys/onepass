@@ -45,7 +45,7 @@ export default function Header() {
     }
   }, [revalidate, searchParams]);
 
-  if (isLoading || !profile || !accounts?.length) return <FullScreenLoading />;
+  if (isLoading || !profile || !accounts) return <FullScreenLoading />;
 
   return (
     <div className={styles.header}>

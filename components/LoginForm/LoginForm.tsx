@@ -8,10 +8,12 @@ import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
 import {getCookie, setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
-import {usePathname, useRouter} from 'next/navigation';
+import {usePathname, useRouter, useSearchParams} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
+import {useEffect} from 'react';
+import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
 
 interface Form {
   email: string;
@@ -41,8 +43,6 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
 
   const router = useRouter();
   const {showSnackbar} = useSnackbar();
-  const pathName = usePathname();
-  console.log(window.location.hash);
 
   const onSubmit = async (data: Form) => {
     await _api.post('/auth/login', data).then((data) => {
@@ -53,42 +53,44 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Controller
-        name="email"
-        control={control}
-        render={({field: {ref, ...field}, fieldState}) => (
-          <Input
-            aliasText="Email"
-            placeholder="johndoe@email.com"
-            autoComplete="email"
-            {...field}
-            errorText={fieldState.error?.message}
-          />
-        )}
-      />
-      <Controller
-        name="password"
-        control={control}
-        render={({field: {ref, ...field}, fieldState}) => (
-          <Input
-            aliasText="Password"
-            placeholder="Password"
-            autoComplete="current-password"
-            {...field}
-            type="password"
-            errorText={fieldState.error?.message}
-          />
-        )}
-      />
-      <div className={styles.buttons}>
-        <Button className={styles.button} theme="default" type="submit">
-          Login
-        </Button>
-        <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
-        <YandexLogin CLIENT_ID={CLIENT_ID} />
-        <button onClick={() => window.close()}>Закрыть</button>
-      </div>
-    </form>
+    <>
+      <AuthorizationChecker />
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <Controller
+          name="email"
+          control={control}
+          render={({field: {ref, ...field}, fieldState}) => (
+            <Input
+              aliasText="Email"
+              placeholder="johndoe@email.com"
+              autoComplete="email"
+              {...field}
+              errorText={fieldState.error?.message}
+            />
+          )}
+        />
+        <Controller
+          name="password"
+          control={control}
+          render={({field: {ref, ...field}, fieldState}) => (
+            <Input
+              aliasText="Password"
+              placeholder="Password"
+              autoComplete="current-password"
+              {...field}
+              type="password"
+              errorText={fieldState.error?.message}
+            />
+          )}
+        />
+        <div className={styles.buttons}>
+          <Button className={styles.button} theme="default" type="submit">
+            Login
+          </Button>
+          <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
+          <YandexLogin CLIENT_ID={CLIENT_ID} />
+        </div>
+      </form>
+    </>
   );
 };
