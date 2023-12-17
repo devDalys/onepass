@@ -2,10 +2,13 @@
 import React, {useEffect} from 'react';
 interface YandexLoginProps {
   CLIENT_ID: string;
+  callback: () => void;
+  isDisabled: boolean;
 }
 
-export default function YandexLogin({CLIENT_ID}: YandexLoginProps) {
+export default function YandexLogin({CLIENT_ID, callback, isDisabled}: YandexLoginProps) {
   useEffect(() => {
+    // @ts-ignore
     window.YaAuthSuggest.init(
       {
         client_id: CLIENT_ID,
@@ -21,11 +24,17 @@ export default function YandexLogin({CLIENT_ID}: YandexLoginProps) {
         buttonSize: 'm',
         buttonBorderRadius: 10,
       },
-    )
-      .then(({handler}) => handler())
-      .then((data) => console.log('Message with the token', data))
-      .catch((error) => console.log('Error processing', error));
+    ).then(({handler}: any) => handler());
   }, []);
 
-  return <button id="container"></button>;
+  return (
+    <button
+      disabled={isDisabled}
+      onClick={(event) => {
+        event.preventDefault();
+        callback?.();
+      }}
+      id="container"
+    ></button>
+  );
 }

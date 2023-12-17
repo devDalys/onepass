@@ -12,7 +12,7 @@ import {usePathname, useRouter, useSearchParams} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
 
 interface Form {
@@ -41,20 +41,40 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
     resolver: yupResolver(schema),
   });
 
+  const [isLoading, setLoading] = useState(false);
+
   const router = useRouter();
   const {showSnackbar} = useSnackbar();
 
   const onSubmit = async (data: Form) => {
-    await _api.post('/auth/login', data).then((data) => {
-      showSnackbar('Вы успешно вошли !');
-      setCookie('token', data.data.token, {maxAge: ONE_MONTH});
-      router.push('/accounts');
-    });
+    setLoading(true);
+    await _api
+      .post('/auth/login', data)
+      .then((data) => {
+        showSnackbar('Вы успешно вошли !');
+        setCookie('token', data.data.token, {maxAge: ONE_MONTH});
+        router.push('/accounts');
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
+  const onYandexClick = () => {
+    setLoading(true);
+    const interval = setInterval(() => {
+      const token = getCookie('token');
+      if (token) {
+        clearInterval(interval);
+        showSnackbar('Вы успешно вошли !');
+        router.push('/accounts');
+      }
+    }, 500);
   };
 
   return (
     <>
-      <AuthorizationChecker />
+      <AuthorizationChecker onYandexClick={onYandexClick} />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Controller
           name="email"
@@ -64,6 +84,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
               aliasText="Email"
               placeholder="johndoe@email.com"
               autoComplete="email"
+              disabled={isLoading}
               {...field}
               errorText={fieldState.error?.message}
             />
@@ -77,6 +98,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
               aliasText="Password"
               placeholder="Password"
               autoComplete="current-password"
+              disabled={isLoading}
               {...field}
               type="password"
               errorText={fieldState.error?.message}
@@ -84,11 +106,11 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
           )}
         />
         <div className={styles.buttons}>
-          <Button className={styles.button} theme="default" type="submit">
+          <Button className={styles.button} theme="default" type="submit" disabled={isLoading}>
             Login
           </Button>
           <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
-          <YandexLogin CLIENT_ID={CLIENT_ID} />
+          <YandexLogin CLIENT_ID={CLIENT_ID} isDisabled={isLoading} callback={onYandexClick} />
         </div>
       </form>
     </>

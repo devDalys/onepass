@@ -19,5 +19,5 @@ export default function VkLogin({APP_ID, redirectUrl}: VkLoginProps) {
     ref.current && oneTap.render({container: ref.current, styles: {height: 42}});
   }, []);
 
-  return <div ref={ref} />;
+  return <div onClick={(event) => event.preventDefault()} ref={ref} />;
 }
