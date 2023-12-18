@@ -6,11 +6,13 @@ import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {useAccountsContext} from '@/providers/ContextProvider';
 import {useSnackbar} from '@/providers/SnackbarProvider';
+import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
 
 export default function AccountList() {
-  const [accountsState, setAccounts] = useState<IAccountItem[]>();
   const [inputState, setInputState] = useState<string>('');
   const {setAccounts: setContext, accounts} = useAccountsContext();
+  const [accountsState, setAccounts] = useState<IAccountItem[] | undefined>(accounts);
+
   const {showSnackbar} = useSnackbar();
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export default function AccountList() {
       setAccounts(accounts);
     }
   }, [accounts, inputState]);
+  if(!accounts?.length) return <WelcomeComponent />
 
   return (
     <div className={styles.wrapper}>
