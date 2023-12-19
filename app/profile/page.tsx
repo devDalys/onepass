@@ -12,10 +12,13 @@ import Lock from '@/assets/images/Lock.svg';
 import {useTheme} from '@/providers/ThemeProvider';
 import {Theme} from '@/providers/ThemeProvider/ThemeContext';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
+import EditProfile from '@/components/EditProfile/EditProfile';
+
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditMode, setEditMode] = useState(false);
   const {theme, toggleTheme} = useTheme();
   const isLightTheme = useMemo(() => theme === Theme.LIGHT, [theme]);
 
@@ -33,25 +36,30 @@ export default function ProfilePage() {
         <Image src={profile?.avatarUrl} alt={profile?.name} />
         <div className={styles.fullName}>{profile?.name}</div>
         <div className={styles.email}>{profile?.email}</div>
-        {/*<LogoutButton />*/}
       </div>
       <div className={styles.actions}>
         <div>
-          <div className={styles.action}>
-            <User />
-            Update Profile
-          </div>
-          <div className={styles.action}>
-            <Lock />
-            Change Master Password
-          </div>
-          <div className={styles.action} onClick={() => toggleTheme()}>
-            {isLightTheme ? <Sun /> : <Moon />}
-            Switch to {isLightTheme ? 'Dark' : 'Light'} Theme
-          </div>
+          {isEditMode ? (
+            <EditProfile name={profile?.name as string} onSubmit={() => null} onCancel={() => setEditMode(!isEditMode)} />
+          ) : (
+            <>
+              <div className={styles.action} onClick={() => setEditMode(!isEditMode)}>
+                <User />
+                Update Profile
+              </div>
+              <div className={styles.action}>
+                <Lock />
+                Change Master Password
+              </div>
+              <div className={styles.action} onClick={() => toggleTheme()}>
+                {isLightTheme ? <Sun /> : <Moon />}
+                Switch to {isLightTheme ? 'Dark' : 'Light'} Theme
+              </div>
+            </>
+          )}
         </div>
 
-        <LogoutButton className={styles.logout} />
+          {!isEditMode && <LogoutButton className={styles.logout}/>}
       </div>
     </>
   );

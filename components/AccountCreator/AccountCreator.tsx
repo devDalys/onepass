@@ -63,6 +63,8 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
           reset(data.data.body);
           setCurrentAccount(data.data.body);
           setIsEditMode(false);
+        }else{
+          router.push('/accounts/?revalidate=1')
         }
       });
   };

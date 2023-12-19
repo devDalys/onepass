@@ -1,0 +1,77 @@
+<svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_303_18)">
+        <path
+                d="M19.0551 21.6769C21.4466 20.2962 22.2659 17.2382 20.8852 14.8468C19.5045 12.4553 16.4466 11.6359 14.0551 13.0166C11.6636 14.3973 10.8443 17.4553 12.225 19.8468C13.6057 22.2382 16.6636 23.0576 19.0551 21.6769Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M11.0551 7.8205L12.0551 9.55255"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M21.0551 25.141L22.0551 26.873"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M5.92743 14.4991L7.86719 15.0188"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M25.243 19.6747L27.1828 20.1944"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M7.02884 22.8468L8.76089 21.8468"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M24.3493 12.8468L26.0814 11.8468"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M13.7074 27.9744L14.2272 26.0347"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+        <path
+                d="M18.883 8.65886L19.4028 6.71911"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+    </g>
+    <defs>
+        <clipPath id="clip0_303_18">
+            <rect
+                    width="24"
+                    height="24"
+                    fill="white"
+                    transform="translate(0.162811 12.9545) rotate(-30)"
+            />
+        </clipPath>
+    </defs>
+</svg>
