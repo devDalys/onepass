@@ -13,6 +13,7 @@ import {useTheme} from '@/providers/ThemeProvider';
 import {Theme} from '@/providers/ThemeProvider/ThemeContext';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
 import EditProfile from '@/components/EditProfile/EditProfile';
+import {useSnackbar} from "@/providers/SnackbarProvider";
 
 
 export default function ProfilePage() {
@@ -21,7 +22,11 @@ export default function ProfilePage() {
   const [isEditMode, setEditMode] = useState(false);
   const {theme, toggleTheme} = useTheme();
   const isLightTheme = useMemo(() => theme === Theme.LIGHT, [theme]);
-
+  const {showSnackbar} = useSnackbar();
+  const handleSubmit = (data: Profile) => {
+      showSnackbar('Вы успешно обновили профиль');
+      setProfile(data)
+  }
   useEffect(() => {
     getProfile()
       .then((data) => setProfile(data))
@@ -40,7 +45,7 @@ export default function ProfilePage() {
       <div className={styles.actions}>
         <div>
           {isEditMode ? (
-            <EditProfile name={profile?.name as string} onSubmit={() => null} onCancel={() => setEditMode(!isEditMode)} />
+            <EditProfile name={profile?.name as string} onSubmit={handleSubmit} onCancel={() => setEditMode(!isEditMode)} />
           ) : (
             <>
               <div className={styles.action} onClick={() => setEditMode(!isEditMode)}>

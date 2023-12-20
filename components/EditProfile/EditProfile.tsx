@@ -4,6 +4,10 @@ import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Input} from '@/ui-kit';
 import React from 'react';
+import {_api} from '@/api';
+import {useSnackbar} from '@/providers/SnackbarProvider';
+import {useRouter} from 'next/navigation';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 
 interface Form {
   name: string;
@@ -15,7 +19,7 @@ const schema = yup.object().shape({
 
 interface Props {
   name: string;
-  onSubmit: () => void;
+  onSubmit: (data: Profile) => void;
   onCancel: () => void;
 }
 
@@ -29,11 +33,16 @@ export default function EditProfile({name, onCancel, onSubmit}: Props) {
   });
 
   const onHandleSubmit = (form: Form) => {
-    console.log(form);
+    _api
+      .put('/auth/me', form)
+      .then((data) => {
+        onSubmit(data.data);
+      })
+      .finally(() => onCancel());
   };
 
   return (
-    <form>
+    <form className={styles.form} onSubmit={handleSubmit(onHandleSubmit)}>
       <Controller
         control={control}
         name="name"
@@ -48,8 +57,12 @@ export default function EditProfile({name, onCancel, onSubmit}: Props) {
         )}
       />
       <div className={styles.actions}>
-          <Button type='submit' theme={'default'} disabled={!formState.isDirty} onClick={onSubmit}>Save</Button>
-          <Button theme={'outline'} onClick={onCancel}>Cancel</Button>
+        <Button type="submit" theme={'default'} disabled={!formState.isDirty} onClick={onSubmit}>
+          Save
+        </Button>
+        <Button theme={'outline'} onClick={onCancel}>
+          Cancel
+        </Button>
       </div>
     </form>
   );
