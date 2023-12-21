@@ -2,6 +2,7 @@
 import Copy from '@/assets/images/Copy.svg';
 import styles from './AccountItem.module.scss';
 import Link from 'next/link';
+
 export interface IAccountItem {
   login: string;
   password: string;

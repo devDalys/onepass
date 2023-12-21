@@ -1,5 +1,6 @@
 'use client';
 import React, {useEffect} from 'react';
+
 interface YandexLoginProps {
   CLIENT_ID: string;
   callback: () => void;

@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import styles from './AuthorizationChecker.module.scss';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {_api} from '@/api';
 import {setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import {AxiosResponse} from 'axios';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 
 interface AuthorizationCheckerProps {

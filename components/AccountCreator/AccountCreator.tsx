@@ -7,7 +7,7 @@ import {Button, Checkbox, Input, PageTitle} from '@/ui-kit';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useCallback, useEffect, useState} from 'react';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
-import {notFound, useRouter} from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
 
@@ -63,8 +63,8 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
           reset(data.data.body);
           setCurrentAccount(data.data.body);
           setIsEditMode(false);
-        }else{
-          router.push('/accounts/?revalidate=1')
+        } else {
+          router.push('/accounts/?revalidate=1');
         }
       });
   };

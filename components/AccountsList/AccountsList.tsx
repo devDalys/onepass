@@ -37,7 +37,7 @@ export default function AccountList() {
       setAccounts(accounts);
     }
   }, [accounts, inputState]);
-  if(!accounts?.length) return <WelcomeComponent />
+  if (!accounts?.length) return <WelcomeComponent />;
 
   return (
     <div className={styles.wrapper}>

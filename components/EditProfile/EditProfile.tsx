@@ -5,8 +5,6 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Input} from '@/ui-kit';
 import React from 'react';
 import {_api} from '@/api';
-import {useSnackbar} from '@/providers/SnackbarProvider';
-import {useRouter} from 'next/navigation';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 
 interface Form {

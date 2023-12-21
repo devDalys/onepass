@@ -7,9 +7,8 @@ import {_api} from '@/api';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 import {useAccountsContext} from '@/providers/ContextProvider';
 import {useEffect, useState} from 'react';
-import {NotFoundPage} from '@/components/NotFoundPage';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
-import {usePathname, useRouter, useSearchParams} from 'next/navigation';
+import {useSearchParams} from 'next/navigation';
 
 const getAccounts = async (): Promise<IAccountItem[]> => {
   const data = await _api.get('/accounts');

@@ -4,6 +4,7 @@ import Home from '@/assets/images/Home.svg';
 import Add from '@/assets/images/Add.svg';
 import User from '@/assets/images/User.svg';
 import Link from 'next/link';
+
 interface NavMenuProps {}
 
 export default function NavMenu({}: NavMenuProps) {

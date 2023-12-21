@@ -8,11 +8,11 @@ import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
 import {getCookie, setCookie} from 'cookies-next';
 import {ONE_MONTH} from '@/utils/consts';
-import {usePathname, useRouter, useSearchParams} from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
 
 interface Form {
