@@ -10,22 +10,29 @@ const classes = {
 
 interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   classes?: Partial<typeof classes>;
+  fallback?: string;
 }
 
-export const Image = (props: Props) => {
+export const Image = ({classes, fallback, ...imageProps}: Props) => {
   const [isImageLoading, setImageLoading] = useState(true);
+  const [imageSrc, setImageSrc] = useState(imageProps.src);
+  console.log(fallback);
 
   return (
     <>
       {isImageLoading && (
-        <div className={classNames(styles.avatar, styles.loader, props?.classes?.loader)} />
+        <div className={classNames(styles.avatar, styles.loader, classes?.loader)} />
       )}
       <img
-        className={classNames(styles.avatar, props?.classes?.img, {
+        {...imageProps}
+        className={classNames(styles.avatar, classes?.img, {
           [styles.hideAvatar]: isImageLoading,
         })}
-        src={props?.src}
-        alt={props?.alt}
+        src={imageSrc}
+        onError={() => {
+          setImageSrc(fallback);
+          setImageLoading(false);
+        }}
         onLoad={() => setImageLoading(false)}
       />
     </>

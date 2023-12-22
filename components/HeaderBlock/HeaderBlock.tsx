@@ -1,8 +1,9 @@
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import styles from './HeaderBlock.module.scss';
-import NoProfile from '@/assets/images/no-profile.svg';
+import NoProfile from '@/assets/images/no-profile.svg?url';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
 import {ThemeSwitcher} from '@/components/ThemeSwitcher';
+import {Image} from '@/ui-kit';
 
 export interface Profile {
   name: string;
@@ -33,7 +34,11 @@ const CountsBlock = ({text, length}: CounterProps) => {
 const ProfileBlock = ({avatarUrl, name, email}: Profile) => {
   return (
     <div className={styles.profile}>
-      <img className={styles.avatar} src={avatarUrl ?? NoProfile.src} />
+      <Image
+        classes={{img: styles.avatar, loader: styles.avatar}}
+        src={avatarUrl ?? NoProfile.src}
+        fallback={NoProfile.src}
+      />
 
       <div className={styles.userInfo}>
         <span className={styles.name}>{name}</span>
