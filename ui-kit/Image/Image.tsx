@@ -1,7 +1,8 @@
 'use client';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import styles from './Image.module.scss';
+import notFound from '@/assets/images/not-found.svg?url';
 
 const classes = {
   loader: 'loader',
@@ -16,8 +17,9 @@ interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
 export const Image = ({classes, fallback, ...imageProps}: Props) => {
   const [isImageLoading, setImageLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(imageProps.src);
-  console.log(fallback);
-
+  useEffect(() => {
+    setImageSrc(imageProps.src);
+  }, [imageProps.src]);
   return (
     <>
       {isImageLoading && (
@@ -30,7 +32,7 @@ export const Image = ({classes, fallback, ...imageProps}: Props) => {
         })}
         src={imageSrc}
         onError={() => {
-          setImageSrc(fallback);
+          setImageSrc(fallback ?? notFound.src);
           setImageLoading(false);
         }}
         onLoad={() => setImageLoading(false)}

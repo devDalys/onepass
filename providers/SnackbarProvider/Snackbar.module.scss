@@ -22,10 +22,10 @@
 
 .snackBarvisible {
   display: flex;
-  animation: snackBarAnimation 2s forwards;
+  animation: snackBarAnimation 3s forwards;
 
   @include for-mobile {
-    animation: snackBarAnimationMobile 2s forwards;
+    animation: snackBarAnimationMobile 3s forwards;
   }
 }
 

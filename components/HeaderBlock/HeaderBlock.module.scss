@@ -20,10 +20,10 @@
   border: 2px solid var(--neutral-text);
   flex-direction: column;
   border-radius: 0.625rem;
+  justify-content: space-between;
   background: var(--neutral-card);
   @include for-mobile {
     padding: 0.5rem;
-    justify-content: space-between;
   }
 }
 
@@ -52,7 +52,7 @@
 }
 
 .profile {
-  width: 49%;
+  width: 60%;
   height: 10rem;
   display: flex;
   justify-content: space-between;
@@ -88,7 +88,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 62%;
+  overflow: hidden;
 
   @include for-mobile {
     padding-left: 0;
