@@ -55,7 +55,7 @@ export default function EditProfile({name, onCancel, onSubmit}: Props) {
         )}
       />
       <div className={styles.actions}>
-        <Button type="submit" theme={'default'} disabled={!formState.isDirty} onClick={onSubmit}>
+        <Button type="submit" theme={'default'} disabled={!formState.isDirty}>
           Save
         </Button>
         <Button theme={'outline'} onClick={onCancel}>

@@ -7,10 +7,25 @@
   left: 2rem;
   background: var(--primary-default);
   color: #fff;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
+  width: 20rem;
   border-radius: 0.625rem;
   font-weight: 700;
   font-family: var(--play);
+  cursor: pointer;
+
+  &:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.3rem;
+    border-bottom-left-radius: 0.625rem;
+    border-bottom-right-radius: 0.625rem;
+    background: #fff;
+    animation: progressAnimation var(--snackbar-delay) forwards linear;
+  }
   @include for-mobile {
     z-index: 3;
     width: 100%;
@@ -22,10 +37,10 @@
 
 .snackBarvisible {
   display: flex;
-  animation: snackBarAnimation 3s forwards;
+  animation: snackBarAnimation var(--snackbar-delay) forwards;
 
   @include for-mobile {
-    animation: snackBarAnimationMobile 3s forwards;
+    animation: snackBarAnimationMobile var(--snackbar-delay) forwards;
   }
 }
 
@@ -57,5 +72,14 @@
   }
   100% {
     bottom: -10rem;
+  }
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
   }
 }
