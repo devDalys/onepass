@@ -1,7 +1,6 @@
 'use client';
 import {Image, PageTitle} from '@/ui-kit';
 import {useEffect, useMemo, useState} from 'react';
-import {getProfile} from '@/components/Header/Header';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 import styles from './page.module.scss';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
@@ -14,6 +13,7 @@ import {Theme} from '@/providers/ThemeProvider/ThemeContext';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
 import EditProfile from '@/components/EditProfile/EditProfile';
 import {useSnackbar} from '@/providers/SnackbarProvider';
+import {getProfile} from '@/components/Header/HeaderWrapper';
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile>();

@@ -7,19 +7,14 @@ import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {useAccountsContext} from '@/providers/ContextProvider';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
+import {FullScreenLoading} from '@/components/FullScreenLoading';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');
-  const {setAccounts: setContext, accounts} = useAccountsContext();
+  const {accounts, isLoaded} = useAccountsContext();
   const [accountsState, setAccounts] = useState<IAccountItem[] | undefined>(accounts);
 
   const {showSnackbar} = useSnackbar();
-
-  useEffect(() => {
-    if (!!accounts?.length) {
-      setContext?.(accounts);
-    }
-  }, [accounts, setContext]);
 
   const onCopy = async (text: string) => {
     await navigator.clipboard.writeText(text);
@@ -37,7 +32,8 @@ export default function AccountList() {
       setAccounts(accounts);
     }
   }, [accounts, inputState]);
-  if (!accounts?.length) return <WelcomeComponent />;
+  if (!isLoaded) return <FullScreenLoading />;
+  if (accounts && !accounts.length) return <WelcomeComponent />;
 
   return (
     <div className={styles.wrapper}>

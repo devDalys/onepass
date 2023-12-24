@@ -8,10 +8,11 @@
   border-radius: 0.625rem;
   background: var(--neutral-card);
   cursor: pointer;
-  transition: filter 0.5s;
+  transition: all 0.25s;
 
   &:hover {
     filter: saturate(200%);
+    border-color: var(--primary-default);
   }
 }
 

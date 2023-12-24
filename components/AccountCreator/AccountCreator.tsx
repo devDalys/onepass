@@ -61,7 +61,7 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
           : showSnackbar('Вы успешно обновили аккаунт');
         if (!isCreateMode) {
           reset(data.data.body);
-          setCurrentAccount(data.data.body);
+          setCurrentAccount(form);
           setIsEditMode(false);
         } else {
           router.push('/accounts/?revalidate=1');
@@ -110,7 +110,7 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         <div className={styles.header}>
           <div className={styles.title}>
-            <PageTitle>{currentAccount?.socialName || socialName}</PageTitle>
+            <PageTitle>{currAccount?.socialName || socialName}</PageTitle>
             {!isCreateMode && (
               <div className={styles.checker}>
                 edit mode

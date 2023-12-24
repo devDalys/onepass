@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import styles from './Image.module.scss';
 import notFound from '@/assets/images/not-found.svg?url';
+import dynamic from 'next/dynamic';
 
 const classes = {
   loader: 'loader',
@@ -14,12 +15,13 @@ interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallback?: string;
 }
 
-export const Image = ({classes, fallback, ...imageProps}: Props) => {
+const ImageComponent = ({classes, fallback, ...imageProps}: Props) => {
   const [isImageLoading, setImageLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(imageProps.src);
   useEffect(() => {
     setImageSrc(imageProps.src);
   }, [imageProps.src]);
+
   return (
     <>
       {isImageLoading && (
@@ -40,3 +42,5 @@ export const Image = ({classes, fallback, ...imageProps}: Props) => {
     </>
   );
 };
+
+export const Image = dynamic(() => Promise.resolve(ImageComponent), {ssr: false});

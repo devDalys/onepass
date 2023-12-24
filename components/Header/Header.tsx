@@ -3,48 +3,24 @@ import styles from './Header.module.scss';
 import HeaderBlock from '@/components/HeaderBlock';
 import NavMenu from '@/components/NavMenu/NavMenu';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
-import {_api} from '@/api';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 import {useAccountsContext} from '@/providers/ContextProvider';
-import {useEffect, useState} from 'react';
-import {FullScreenLoading} from '@/components/FullScreenLoading';
-import {useSearchParams} from 'next/navigation';
+import {useEffect} from 'react';
 
-const getAccounts = async (): Promise<IAccountItem[]> => {
-  const data = await _api.get('/accounts');
-  return Object.values(data.data.body);
-};
+interface Props {
+  profile: Profile;
+  accounts: IAccountItem[];
+}
 
-export const getProfile = async (): Promise<Profile> => {
-  const data = await _api.get('/auth/me');
-
-  return data.data;
-};
-
-export default function Header() {
-  const {setAccounts, accounts} = useAccountsContext();
-  const [profile, setProfile] = useState<Profile>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFirstRender, setFirstRender] = useState(true);
-  const searchParams = useSearchParams();
-  const revalidate = Boolean(searchParams.get('revalidate'));
+export default function Header({profile, accounts}: Props) {
+  const {setAccounts, setIsLoaded} = useAccountsContext();
 
   useEffect(() => {
-    if (isFirstRender || revalidate) {
-      setIsLoading(true);
-      Promise.all([getAccounts(), getProfile()])
-        .then(([accounts, profile]) => {
-          setAccounts?.(accounts);
-          setProfile(profile);
-        })
-        .finally(() => {
-          setIsLoading(false);
-          setFirstRender(false);
-        });
+    if (setAccounts && setIsLoaded) {
+      setAccounts(accounts);
+      setIsLoaded(true);
     }
-  }, [revalidate, searchParams]);
-
-  if (isLoading || !profile || !accounts) return <FullScreenLoading />;
+  }, [accounts, setAccounts, setIsLoaded]);
 
   return (
     <div className={styles.header}>

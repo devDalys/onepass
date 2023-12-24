@@ -2,7 +2,7 @@ import {Metadata} from 'next';
 import {NotFoundPage} from '@/components/NotFoundPage';
 import {cookies} from 'next/headers';
 import {ContextProvider} from '@/providers/ContextProvider';
-import Header from '@/components/Header/Header';
+import HeaderWrapper from '@/components/Header/HeaderWrapper';
 
 export const metadata: Metadata = {
   title: 'Аккаунты',
@@ -15,7 +15,7 @@ export default function AccountLayout({children}: {children: React.ReactNode}) {
 
   return (
     <ContextProvider>
-      <Header />
+      <HeaderWrapper />
       {children}
     </ContextProvider>
   );

@@ -5,3 +5,10 @@ declare global {
     };
   }
 }
+
+declare module '*.svg?url' {
+  const content: {
+    src: string;
+  };
+  export default content;
+}

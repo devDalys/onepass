@@ -4,15 +4,16 @@
   justify-content: space-between;
   border-radius: 0.625rem;
   border: 1px solid var(--neutral-grey);
-  padding: 0.2rem 0.5rem;
   cursor: pointer;
   width: 7rem;
   position: relative;
+  height: 2.125rem;
+  overflow: hidden;
 }
 
 .icon {
-  border-radius: 0.625rem;
-  width: 2rem;
+  //border-radius: 0.625rem;
+  width: 50%;
   height: 2rem;
   display: flex;
   align-items: center;
@@ -23,7 +24,6 @@
     position: absolute;
     content: '';
     background: var(--primary-default);
-    border-radius: 0.625rem;
   }
 
   svg {
@@ -34,10 +34,9 @@
 .leftAnimation {
   color: white;
   &:before {
-    right: 0.5rem;
     z-index: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 50%;
+    height: 100%;
     animation: leftAnimation 0.2s linear forwards;
   }
 }
@@ -45,29 +44,28 @@
 .rightAnimation {
   color: white;
   &:before {
-    left: 0.5rem;
     z-index: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 50%;
+    height: 100%;
     animation: rightAnimation 0.2s linear forwards;
   }
 }
 
 @keyframes leftAnimation {
   0% {
-    right: 0.5rem;
+    right: 0;
   }
   100% {
-    right: 64%;
+    right: 50%;
   }
 }
 
 @keyframes rightAnimation {
   0% {
-    left: 0.5rem;
+    left: 0;
   }
   100% {
-    left: 64%;
+    left: 50%;
   }
 }
 
