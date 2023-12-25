@@ -1,0 +1,41 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.625rem;
+  justify-content: space-between;
+  border: 2px solid var(--neutral-text);
+  background: var(--neutral-card);
+  overflow: hidden;
+  transition: all 0.3s linear;
+  margin-bottom: 1rem;
+}
+
+.title{
+  font-size: 1.5rem;
+  color: var(--neutral-input);
+  padding: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+}
+
+.additionalInfo{
+  margin-left: auto;
+  font-size: 1rem;
+}
+
+.icon{
+  margin-left: 1rem;
+}
+
+.renderContent{
+  padding: 0 1.2rem 0 1.2rem;
+  max-height: 0;
+  transition: max-height 0.3s linear;
+}
+
+.visible{
+  max-height: 40rem;
+}
+

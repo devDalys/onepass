@@ -9,6 +9,7 @@ export interface IAccountItem {
   iconSrc?: string;
   socialName: string;
   _id?: string;
+  createdAt?: string;
 }
 
 interface Props extends IAccountItem {

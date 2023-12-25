@@ -4,6 +4,7 @@ import {useMemo} from 'react';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountCreator} from '@/components/AccountCreator/AccountCreator';
 import {notFound} from 'next/navigation';
+import {Accordion} from '@/ui-kit';
 
 export default function AccountPage({params}: {params: {id: string}}) {
   const {accounts} = useAccountsContext();
@@ -14,7 +15,15 @@ export default function AccountPage({params}: {params: {id: string}}) {
 
   if (!accounts?.length) return <FullScreenLoading />;
 
-  if (accounts.length && !currAccount) return notFound();
+  if (!currAccount) return notFound();
 
-  return <AccountCreator currentAccount={currAccount} />;
+  return (
+    <Accordion
+      renderProps={() => <AccountCreator currentAccount={currAccount} />}
+      title={currAccount?.socialName}
+      additionalInfo={
+        currAccount.createdAt && 'Added: ' + new Date(currAccount.createdAt).toLocaleDateString()
+      }
+    />
+  );
 }

@@ -4,3 +4,4 @@ export {SearchBar} from './SearchBar';
 export {Checkbox} from './Checkbox';
 export {PageTitle} from './PageTitle';
 export {Image} from './Image';
+export {Accordion} from './Accordion';
