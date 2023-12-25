@@ -14,6 +14,7 @@ import {_api} from '@/api';
 interface Props {
   currentAccount?: IAccountItem;
   isCreateMode?: boolean;
+  isSimpleMode?: boolean;
 }
 
 const schema = yup.object().shape({
@@ -22,7 +23,11 @@ const schema = yup.object().shape({
   socialName: yup.string().required().min(2).max(20),
 });
 
-export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) => {
+export const AccountCreator = ({
+  currentAccount,
+  isCreateMode = false,
+  isSimpleMode = false,
+}: Props) => {
   const {showSnackbar} = useSnackbar();
   const [isEditMode, setIsEditMode] = useState(isCreateMode);
   const [currAccount, setCurrentAccount] = useState(currentAccount);
@@ -106,11 +111,11 @@ export const AccountCreator = ({currentAccount, isCreateMode = false}: Props) =>
   if (notFound) return <NotSearchFound />;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={!isSimpleMode ? styles.wrapper : ''}>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         <div className={styles.header}>
           <div className={styles.title}>
-            <PageTitle>{currAccount?.socialName || socialName}</PageTitle>
+            {!isSimpleMode && <PageTitle>{currAccount?.socialName || socialName}</PageTitle>}
             {!isCreateMode && (
               <div className={styles.checker}>
                 edit mode

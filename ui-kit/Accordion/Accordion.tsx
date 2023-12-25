@@ -5,10 +5,16 @@ interface AccordionProps {
   renderProps: () => React.ReactNode;
   title?: string;
   additionalInfo?: string;
+  isDefaultOpened?: boolean;
 }
 
-export const Accordion = ({renderProps, title, additionalInfo}: AccordionProps) => {
-  const [isOpened, setOpened] = useState(false);
+export const Accordion = ({
+  renderProps,
+  title,
+  additionalInfo,
+  isDefaultOpened = false,
+}: AccordionProps) => {
+  const [isOpened, setOpened] = useState(isDefaultOpened);
 
   return (
     <div className={styles.wrapper}>

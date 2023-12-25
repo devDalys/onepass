@@ -17,10 +17,13 @@ export default function AccountPage({params}: {params: {id: string}}) {
 
   if (!currAccount) return notFound();
 
+  if (currAccount.createdAt) return <AccountCreator currentAccount={currAccount} />;
+
   return (
     <Accordion
-      renderProps={() => <AccountCreator currentAccount={currAccount} />}
+      renderProps={() => <AccountCreator isSimpleMode currentAccount={currAccount} />}
       title={currAccount?.socialName}
+      isDefaultOpened
       additionalInfo={
         currAccount.createdAt && 'Added: ' + new Date(currAccount.createdAt).toLocaleDateString()
       }

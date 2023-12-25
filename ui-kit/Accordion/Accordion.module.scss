@@ -1,3 +1,5 @@
+@import '@/app/mixins';
+
 .wrapper{
   display: flex;
   flex-direction: column;
@@ -11,18 +13,24 @@
 }
 
 .title{
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: var(--neutral-input);
   padding: 1.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
+  @include for-mobile{
+    font-size: 1.6rem;
+  }
 
 }
 
 .additionalInfo{
   margin-left: auto;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  @include for-mobile{
+    font-size: 1.2rem;
+  }
 }
 
 .icon{
