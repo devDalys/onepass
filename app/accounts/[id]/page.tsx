@@ -14,7 +14,6 @@ export default function AccountPage({params}: {params: {id: string}}) {
   }, [accounts, params.id]);
 
   if (!accounts?.length) return <FullScreenLoading />;
-
   if (!currAccount) return notFound();
 
   if (currAccount?.accountEntries?.length === 1)

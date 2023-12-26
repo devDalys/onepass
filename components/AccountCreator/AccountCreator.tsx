@@ -31,28 +31,21 @@ export const AccountCreator = ({
   const {showSnackbar} = useSnackbar();
   const [isEditMode, setIsEditMode] = useState(isCreateMode);
   const [currAccount, setCurrentAccount] = useState(currentAccount);
-  const notFound = !currentAccount && !isCreateMode;
   const router = useRouter();
 
   const {control, reset, formState, watch, handleSubmit} = useForm<IAccountItem>({
     defaultValues: {
-      login: '',
-      password: '',
-      socialName: '',
-    },
-    resolver: yupResolver(schema),
-  });
-
-  const socialName = watch('socialName') || 'New account';
-
-  const handleReset = useCallback(() => {
-    reset({
       login: currAccount?.login,
       password: currAccount?.password,
       socialName: currAccount?.socialName,
       _id: currAccount?._id,
-    });
-  }, [currAccount, reset]);
+    },
+    resolver: yupResolver(schema),
+  });
+
+  const notFound = !currentAccount && !isCreateMode;
+  const socialName = watch('socialName') || 'New account';
+
   const handleSubmitForm = (form: IAccountItem) => {
     _api
       .request<{body: IAccountItem}>({
@@ -61,15 +54,14 @@ export const AccountCreator = ({
         method: isCreateMode ? 'POST' : 'PUT',
       })
       .then((data) => {
-        isCreateMode
-          ? showSnackbar('Вы успешно добавили аккаунт')
-          : showSnackbar('Вы успешно обновили аккаунт');
-        if (!isCreateMode) {
+        if (isCreateMode) {
+          showSnackbar('Вы успешно добавили аккаунт');
+          router.push('/accounts/?revalidate=1');
+        } else {
+          showSnackbar('Вы успешно обновили аккаунт');
           reset(data.data.body);
           setCurrentAccount(form);
           setIsEditMode(false);
-        } else {
-          router.push('/accounts/?revalidate=1');
         }
       });
   };
@@ -82,18 +74,12 @@ export const AccountCreator = ({
     });
   };
 
-  useEffect(() => {
-    if (currentAccount && !isCreateMode) {
-      handleReset();
-    }
-  }, [currentAccount, handleReset, isCreateMode, reset]);
-
   const ActionButtons = ({type}: {type: 'desktop' | 'mobile'}) => (
     <div className={classNames(styles.actions, styles[type])}>
       <Button
         theme="default"
         className={classNames({
-          [styles.hidden]: (!formState.isDirty || !isEditMode) && !isCreateMode,
+          [styles.hidden]: !formState.isDirty || !isEditMode,
         })}
         type="submit"
         disabled={!formState.isValid}
@@ -123,7 +109,7 @@ export const AccountCreator = ({
                   value={isEditMode}
                   setValue={() => {
                     setIsEditMode((state) => !state);
-                    handleReset();
+                    reset();
                   }}
                 />
               </div>
