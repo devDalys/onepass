@@ -40,10 +40,11 @@
 .renderContent{
   padding: 0 1.2rem 0 1.2rem;
   max-height: 0;
-  transition: max-height 0.3s linear;
+  transition: max-height 0.2s linear;
 }
 
 .visible{
-  max-height: 40rem;
+  max-height: 20rem;
+  padding-bottom: 1.2rem;
 }
 

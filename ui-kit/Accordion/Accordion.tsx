@@ -1,3 +1,4 @@
+'use client';
 import {useState} from 'react';
 import styles from './Accordion.module.scss';
 import classNames from 'classnames';

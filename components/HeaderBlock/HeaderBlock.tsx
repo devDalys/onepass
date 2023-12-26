@@ -4,6 +4,7 @@ import NoProfile from '@/assets/images/no-profile.svg?url';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
 import {ThemeSwitcher} from '@/components/ThemeSwitcher';
 import {Image} from '@/ui-kit';
+import {AccountsResponse} from '@/components/AccountsList/types';
 
 export interface Profile {
   name: string;
@@ -12,7 +13,7 @@ export interface Profile {
 }
 
 interface Props {
-  accounts: IAccountItem[];
+  accounts: AccountsResponse[];
   profile: Profile;
 }
 

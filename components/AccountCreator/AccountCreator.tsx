@@ -132,19 +132,21 @@ export const AccountCreator = ({
           <ActionButtons type="desktop" />
         </div>
         <div className={styles.form}>
-          <Controller
-            name="socialName"
-            control={control}
-            render={({field: {ref, ...field}, fieldState}) => (
-              <Input
-                aliasText="Social name"
-                readOnly={!isEditMode}
-                {...field}
-                className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
-                errorText={fieldState.error?.message}
-              />
-            )}
-          />
+          {!isSimpleMode && (
+            <Controller
+              name="socialName"
+              control={control}
+              render={({field: {ref, ...field}, fieldState}) => (
+                <Input
+                  aliasText="Social name"
+                  readOnly={!isEditMode}
+                  {...field}
+                  className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
+                  errorText={fieldState.error?.message}
+                />
+              )}
+            />
+          )}
           <Controller
             name="login"
             control={control}

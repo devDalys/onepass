@@ -8,13 +8,24 @@ import {useAccountsContext} from '@/providers/ContextProvider';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
+import {AccountsResponse} from '@/components/AccountsList/types';
+import {useSearchParams} from 'next/navigation';
+import {getAccounts} from '@/components/Header/HeaderWrapper';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');
-  const {accounts, isLoaded} = useAccountsContext();
-  const [accountsState, setAccounts] = useState<IAccountItem[] | undefined>(accounts);
+  const {accounts, isLoaded, setAccounts: setAccountsContext} = useAccountsContext();
+  const [accountsState, setAccounts] = useState<AccountsResponse[] | undefined>(accounts);
 
   const {showSnackbar} = useSnackbar();
+  const isRevalidate = useSearchParams().get('revalidate');
+  useEffect(() => {
+    if (isRevalidate) {
+      getAccounts().then((data) => {
+        setAccountsContext?.(data);
+      });
+    }
+  }, []);
 
   const onCopy = async (text: string) => {
     await navigator.clipboard.writeText(text);

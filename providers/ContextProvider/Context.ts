@@ -1,10 +1,11 @@
 'use client';
 import {createContext} from 'react';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
+import {AccountsResponse} from '@/components/AccountsList/types';
 
 interface Context {
-  accounts?: IAccountItem[];
-  setAccounts?: (accounts: IAccountItem[]) => void;
+  accounts?: AccountsResponse[];
+  setAccounts?: (accounts: AccountsResponse[]) => void;
   isLoaded?: boolean;
   setIsLoaded?: React.Dispatch<boolean>;
 }

@@ -1,17 +1,17 @@
 'use client';
 import {AccountsContext} from './Context';
 import {useState} from 'react';
-import {IAccountItem} from '@/components/AccountsList/AccountItem';
+import {AccountsResponse} from '@/components/AccountsList/types';
 
 export const ContextProvider = ({children}: {children: React.ReactNode}) => {
-  const [state, setState] = useState<IAccountItem[]>([]);
+  const [state, setState] = useState<AccountsResponse[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <AccountsContext.Provider
       value={{
         accounts: state,
-        setAccounts: (accounts: IAccountItem[]) => setState(accounts),
+        setAccounts: (accounts: AccountsResponse[]) => setState(accounts),
         isLoaded: isLoaded,
         setIsLoaded: setIsLoaded,
       }}

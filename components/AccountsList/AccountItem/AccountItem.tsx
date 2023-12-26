@@ -2,17 +2,9 @@
 import Copy from '@/assets/images/Copy.svg';
 import styles from './AccountItem.module.scss';
 import Link from 'next/link';
+import {AccountsResponse, IAccountItem} from '@/components/AccountsList/types';
 
-export interface IAccountItem {
-  login: string;
-  password: string;
-  iconSrc?: string;
-  socialName: string;
-  _id?: string;
-  createdAt?: string;
-}
-
-interface Props extends IAccountItem {
+interface Props extends AccountsResponse {
   onCopy: (text: string) => void;
 }
 
@@ -28,7 +20,7 @@ export default function AccountItem(props: Props) {
           className={styles.copyIcon}
           onClick={(event: any) => {
             event.preventDefault();
-            props.onCopy(props.password);
+            props.onCopy(props.accountEntries[0].password);
           }}
         >
           <Copy />

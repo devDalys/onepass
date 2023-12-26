@@ -22,6 +22,12 @@
   }
 }
 
+.onlyMobile{
+  @include for-desktop{
+    display: none;
+  }
+}
+
 .add,
 .item {
   display: flex;

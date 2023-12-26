@@ -4,12 +4,15 @@ import Home from '@/assets/images/Home.svg';
 import Add from '@/assets/images/Add.svg';
 import User from '@/assets/images/User.svg';
 import Link from 'next/link';
+import classNames from 'classnames';
 
-interface NavMenuProps {}
+interface NavMenuProps {
+  onlyIsMobile?: boolean;
+}
 
-export default function NavMenu({}: NavMenuProps) {
+export default function NavMenu({onlyIsMobile = false}: NavMenuProps) {
   return (
-    <div className={styles.wrapper}>
+    <div className={classNames(styles.wrapper, {[styles.onlyMobile]: onlyIsMobile})}>
       <Link className={styles.add} href={'/accounts/add'}>
         <Add className={styles.icon} />
         <span className={styles.text}>New account</span>

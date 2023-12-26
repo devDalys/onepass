@@ -17,16 +17,27 @@ export default function AccountPage({params}: {params: {id: string}}) {
 
   if (!currAccount) return notFound();
 
-  if (currAccount.createdAt) return <AccountCreator currentAccount={currAccount} />;
+  if (currAccount?.accountEntries?.length === 1)
+    return (
+      <AccountCreator
+        currentAccount={{...currAccount.accountEntries[0], socialName: currAccount.socialName}}
+      />
+    );
 
-  return (
+  return currAccount.accountEntries.map((account, index) => (
     <Accordion
-      renderProps={() => <AccountCreator isSimpleMode currentAccount={currAccount} />}
-      title={currAccount?.socialName}
-      isDefaultOpened
+      key={account._id}
+      renderProps={() => (
+        <AccountCreator
+          isSimpleMode
+          currentAccount={{...account, socialName: currAccount.socialName}}
+        />
+      )}
+      title={`${index + 1}. ${currAccount.socialName}`}
+      isDefaultOpened={!index}
       additionalInfo={
         currAccount.createdAt && 'Added: ' + new Date(currAccount.createdAt).toLocaleDateString()
       }
     />
-  );
+  ));
 }
