@@ -5,16 +5,21 @@ import classNames from 'classnames';
 import styles from './AccountCreator.module.scss';
 import {Button, Checkbox, Input, PageTitle} from '@/ui-kit';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
+import {useAccountsContext} from '@/providers/ContextProvider';
 
 interface Props {
-  currentAccount?: IAccountItem;
-  isCreateMode?: boolean;
-  isSimpleMode?: boolean;
+  currentAccount?: Partial<IAccountItem>;
+  createMode?: boolean;
+  editMode?: boolean;
+  createMinifiedMode?: boolean;
+  withWrapper?: boolean;
+  disableEditDefault?: boolean;
+  minifiedTitle?: boolean;
 }
 
 const schema = yup.object().shape({
@@ -25,39 +30,56 @@ const schema = yup.object().shape({
 
 export const AccountCreator = ({
   currentAccount,
-  isCreateMode = false,
-  isSimpleMode = false,
+  createMode = false,
+  editMode = false,
+  createMinifiedMode,
+  withWrapper = true,
+  disableEditDefault = false,
+  minifiedTitle = false,
 }: Props) => {
   const {showSnackbar} = useSnackbar();
-  const [isEditMode, setIsEditMode] = useState(isCreateMode);
+  const [isEditMode, setIsEditMode] = useState(
+    Boolean((createMode || createMinifiedMode) && !disableEditDefault),
+  );
   const [currAccount, setCurrentAccount] = useState(currentAccount);
+  const {refreshData, accounts} = useAccountsContext();
   const router = useRouter();
+  const countAccounts = useMemo(() => {
+    return accounts?.find((item) => item?.socialName === currAccount?.socialName)?.accountEntries
+      .length;
+  }, [accounts]);
 
   const {control, reset, formState, watch, handleSubmit} = useForm<IAccountItem>({
     defaultValues: {
-      login: currAccount?.login,
-      password: currAccount?.password,
-      socialName: currAccount?.socialName,
+      login: currAccount?.login || '',
+      password: currAccount?.password || '',
+      socialName: currAccount?.socialName || '',
       _id: currAccount?._id,
     },
     resolver: yupResolver(schema),
   });
 
-  const notFound = !currentAccount && !isCreateMode;
+  const notFound = !currentAccount && !createMode;
   const socialName = watch('socialName') || 'New account';
 
   const handleSubmitForm = (form: IAccountItem) => {
     _api
       .request<{body: IAccountItem}>({
         data: form,
-        url: isCreateMode ? '/accounts/add' : '/accounts/update',
-        method: isCreateMode ? 'POST' : 'PUT',
+        url: createMode || createMinifiedMode ? '/accounts/add' : '/accounts/update',
+        method: createMode || createMinifiedMode ? 'POST' : 'PUT',
       })
       .then((data) => {
-        if (isCreateMode) {
+        if (createMode) {
           showSnackbar('Вы успешно добавили аккаунт');
           router.push('/accounts/?revalidate=1');
-        } else {
+        }
+        if (createMinifiedMode) {
+          showSnackbar('Вы успешно добавили аккаунт');
+          refreshData?.();
+          reset();
+        }
+        if (editMode) {
           showSnackbar('Вы успешно обновили аккаунт');
           reset(data.data.body);
           setCurrentAccount(form);
@@ -70,7 +92,13 @@ export const AccountCreator = ({
     event.preventDefault();
     _api.delete(`/accounts/delete/${currAccount?._id}`).then(() => {
       showSnackbar('Аккаунт успешно удалён');
-      router.push('/accounts/?revalidate=1');
+      if (createMode) {
+        router.push('/accounts/?revalidate=1');
+      }
+      if (editMode) {
+        if (countAccounts === 1) router.push('/accounts?revalidate=1');
+        refreshData?.();
+      }
     });
   };
 
@@ -86,7 +114,7 @@ export const AccountCreator = ({
       >
         SAVE
       </Button>
-      {!isCreateMode && (
+      {editMode && (
         <Button theme="outline" onClick={handleDelete}>
           DELETE
         </Button>
@@ -97,12 +125,16 @@ export const AccountCreator = ({
   if (notFound) return <NotSearchFound />;
 
   return (
-    <div className={!isSimpleMode ? styles.wrapper : ''}>
+    <div className={withWrapper ? styles.wrapper : ''}>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         <div className={styles.header}>
           <div className={styles.title}>
-            {!isSimpleMode && <PageTitle>{currAccount?.socialName || socialName}</PageTitle>}
-            {!isCreateMode && (
+            {(createMode || createMinifiedMode) && (
+              <PageTitle className={classNames({[styles.minifiedTitle]: minifiedTitle})}>
+                {currAccount?.socialName || socialName}
+              </PageTitle>
+            )}
+            {editMode && (
               <div className={styles.checker}>
                 edit mode
                 <Checkbox
@@ -118,7 +150,7 @@ export const AccountCreator = ({
           <ActionButtons type="desktop" />
         </div>
         <div className={styles.form}>
-          {!isSimpleMode && (
+          {createMode && (
             <Controller
               name="socialName"
               control={control}
@@ -160,7 +192,7 @@ export const AccountCreator = ({
               />
             )}
           />
-          <ActionButtons type="mobile" />
+          <ActionButtons type={'mobile'} />
         </div>
       </form>
     </div>

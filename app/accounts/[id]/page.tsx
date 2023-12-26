@@ -7,36 +7,60 @@ import {notFound} from 'next/navigation';
 import {Accordion} from '@/ui-kit';
 
 export default function AccountPage({params}: {params: {id: string}}) {
-  const {accounts} = useAccountsContext();
+  const {accounts, isLoaded} = useAccountsContext();
 
   const currAccount = useMemo(() => {
     return accounts?.find((item) => item._id === params.id);
   }, [accounts, params.id]);
 
-  if (!accounts?.length) return <FullScreenLoading />;
+  const isOneAccount = currAccount?.accountEntries?.length === 1;
+
+  if (!accounts?.length && !isLoaded) return <FullScreenLoading />;
   if (!currAccount) return notFound();
 
-  if (currAccount?.accountEntries?.length === 1)
-    return (
-      <AccountCreator
-        currentAccount={{...currAccount.accountEntries[0], socialName: currAccount.socialName}}
-      />
-    );
-
-  return currAccount.accountEntries.map((account, index) => (
-    <Accordion
-      key={account._id}
-      renderProps={() => (
+  return (
+    <>
+      {isOneAccount && (
         <AccountCreator
-          isSimpleMode
-          currentAccount={{...account, socialName: currAccount.socialName}}
+          editMode
+          disableEditDefault
+          createMinifiedMode
+          currentAccount={{...currAccount.accountEntries[0], socialName: currAccount.socialName}}
         />
       )}
-      title={`${index + 1}. ${currAccount.socialName}`}
-      isDefaultOpened={!index}
-      additionalInfo={
-        currAccount.createdAt && 'Added: ' + new Date(currAccount.createdAt).toLocaleDateString()
+
+      {!isOneAccount &&
+        currAccount.accountEntries.map((account, index) => (
+          <Accordion
+            key={account._id}
+            renderProps={() => (
+              <AccountCreator
+                editMode
+                withWrapper={false}
+                currentAccount={{...account, socialName: currAccount.socialName}}
+              />
+            )}
+            title={`${index + 1}. ${currAccount.socialName}`}
+            isDefaultOpened={!index}
+            additionalInfo={
+              currAccount.createdAt && 'Added: ' + new Date(account.createdAt).toLocaleDateString()
+            }
+          />
+        ))}
+
+      {
+        <Accordion
+          renderProps={() => (
+            <AccountCreator
+              createMinifiedMode
+              withWrapper={false}
+              minifiedTitle
+              currentAccount={{socialName: currAccount.socialName}}
+            />
+          )}
+          title={'Add new account'}
+        />
       }
-    />
-  ));
+    </>
+  );
 }

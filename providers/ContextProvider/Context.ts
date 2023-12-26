@@ -8,6 +8,7 @@ interface Context {
   setAccounts?: (accounts: AccountsResponse[]) => void;
   isLoaded?: boolean;
   setIsLoaded?: React.Dispatch<boolean>;
+  refreshData?: () => void;
 }
 
 export const AccountsContext = createContext<Context>({});

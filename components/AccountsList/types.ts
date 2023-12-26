@@ -13,5 +13,6 @@ export interface AccountsResponse {
     login: string;
     password: string;
     _id: string;
+    createdAt: string;
   }[];
 }

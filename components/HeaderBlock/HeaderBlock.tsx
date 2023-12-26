@@ -1,4 +1,3 @@
-import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import styles from './HeaderBlock.module.scss';
 import NoProfile from '@/assets/images/no-profile.svg?url';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
@@ -54,7 +53,10 @@ export default function HeaderBlock({accounts, profile: {name, email, avatarUrl}
   return (
     <div className={styles.wrapper}>
       <ProfileBlock name={name} email={email} avatarUrl={avatarUrl} />
-      <CountsBlock length={accounts.length} text={'Passwords Stored'} />
+      <CountsBlock
+        length={accounts.flatMap((item) => item.accountEntries).length}
+        text={'Passwords Stored'}
+      />
     </div>
   );
 }

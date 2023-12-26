@@ -14,16 +14,14 @@ import {getAccounts} from '@/components/Header/HeaderWrapper';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');
-  const {accounts, isLoaded, setAccounts: setAccountsContext} = useAccountsContext();
+  const {accounts, isLoaded, refreshData} = useAccountsContext();
   const [accountsState, setAccounts] = useState<AccountsResponse[] | undefined>(accounts);
 
   const {showSnackbar} = useSnackbar();
   const isRevalidate = useSearchParams().get('revalidate');
   useEffect(() => {
     if (isRevalidate) {
-      getAccounts().then((data) => {
-        setAccountsContext?.(data);
-      });
+      refreshData?.();
     }
   }, []);
 

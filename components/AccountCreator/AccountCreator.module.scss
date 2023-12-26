@@ -22,6 +22,10 @@
   gap: 0.5rem;
 }
 
+.minifiedTitle{
+  font-size: 1.5rem;
+}
+
 .actions {
   display: flex;
   gap: 0.5rem;
@@ -30,6 +34,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding-bottom: 1.2rem;
   }
 }
 
@@ -49,7 +54,7 @@
   visibility: hidden;
 }
 .form {
-  margin-top: 2rem;
+  margin-top: 1.7rem;
   width: 50%;
   @include for-mobile {
     width: 100%;
@@ -58,7 +63,7 @@
 
 .input {
   div {
-    transition: all 0.5s;
+    transition: all 0.3s;
   }
   input {
     cursor: inherit;
@@ -69,7 +74,7 @@
   div {
     border-color: var(--neutral-grey);
     pointer-events: auto;
-    transition: all 0.5s;
+    transition: all 0.3s;
     cursor: default;
   }
 }
@@ -79,5 +84,6 @@
   background: var(--neutral-card);
   padding: 1.2rem;
   border-radius: 0.625rem;
+  margin-bottom: 1.2rem;
 
 }
