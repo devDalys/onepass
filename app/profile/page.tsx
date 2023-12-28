@@ -14,10 +14,13 @@ import LogoutButton from '@/components/LogoutButton/LogoutButton';
 import EditProfile from '@/components/EditProfile/EditProfile';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {getProfile} from '@/components/Header/HeaderWrapper';
+import {useStore} from '@/providers/ContextProvider';
+import {AccountsContext} from '@/providers/ContextProvider/Context';
 
 export default function ProfilePage() {
+  const {profile: ProfileContext} = useStore();
   const [profile, setProfile] = useState<Profile>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(Boolean(!AccountsContext));
   const [isEditMode, setEditMode] = useState(false);
   const {theme, toggleTheme} = useTheme();
   const isLightTheme = useMemo(() => theme === Theme.LIGHT, [theme]);
@@ -27,10 +30,16 @@ export default function ProfilePage() {
     setProfile(data);
   };
   useEffect(() => {
-    getProfile()
-      .then((data) => setProfile(data))
-      .finally(() => setIsLoading(false));
-  }, []);
+    if (ProfileContext) {
+      setProfile(ProfileContext);
+    }
+    !ProfileContext &&
+      getProfile()
+        .then((data) => setProfile(data))
+        .finally(() => {
+          setIsLoading(false);
+        });
+  }, [ProfileContext, profile]);
 
   return (
     <>

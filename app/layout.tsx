@@ -11,7 +11,7 @@ import favicon from './favicon.png';
 import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
 import Script from 'next/script';
 import React from 'react';
-
+import {ContextProvider} from '@/providers/ContextProvider/ContextProvider';
 export const dynamic = 'force-dynamic';
 export const revalidate = 1;
 
@@ -41,26 +41,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const theme = cookies().get(LOCAL_STORAGE_THEME_KEY)?.value as Theme;
-
   return (
     <html lang="en">
       <Script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></Script>
       <body className={classNames(inter.variable)}>
         <ThemeProvider initialTheme={theme}>
           <SnackbarProvider>
-            <div className={'root'}>
-              <Link href="/">
-                <div className={styles.logo}>
-                  <span className={styles.stars}>
-                    <p className={styles.stars__star}>*</p>
-                    <p className={styles.stars__star}>*</p>
-                    <p className={styles.stars__star}>*</p>
-                  </span>
-                  <span className={styles.line} />
-                </div>
-              </Link>
-              {children}
-            </div>
+            <ContextProvider>
+              <div className={'root'}>
+                <Link href="/">
+                  <div className={styles.logo}>
+                    <span className={styles.stars}>
+                      <p className={styles.stars__star}>*</p>
+                      <p className={styles.stars__star}>*</p>
+                      <p className={styles.stars__star}>*</p>
+                    </span>
+                    <span className={styles.line} />
+                  </div>
+                </Link>
+                {children}
+              </div>
+            </ContextProvider>
           </SnackbarProvider>
         </ThemeProvider>
       </body>

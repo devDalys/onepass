@@ -1,5 +1,5 @@
 'use client';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import styles from './Image.module.scss';
 import notFound from '@/assets/images/not-found.svg?url';
@@ -15,11 +15,14 @@ interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallback?: string;
 }
 
-const ImageComponent = ({classes, fallback, ...imageProps}: Props) => {
+export const Image = ({classes, fallback, ...imageProps}: Props) => {
   const [isImageLoading, setImageLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(imageProps.src);
+  const ref = useRef<HTMLImageElement>(null);
+
   useEffect(() => {
     setImageSrc(imageProps.src);
+    if (ref?.current?.complete) setImageLoading(false);
   }, [imageProps.src]);
 
   return (
@@ -33,6 +36,7 @@ const ImageComponent = ({classes, fallback, ...imageProps}: Props) => {
           [styles.hideAvatar]: isImageLoading,
         })}
         src={imageSrc}
+        ref={ref}
         onError={() => {
           setImageSrc(fallback ?? notFound.src);
           setImageLoading(false);
@@ -43,4 +47,4 @@ const ImageComponent = ({classes, fallback, ...imageProps}: Props) => {
   );
 };
 
-export const Image = dynamic(() => Promise.resolve(ImageComponent), {ssr: false});
+// export const Image = dynamic(() => Promise.resolve(ImageComponent), {ssr: false});

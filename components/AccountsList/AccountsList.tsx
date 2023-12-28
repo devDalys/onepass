@@ -4,7 +4,7 @@ import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {useEffect, useState} from 'react';
 import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
-import {useAccountsContext} from '@/providers/ContextProvider';
+import {useStore} from '@/providers/ContextProvider';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
@@ -14,7 +14,7 @@ import {getAccounts} from '@/components/Header/HeaderWrapper';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');
-  const {accounts, isLoaded, refreshData} = useAccountsContext();
+  const {accounts, isLoaded, refreshData} = useStore();
   const [accountsState, setAccounts] = useState<AccountsResponse[] | undefined>(accounts);
 
   const {showSnackbar} = useSnackbar();

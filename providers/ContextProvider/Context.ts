@@ -1,11 +1,13 @@
 'use client';
 import {createContext} from 'react';
-import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {AccountsResponse} from '@/components/AccountsList/types';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 
 interface Context {
   accounts?: AccountsResponse[];
   setAccounts?: (accounts: AccountsResponse[]) => void;
+  profile?: Profile;
+  setProfile?: (profile: Profile) => void;
   isLoaded?: boolean;
   setIsLoaded?: React.Dispatch<boolean>;
   refreshData?: () => void;

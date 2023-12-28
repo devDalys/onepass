@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 import HeaderBlock from '@/components/HeaderBlock';
 import NavMenu from '@/components/NavMenu/NavMenu';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
-import {useAccountsContext} from '@/providers/ContextProvider';
+import {useStore} from '@/providers/ContextProvider';
 import {useEffect, useState} from 'react';
 import {AccountsResponse} from '@/components/AccountsList/types';
 
@@ -15,16 +15,31 @@ interface Props {
 }
 
 export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Props) {
-  const {setAccounts, setIsLoaded, accounts: AccountsContext} = useAccountsContext();
-  const [isFirstRender, setFirstRender] = useState(true);
+  const {
+    setProfile,
+    profile: ProfileContext,
+    setAccounts,
+    setIsLoaded,
+    accounts: AccountsContext,
+  } = useStore();
 
   useEffect(() => {
-    if (setAccounts && setIsLoaded && !AccountsContext?.length && isFirstRender) {
+    if (setAccounts && !AccountsContext?.length) {
       setAccounts(accounts);
-      setIsLoaded(true);
-      setFirstRender(false);
+      setIsLoaded?.(true);
     }
-  }, [AccountsContext?.length, accounts, isFirstRender, setAccounts, setIsLoaded]);
+    if (setProfile && !ProfileContext) {
+      setProfile(profile);
+    }
+  }, [
+    AccountsContext?.length,
+    ProfileContext,
+    accounts,
+    profile,
+    setAccounts,
+    setIsLoaded,
+    setProfile,
+  ]);
 
   return (
     <div className={styles.header}>

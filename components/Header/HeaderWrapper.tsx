@@ -1,4 +1,3 @@
-import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {_api} from '@/api';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 import Header from '@/components/Header/Header';

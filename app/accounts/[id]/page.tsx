@@ -1,5 +1,5 @@
 'use client';
-import {useAccountsContext} from '@/providers/ContextProvider';
+import {useStore} from '@/providers/ContextProvider';
 import {useMemo} from 'react';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountCreator} from '@/components/AccountCreator/AccountCreator';
@@ -7,7 +7,7 @@ import {notFound} from 'next/navigation';
 import {Accordion} from '@/ui-kit';
 
 export default function AccountPage({params}: {params: {id: string}}) {
-  const {accounts, isLoaded} = useAccountsContext();
+  const {accounts, isLoaded} = useStore();
 
   const currAccount = useMemo(() => {
     return accounts?.find((item) => item._id === params.id);
@@ -19,7 +19,7 @@ export default function AccountPage({params}: {params: {id: string}}) {
   if (!currAccount) return notFound();
 
   return (
-    <>
+    <div style={{paddingBottom: '2rem'}}>
       {isOneAccount && (
         <AccountCreator
           editMode
@@ -61,6 +61,6 @@ export default function AccountPage({params}: {params: {id: string}}) {
           title={'Add new account'}
         />
       }
-    </>
+    </div>
   );
 }

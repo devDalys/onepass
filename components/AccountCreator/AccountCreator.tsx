@@ -5,12 +5,12 @@ import classNames from 'classnames';
 import styles from './AccountCreator.module.scss';
 import {Button, Checkbox, Input, PageTitle} from '@/ui-kit';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useMemo, useState} from 'react';
 import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
-import {useAccountsContext} from '@/providers/ContextProvider';
+import {useStore} from '@/providers/ContextProvider';
 
 interface Props {
   currentAccount?: Partial<IAccountItem>;
@@ -42,12 +42,12 @@ export const AccountCreator = ({
     Boolean((createMode || createMinifiedMode) && !disableEditDefault),
   );
   const [currAccount, setCurrentAccount] = useState(currentAccount);
-  const {refreshData, accounts} = useAccountsContext();
-  const router = useRouter();
+  const {refreshData, accounts} = useStore();
   const countAccounts = useMemo(() => {
     return accounts?.find((item) => item?.socialName === currAccount?.socialName)?.accountEntries
       .length;
   }, [accounts]);
+  const router = useRouter();
 
   const {control, reset, formState, watch, handleSubmit} = useForm<IAccountItem>({
     defaultValues: {
@@ -81,7 +81,7 @@ export const AccountCreator = ({
         }
         if (editMode) {
           showSnackbar('Вы успешно обновили аккаунт');
-          reset(data.data.body);
+          reset(form);
           setCurrentAccount(form);
           setIsEditMode(false);
         }
@@ -96,6 +96,7 @@ export const AccountCreator = ({
         router.push('/accounts/?revalidate=1');
       }
       if (editMode) {
+        console.log(countAccounts);
         if (countAccounts === 1) router.push('/accounts?revalidate=1');
         refreshData?.();
       }

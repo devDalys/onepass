@@ -1,7 +1,4 @@
 import {useContext} from 'react';
-import {AccountsContext} from '@/providers/ContextProvider/Context';
+import {AccountsContext} from './Context';
 
-export {AccountsContext} from './Context';
-export {ContextProvider} from './ContextProvider';
-
-export const useAccountsContext = () => useContext(AccountsContext);
+export const useStore = () => useContext(AccountsContext);
