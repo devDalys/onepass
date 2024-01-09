@@ -21,7 +21,7 @@ export default function ProfilePage() {
   const {profile: ProfileContext} = useStore();
   const [profile, setProfile] = useState<Profile>();
   const [isLoading, setIsLoading] = useState(Boolean(!AccountsContext));
-  const [isEditMode, setEditMode] = useState(false);
+  const [isEditMode, setEditMode] = useState<'name' | 'password' | null>(null);
   const {theme, toggleTheme} = useTheme();
   const isLightTheme = useMemo(() => theme === Theme.LIGHT, [theme]);
   const {showSnackbar} = useSnackbar();
@@ -54,17 +54,18 @@ export default function ProfilePage() {
         <div>
           {isEditMode ? (
             <EditProfile
+              type={isEditMode}
               name={profile?.name as string}
               onSubmit={handleSubmit}
-              onCancel={() => setEditMode(!isEditMode)}
+              onCancel={() => setEditMode(null)}
             />
           ) : (
             <>
-              <div className={styles.action} onClick={() => setEditMode(!isEditMode)}>
+              <div className={styles.action} onClick={() => setEditMode('name')}>
                 <User />
                 Update Profile
               </div>
-              <div className={styles.action}>
+              <div className={styles.action} onClick={() => setEditMode('password')}>
                 <Lock />
                 Change Master Password
               </div>
