@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
 import React from 'react';
+import {useSnackbar} from '@/providers/SnackbarProvider';
+import {useRouter} from 'next/navigation';
 
 interface Form {
   name: string;
@@ -30,13 +32,18 @@ export const RegisterForm = () => {
   });
 
   const [isLoading, setIsLoading] = React.useState(false);
+  const {showSnackbar} = useSnackbar();
+  const router = useRouter();
 
   const onSubmit = async (data: Form) => {
     try {
       setIsLoading(true);
-      const result = await _api.post('/auth/register', data);
+      await _api.post('/auth/register', data);
+      showSnackbar('Вы успешно зарегистрировались');
+      router.push('/login');
     } catch (e) {
       console.error(e);
+      showSnackbar('Что-то пошло не так');
     } finally {
       setIsLoading(false);
     }

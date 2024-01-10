@@ -3,7 +3,6 @@ import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import styles from './Image.module.scss';
 import notFound from '@/assets/images/not-found.svg?url';
-import dynamic from 'next/dynamic';
 
 const classes = {
   loader: 'loader',
@@ -21,7 +20,11 @@ export const Image = ({classes, fallback, ...imageProps}: Props) => {
   const ref = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    setImageSrc(imageProps.src);
+    if (imageProps.src) {
+      setImageSrc(imageProps.src);
+    } else {
+      setImageSrc(notFound.src);
+    }
     if (ref?.current?.complete) setImageLoading(false);
   }, [imageProps.src]);
 

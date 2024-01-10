@@ -56,6 +56,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
         router.push('/accounts');
       })
       .catch(() => {
+        showSnackbar('Неверный логин или пароль');
         setLoading(false);
       });
   };

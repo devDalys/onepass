@@ -6,6 +6,7 @@ import {Button, Input} from '@/ui-kit';
 import React from 'react';
 import {_api} from '@/api';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock';
+import {useSnackbar} from '@/providers/SnackbarProvider';
 
 interface Form {
   name?: string;
@@ -42,13 +43,17 @@ export default function EditProfile({name, onCancel, onSubmit, type}: Props) {
       currentPassword: '',
     },
   });
+  const {showSnackbar} = useSnackbar();
 
+  console.log(formState.isDirty);
   const onHandleSubmit = (form: Form) => {
+    console.log(formState.isDirty);
     if (formState.isDirty) {
       _api
         .put('/auth/me', form)
         .then((data) => {
           onSubmit(data.data);
+          showSnackbar('Данные успешно изменены');
         })
         .finally(() => onCancel());
     } else {
