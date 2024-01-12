@@ -3,23 +3,7 @@ import NoProfile from '@/assets/images/no-profile.svg?url';
 import LogoutButton from '@/components/LogoutButton/LogoutButton';
 import {ThemeSwitcher} from '@/components/ThemeSwitcher';
 import {Image} from '@/ui-kit';
-import {AccountsResponse} from '@/components/AccountsList/types';
-
-export interface Profile {
-  name: string;
-  email: string;
-  avatarUrl: string;
-}
-
-interface Props {
-  accounts: AccountsResponse[];
-  profile: Profile;
-}
-
-interface CounterProps {
-  length: number;
-  text: string;
-}
+import {CounterProps, Profile, Props} from '@/components/HeaderBlock/HeaderBlock.types';
 
 const CountsBlock = ({text, length}: CounterProps) => {
   return (

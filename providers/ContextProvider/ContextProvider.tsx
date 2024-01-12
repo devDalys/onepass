@@ -1,9 +1,9 @@
 'use client';
 import {AccountsContext} from './Context';
 import {useCallback, useState} from 'react';
-import {AccountsResponse} from '@/components/AccountsList/types';
-import {getAccounts} from '@/components/Header/HeaderWrapper';
-import {Profile} from '@/components/HeaderBlock/HeaderBlock';
+import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
+import {getAccounts} from '@/components/Header/Header.api';
 
 export const ContextProvider = ({children}: {children: React.ReactNode}) => {
   const [state, setState] = useState<AccountsResponse[]>([]);

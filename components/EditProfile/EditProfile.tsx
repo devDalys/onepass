@@ -5,8 +5,8 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Input} from '@/ui-kit';
 import React from 'react';
 import {_api} from '@/api';
-import {Profile} from '@/components/HeaderBlock/HeaderBlock';
 import {useSnackbar} from '@/providers/SnackbarProvider';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
 interface Form {
   name?: string;
@@ -45,7 +45,6 @@ export default function EditProfile({name, onCancel, onSubmit, type}: Props) {
   });
   const {showSnackbar} = useSnackbar();
 
-  console.log(formState.isDirty);
   const onHandleSubmit = (form: Form) => {
     console.log(formState.isDirty);
     if (formState.isDirty) {

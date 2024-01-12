@@ -1,29 +1,4 @@
-.profile {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 3rem;
-  align-items: center;
-}
 
-.fullName {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--neutral-text);
-}
-
-.email {
-  color: var(--neutral-grey);
-}
-
-.actions {
-  display: flex;
-  flex-direction: column;
-  margin-top: 3rem;
-  width: 100%;
-  align-items: center;
-}
 
 .action {
   color: var(--neutral-text);
@@ -50,8 +25,3 @@
   }
 }
 
-.logout {
-  margin-top: 2rem;
-  width: 20rem;
-  height: 2.5rem;
-}

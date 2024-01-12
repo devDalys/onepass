@@ -1,7 +1,7 @@
 'use client';
 import {createContext} from 'react';
-import {AccountsResponse} from '@/components/AccountsList/types';
-import {Profile} from '@/components/HeaderBlock/HeaderBlock';
+import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
 interface Context {
   accounts?: AccountsResponse[];

@@ -8,9 +8,8 @@ import {useStore} from '@/providers/ContextProvider';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
-import {AccountsResponse} from '@/components/AccountsList/types';
+import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 import {useSearchParams} from 'next/navigation';
-import {getAccounts} from '@/components/Header/HeaderWrapper';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');
