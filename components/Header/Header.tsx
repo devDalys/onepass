@@ -6,6 +6,8 @@ import {useStore} from '@/providers/ContextProvider';
 import {useEffect, useState} from 'react';
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
+import {PageTitle} from '@/ui-kit';
+import {usePathname} from 'next/navigation';
 
 interface Props {
   profile: Profile;
@@ -22,7 +24,6 @@ export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Pro
     setIsLoaded,
     accounts: AccountsContext,
   } = useStore();
-
   useEffect(() => {
     if (setAccounts && !AccountsContext?.length) {
       setAccounts(accounts);
@@ -41,10 +42,21 @@ export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Pro
     setProfile,
   ]);
 
+  const pathName = usePathname();
+
+  const getTitle = () => {
+    if (pathName.startsWith('/profile')) return 'Profile';
+    if (pathName.startsWith('/accounts')) return 'Accounts';
+  };
+
   return (
-    <div className={styles.header}>
-      {!onlyNavMenu && <HeaderBlock accounts={AccountsContext || accounts} profile={profile} />}
-      <NavMenu onlyIsMobile={onIsMobile} />
-    </div>
+    <>
+      <PageTitle>{getTitle()}</PageTitle>
+
+      <div className={styles.header}>
+        {!onlyNavMenu && <HeaderBlock accounts={AccountsContext || accounts} profile={profile} />}
+        <NavMenu onlyIsMobile={onIsMobile} />
+      </div>
+    </>
   );
 }

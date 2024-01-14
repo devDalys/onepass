@@ -11,6 +11,8 @@ import {useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
 import {useStore} from '@/providers/ContextProvider';
+import {revalidateCache, revalidateQuery} from '@/api/revalidatePath';
+import {revalidateTag} from 'next/cache';
 
 interface Props {
   currentAccount?: Partial<IAccountItem>;
@@ -66,13 +68,16 @@ export const AccountCreator = ({
     _api
       .request<{body: IAccountItem}>({
         data: form,
-        url: createMode || createMinifiedMode ? '/accounts/add' : '/accounts/update',
+        url: createMode || createMinifiedMode ? '/api/accounts/add' : '/api/accounts/update',
         method: createMode || createMinifiedMode ? 'POST' : 'PUT',
+        // withCredentials: true,
       })
       .then((data) => {
         if (createMode) {
           showSnackbar('Вы успешно добавили аккаунт');
-          router.push('/accounts/?revalidate=1');
+          revalidateCache();
+          revalidateQuery();
+          router.push('/accounts');
         }
         if (createMinifiedMode) {
           showSnackbar('Вы успешно добавили аккаунт');
@@ -90,15 +95,13 @@ export const AccountCreator = ({
 
   const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    _api.delete(`/accounts/delete/${currAccount?._id}`).then(() => {
+    _api.delete(`/api/accounts/delete/${currAccount?._id}`).then(() => {
       showSnackbar('Аккаунт успешно удалён');
       if (createMode) {
         router.push('/accounts/?revalidate=1');
       }
       if (editMode) {
-        console.log(countAccounts);
         if (countAccounts === 1) router.push('/accounts?revalidate=1');
-        refreshData?.();
       }
     });
   };

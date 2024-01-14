@@ -46,7 +46,6 @@ export default function EditProfile({name, onCancel, onSubmit, type}: Props) {
   const {showSnackbar} = useSnackbar();
 
   const onHandleSubmit = (form: Form) => {
-    console.log(formState.isDirty);
     if (formState.isDirty) {
       _api
         .put('/auth/me', form)

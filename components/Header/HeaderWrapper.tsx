@@ -1,9 +1,7 @@
 'use server';
-import {_api} from '@/api';
 import Header from '@/components/Header/Header';
-import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
-import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 import {getAccounts, getProfile} from '@/components/Header/Header.api';
+import {unstable_cache, unstable_noStore} from 'next/cache';
 
 interface HeaderProps {
   onlyNavMenu?: boolean;

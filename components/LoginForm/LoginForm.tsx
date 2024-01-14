@@ -49,10 +49,10 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   const onSubmit = async (data: Form) => {
     setLoading(true);
     await _api
-      .post('/auth/login', data)
+      .post('/api/auth/login', data)
       .then((data) => {
         showSnackbar('Вы успешно вошли !');
-        setCookie('token', data.data.token, {maxAge: ONE_MONTH});
+        setCookie('token', data.data.token, {maxAge: ONE_MONTH, httpOnly: true, secure: true});
         router.push('/accounts');
       })
       .catch(() => {

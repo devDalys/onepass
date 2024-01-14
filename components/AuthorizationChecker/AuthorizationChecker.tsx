@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {_api} from '@/api';
-import {setCookie} from 'cookies-next';
-import {ONE_MONTH} from '@/utils/consts';
+import {getCookie, setCookie} from 'cookies-next';
+import {AUTH_TOKEN, ONE_MONTH} from '@/utils/consts';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 
@@ -28,7 +28,11 @@ export default function AuthorizationChecker({onYandexClick}: AuthorizationCheck
             social: 'Yandex',
           })
           .then((data) => {
-            setCookie('token', data.data.token, {maxAge: ONE_MONTH});
+            setCookie(AUTH_TOKEN, data.data.token, {
+              maxAge: ONE_MONTH,
+              httpOnly: true,
+              secure: true,
+            });
             onYandexClick();
             window.close();
           })
@@ -44,14 +48,13 @@ export default function AuthorizationChecker({onYandexClick}: AuthorizationCheck
         setIsLoading(true);
         const decodePayload = JSON.parse(payload);
         _api
-          .post('/auth/login/social', {
+          .post('/api/auth/login/social', {
             silence_token: decodePayload.token,
             uuid: decodePayload.uuid,
             social: 'VK',
           })
           .then((data) => {
             showSnackbar('Вы успешно вошли !');
-            setCookie('token', data.data.token, {maxAge: ONE_MONTH});
             router.push('/accounts');
           })
           .catch(() => {

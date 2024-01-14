@@ -1,15 +1,46 @@
-import {cookies} from 'next/headers';
+import {AUTH_TOKEN} from '@/utils/consts';
+import {redirect} from 'next/navigation';
+import {revalidateCache} from '@/api/revalidatePath';
 
-export const fetchClient = (url: string, init?: RequestInit | undefined) => {
-  const token = cookies().get('token')?.value;
+const isServer = typeof window === 'undefined';
 
-  return fetch('http://127.0.0.1:8888' + url, {
-    headers: {
-      token: token as string,
-    },
-    next: {
-      revalidate: 1,
-    },
-    ...init,
-  }).then((data) => data.json());
+interface RequestOptions extends RequestInit {
+  // Добавляем возможность устанавливать другие заголовки
+  headers?: Record<string, string>;
+}
+
+export const _api = async <T>(url: string, options: RequestOptions = {}): Promise<T> => {
+  const defaultOptions: RequestOptions = {
+    method: 'GET',
+    credentials: 'include',
+    headers: {},
+    ...options,
+  };
+
+  if (isServer) {
+    const lib = await import('next/headers');
+    const token = lib.cookies().get(AUTH_TOKEN)?.value;
+
+    if (token) {
+      defaultOptions.headers = defaultOptions.headers || {};
+      defaultOptions.headers['token'] = token;
+    }
+  }
+
+  return fetch(`https://local.onepass.ru/${url}`, defaultOptions)
+    .then(async (response) => {
+      if (!response.ok) {
+        if (response.status === 403) {
+          redirect('/logout');
+        }
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+
+      revalidateCache();
+      return (await response.json()) as T;
+    })
+    .catch((error) => {
+      console.error('Fetch error:', error);
+      throw error;
+    });
 };

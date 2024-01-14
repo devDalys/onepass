@@ -14,9 +14,9 @@ export default function YandexLogin({CLIENT_ID, callback, isDisabled}: YandexLog
       {
         client_id: CLIENT_ID,
         response_type: 'token',
-        redirect_uri: 'http://localhost:8000/login?',
+        redirect_uri: 'https://local.onepass.ru/login?',
       },
-      'http://localhost:8000/login?',
+      'https://local.onepass.ru/login?',
       {
         view: 'button',
         parentId: 'container',

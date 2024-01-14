@@ -6,7 +6,7 @@ import Add from '@/assets/images/Add.svg';
 import User from '@/assets/images/User.svg';
 import Link from 'next/link';
 import classNames from 'classnames';
-import {usePathname, useRouter} from 'next/navigation';
+import {usePathname} from 'next/navigation';
 
 interface NavMenuProps {
   onlyIsMobile?: boolean;
