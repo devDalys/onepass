@@ -27,7 +27,7 @@ export const _api = async <T>(url: string, options: RequestOptions = {}): Promis
     }
   }
 
-  return fetch(`https://local.onepass.ru/${url}`, defaultOptions)
+  return fetch(`https://local.onepass.ru${url}`, defaultOptions)
     .then(async (response) => {
       if (!response.ok) {
         if (response.status === 403) {

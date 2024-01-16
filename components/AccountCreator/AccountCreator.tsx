@@ -75,13 +75,14 @@ export const AccountCreator = ({
       .then((data) => {
         if (createMode) {
           showSnackbar('Вы успешно добавили аккаунт');
-          revalidateCache();
-          revalidateQuery();
-          router.push('/accounts');
+          // revalidateCache();
+          // revalidateQuery();
+          router.push('/accounts?revalidate=1');
         }
         if (createMinifiedMode) {
           showSnackbar('Вы успешно добавили аккаунт');
-          refreshData?.();
+          // refreshData?.();
+          router.refresh();
           reset();
         }
         if (editMode) {
@@ -98,9 +99,11 @@ export const AccountCreator = ({
     _api.delete(`/api/accounts/delete/${currAccount?._id}`).then(() => {
       showSnackbar('Аккаунт успешно удалён');
       if (createMode) {
-        router.push('/accounts/?revalidate=1');
+        revalidateQuery();
+        router.push('/accounts?revalidate=1');
       }
       if (editMode) {
+        revalidateQuery();
         if (countAccounts === 1) router.push('/accounts?revalidate=1');
       }
     });

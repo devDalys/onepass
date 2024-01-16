@@ -6,5 +6,6 @@ export const revalidateCache = () => {
 };
 
 export const revalidateQuery = () => {
+  console.log('revalidate');
   revalidateTag('accounts');
 };

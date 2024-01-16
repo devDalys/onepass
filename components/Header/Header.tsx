@@ -24,12 +24,14 @@ export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Pro
     setIsLoaded,
     accounts: AccountsContext,
   } = useStore();
+  const pathName = usePathname();
+
   useEffect(() => {
-    if (setAccounts && !AccountsContext?.length) {
+    if (setAccounts) {
       setAccounts(accounts);
       setIsLoaded?.(true);
     }
-    if (setProfile && !ProfileContext) {
+    if (setProfile) {
       setProfile(profile);
     }
   }, [
@@ -41,8 +43,6 @@ export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Pro
     setIsLoaded,
     setProfile,
   ]);
-
-  const pathName = usePathname();
 
   const getTitle = () => {
     if (pathName.startsWith('/profile')) return 'Profile';

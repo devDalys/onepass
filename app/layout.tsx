@@ -14,7 +14,7 @@ import React from 'react';
 import {ContextProvider} from '@/providers/ContextProvider/ContextProvider';
 import HeaderWrapper from '@/components/Header/HeaderWrapper';
 export const dynamic = 'force-dynamic';
-export const revalidate = 1;
+// export const revalidate = 0;
 
 const inter = localFont({
   variable: '--play',
