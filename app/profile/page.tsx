@@ -9,6 +9,7 @@
 // import {useStore} from '@/providers/ContextProvider';
 // import {AccountsContext} from '@/providers/ContextProvider/Context';
 import {ProfileHeader} from '@/components/ProfileHeader';
+import ProfileMenu from '@/components/ProfileMenu';
 
 export default async function ProfilePage() {
   // const {profile: ProfileContext} = useStore();
@@ -34,6 +35,7 @@ export default async function ProfilePage() {
 
   return (
     <>
+      <ProfileMenu currentPage="profile" />
       {/*{isLoading && <FullScreenLoading />}*/}
       {/*<ProfileHeader profile={profile} />*/}
       {/*<div className={styles.actions}>*/}

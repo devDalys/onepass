@@ -14,6 +14,7 @@ import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
 import {useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
+import {revalidateCache} from '@/api/revalidatePath';
 
 interface Form {
   email: string;

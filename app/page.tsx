@@ -15,7 +15,6 @@ export default function Home() {
             <Slide key={Slide.toString()} />
           ))}
         </MainPageSlider>
-
         <nav className={styles.navigation}>
           <Link href={'/register'}>
             <Button theme="outline">Register</Button>

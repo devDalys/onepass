@@ -2,10 +2,9 @@
 import {revalidatePath, revalidateTag} from 'next/cache';
 
 export const revalidateCache = () => {
-  revalidatePath('/accounts');
+  revalidatePath('/accounts', 'page');
 };
 
 export const revalidateQuery = () => {
-  console.log('revalidate');
-  revalidateTag('accounts');
+  revalidateTag('[someexplaintag]');
 };

@@ -36,7 +36,6 @@ export const _api = async <T>(url: string, options: RequestOptions = {}): Promis
         throw new Error(`Request failed with status: ${response.status}`);
       }
 
-      revalidateCache();
       return (await response.json()) as T;
     })
     .catch((error) => {

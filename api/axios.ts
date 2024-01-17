@@ -22,7 +22,6 @@ _api.interceptors.request.use(async (config) => {
 
 _api.interceptors.response.use(
   (value) => {
-    revalidateCache();
     return value;
   },
   async (error: AxiosError) => {

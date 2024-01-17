@@ -10,7 +10,7 @@ import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 import {useRouter, useSearchParams} from 'next/navigation';
-import {revalidateCache} from '@/api/revalidatePath';
+import {revalidateCache, revalidateQuery} from '@/api/revalidatePath';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');
@@ -22,7 +22,7 @@ export default function AccountList() {
   const isRevalidate = useSearchParams().get('revalidate');
   useEffect(() => {
     if (isRevalidate) {
-      router.refresh();
+      revalidateCache();
     }
   }, []);
 
