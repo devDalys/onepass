@@ -1,7 +1,11 @@
 .wrapper{
   display: flex;
+  gap: 1rem;
+}
+.menu{
+  display: flex;
   flex-direction: column;
-  border: 2px solid #fff;
+  border: 2px solid var(--neutral-input);
   width: 26.5%;
   border-radius: 0.625rem;
   overflow: hidden;
@@ -9,10 +13,19 @@
 
 .link{
   padding: 1.2rem;
-  color: #fff;
+  color: var(--neutral-text);;
   font-weight: 700;
 }
 
 .active{
   background: var(--primary-default);
+  color: #fff;
+}
+
+.component{
+  flex: 1;
+  border: 2px solid var(--neutral-input);
+  border-radius: 0.625rem;
+  padding: 1.2rem;
+
 }

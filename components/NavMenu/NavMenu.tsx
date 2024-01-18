@@ -22,7 +22,7 @@ export default function NavMenu({onlyIsMobile = false}: NavMenuProps) {
         href={'/accounts/add'}
       >
         <Add className={styles.icon} />
-        <span className={styles.text}>New account</span>
+        <span className={styles.text}>Добавить аккаунт</span>
       </Link>
       <Link
         className={classNames(styles.item, {
@@ -31,14 +31,14 @@ export default function NavMenu({onlyIsMobile = false}: NavMenuProps) {
         href={'/accounts'}
       >
         <Home className={styles.icon} />
-        <span className={styles.text}>Accounts</span>
+        <span className={styles.text}>Аккаунты</span>
       </Link>
       <Link
         className={classNames(styles.item, {[styles.active]: pathName.startsWith('/profile')})}
         href={'/profile'}
       >
         <User className={styles.icon} />
-        <span className={styles.text}>Profile</span>
+        <span className={styles.text}>Профиль</span>
       </Link>
     </div>
   );

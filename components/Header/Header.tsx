@@ -45,8 +45,8 @@ export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Pro
   ]);
 
   const getTitle = () => {
-    if (pathName.startsWith('/profile')) return 'Profile';
-    if (pathName.startsWith('/accounts')) return 'Accounts';
+    if (pathName.startsWith('/profile')) return 'Профиль';
+    if (pathName.startsWith('/accounts')) return 'Аккаунты';
   };
 
   return (

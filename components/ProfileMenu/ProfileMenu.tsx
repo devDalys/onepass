@@ -3,6 +3,7 @@ import Link from 'next/link';
 import classNames from 'classnames';
 interface Props {
   currentPage: string;
+  children: React.ReactNode;
 }
 
 const pages = [
@@ -13,18 +14,21 @@ const pages = [
   {page: '', url: '/logout', name: 'Выйти из аккаунта'},
 ];
 
-export default function ProfileMenu({currentPage}: Props) {
+export default function ProfileMenu({currentPage, children}: Props) {
   return (
     <div className={styles.wrapper}>
-      {pages.map((item) => (
-        <Link
-          className={classNames(styles.link, {[styles.active]: item.page === currentPage})}
-          href={item.url}
-          key={item.page}
-        >
-          {item.name}
-        </Link>
-      ))}
+      <div className={styles.menu}>
+        {pages.map((item) => (
+          <Link
+            className={classNames(styles.link, {[styles.active]: item.page === currentPage})}
+            href={item.url}
+            key={item.page}
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
+      <div className={styles.component}>{children}</div>
     </div>
   );
 }

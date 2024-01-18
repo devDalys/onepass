@@ -4,6 +4,8 @@ export interface Profile {
   name: string;
   email: string;
   avatarUrl: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Props {

@@ -62,7 +62,7 @@ export const AccountCreator = ({
   });
 
   const notFound = !currentAccount && !createMode;
-  const socialName = watch('socialName') || 'New account';
+  const socialName = watch('socialName') || 'Новый аккаунт';
 
   const handleSubmitForm = (form: IAccountItem) => {
     _api
@@ -118,11 +118,11 @@ export const AccountCreator = ({
         type="submit"
         disabled={!formState.isValid}
       >
-        SAVE
+        Сохранить
       </Button>
       {editMode && (
         <Button theme="outline" onClick={handleDelete}>
-          DELETE
+          Удалить
         </Button>
       )}
     </div>
@@ -162,7 +162,7 @@ export const AccountCreator = ({
               control={control}
               render={({field: {ref, ...field}, fieldState}) => (
                 <Input
-                  aliasText="Social name"
+                  aliasText="Название"
                   readOnly={!isEditMode}
                   {...field}
                   className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
@@ -176,7 +176,7 @@ export const AccountCreator = ({
             control={control}
             render={({field: {ref, ...field}, fieldState}) => (
               <Input
-                aliasText="Login"
+                aliasText="Логин"
                 readOnly={!isEditMode}
                 {...field}
                 className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
@@ -189,7 +189,7 @@ export const AccountCreator = ({
             control={control}
             render={({field: {ref, ...field}, fieldState}) => (
               <Input
-                aliasText="Password"
+                aliasText="Пароль"
                 readOnly={!isEditMode}
                 type={isEditMode ? 'text' : 'password'}
                 {...field}

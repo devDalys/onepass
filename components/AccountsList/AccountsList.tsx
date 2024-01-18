@@ -48,7 +48,7 @@ export default function AccountList() {
   return (
     <div className={styles.wrapper}>
       <SearchBar
-        placeholder={'Search Websites...'}
+        placeholder={'Поиск аккаунтов...'}
         value={inputState}
         onChange={(e) => setInputState(e.target.value)}
       />

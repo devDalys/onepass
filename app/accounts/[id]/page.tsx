@@ -58,7 +58,7 @@ export default function AccountPage({params}: {params: {id: string}}) {
               currentAccount={{socialName: currAccount.socialName}}
             />
           )}
-          title={'Add new account'}
+          title={'Добавление нового аккаунта'}
         />
       }
     </div>

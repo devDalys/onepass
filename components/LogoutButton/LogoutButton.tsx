@@ -23,7 +23,7 @@ export default function LogoutButton({className}: LogoutButtonProps) {
 
   return (
     <button className={classNames(styles.button, className)} onClick={onClick}>
-      Logout
+      Выйти
     </button>
   );
 }

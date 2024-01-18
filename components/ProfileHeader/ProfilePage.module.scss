@@ -1,0 +1,39 @@
+
+.profile {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.profileInfo{
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+}
+
+.form{
+  margin-top: 1.5rem;
+  width: 50%;
+}
+
+.span{
+  &:not(:first-child){
+    margin-top: 0.5rem;
+  }
+  display: flex;
+  color: var(--neutral-text);
+  font-weight: 600;
+}
+
+.value{
+  color: var(--primary-default);
+}
+
+.status{
+  padding-left: 1.5rem;
+  color: green;
+  &.offline{
+    color: red;
+  }
+}
+

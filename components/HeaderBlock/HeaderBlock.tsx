@@ -39,7 +39,7 @@ export default function HeaderBlock({accounts, profile: {name, email, avatarUrl}
       <ProfileBlock name={name} email={email} avatarUrl={avatarUrl} />
       <CountsBlock
         length={accounts.flatMap((item) => item.accountEntries).length}
-        text={'Passwords Stored'}
+        text={'Хранящихся аккаунта'}
       />
     </div>
   );
