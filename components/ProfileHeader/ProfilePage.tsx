@@ -11,6 +11,8 @@ import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 import {useStore} from '@/providers/ContextProvider';
 import {Controller, useForm} from 'react-hook-form';
 import classNames from 'classnames';
+import {log} from 'util';
+import {DragDrop} from '@/ui-kit/DragDrop/DragDrop';
 
 interface Form {
   name: string;
@@ -20,6 +22,7 @@ interface Form {
 export const ProfilePage = () => {
   const {profile} = useStore();
   const [isMounted, setIsMounted] = useState(false);
+  const [isOnline, setOnline] = useState(false);
   const {control, formState, reset} = useForm<Form>({
     defaultValues: {
       name: profile?.name ?? '',
@@ -28,54 +31,67 @@ export const ProfilePage = () => {
   });
 
   useEffect(() => {
-    if (profile?.name) {
+    if (profile?.name && !isMounted) {
       reset({name: profile.name, email: profile.email});
       setIsMounted(true);
     }
   }, [profile, reset]);
 
+  useEffect(() => {
+    setOnline(navigator.onLine);
+
+    const changeOnline = (event: Event) => {
+      setOnline(event.type === 'online');
+    };
+
+    window.addEventListener('offline', changeOnline);
+    window.addEventListener('online', changeOnline);
+
+    return () => {
+      window.removeEventListener('online', changeOnline);
+      window.removeEventListener('offline', changeOnline);
+    };
+  }, []);
+
   if (!profile) return <div>Загрузка...</div>;
 
   return (
-    <div className={styles.profile}>
-      <span className={styles.span}>
-        Статус:
-        <span className={classNames(styles.status, {[styles.offline]: !navigator.onLine})}>
-          {navigator.onLine ? 'Online' : 'Offline'}
+    <div className={styles.wrapper}>
+      <div className={styles.profile}>
+        <span className={styles.span}>
+          Статус:
+          <span className={styles.status}>{isOnline ? 'Online' : 'Offline'}</span>
         </span>
-      </span>
-      <span className={styles.span}>
-        Дата регистрации:
-        <span className={styles.value}>
-          &nbsp;{new Date(profile.createdAt).toLocaleDateString()}
+        <span className={styles.span}>
+          Дата регистрации:
+          <span className={styles.value}>
+            &nbsp;{new Date(profile.createdAt as Date).toLocaleDateString()}
+          </span>
         </span>
-      </span>
-      <span className={styles.span}>
-        Последние изменения аккаунта:
-        <span className={styles.value}>
-          &nbsp;{new Date(profile.updatedAt).toLocaleDateString()}
+        <span className={styles.span}>
+          Последние изменения аккаунта:
+          <span className={styles.value}>
+            &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString()}
+          </span>
         </span>
-      </span>
-      {/*<div className={styles.profileInfo}>*/}
-      {/*  <div className={styles.fullName}>{ProfileContext?.name}</div>*/}
-      {/*  <div className={styles.email}>{ProfileContext?.email}</div>*/}
-      {/*</div>*/}
-      <form className={styles.form}>
-        <Controller
-          name="name"
-          control={control}
-          render={({field: {ref, ...inputProps}, fieldState, formState}) => (
-            <Input aliasText="Имя и фамилия" {...inputProps} />
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          render={({field: {ref, ...inputProps}, fieldState, formState}) => (
-            <Input aliasText="Электронная почта" {...inputProps} />
-          )}
-        />
-      </form>
+        <form className={styles.form}>
+          <Controller
+            name="name"
+            control={control}
+            render={({field: {ref, ...inputProps}, fieldState, formState}) => (
+              <Input aliasText="Имя и фамилия" {...inputProps} />
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            render={({field: {ref, ...inputProps}, fieldState, formState}) => (
+              <Input aliasText="Электронная почта" {...inputProps} />
+            )}
+          />
+        </form>
+      </div>
+      <DragDrop />
     </div>
   );
 };

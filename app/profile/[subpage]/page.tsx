@@ -7,5 +7,9 @@ interface Props {
 }
 
 export default function ProfilePage(props: Props) {
-  return <ProfileMenu currentPage={props.params.subpage} />;
+  return (
+    <ProfileMenu currentPage={props.params.subpage}>
+      <div></div>
+    </ProfileMenu>
+  );
 }
