@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
   display: flex;
 }
 
@@ -8,19 +8,19 @@
   flex-direction: column;
 }
 
-.profileInfo{
+.profileInfo {
   display: flex;
   flex-direction: column;
   padding-left: 1.5rem;
 }
 
-.form{
+.form {
   margin-top: 1.5rem;
   width: 50%;
 }
 
-.span{
-  &:not(:first-child){
+.span {
+  &:not(:first-child) {
     margin-top: 0.5rem;
   }
   display: flex;
@@ -28,18 +28,18 @@
   font-weight: 600;
 }
 
-.value{
+.value {
   color: var(--primary-default);
 }
 
-.status{
+.status {
   padding-left: 1.5rem;
   color: var(--primary-default);
   display: flex;
   align-items: center;
   position: relative;
-  &:before{
-    background:var(--primary-default);
+  &:before {
+    background: var(--primary-default);
     position: absolute;
     left: 0.7rem;
     content: '';
@@ -48,4 +48,3 @@
     border-radius: 50%;
   }
 }
-

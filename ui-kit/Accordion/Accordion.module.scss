@@ -1,6 +1,6 @@
 @import '@/app/mixins';
 
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   border-radius: 0.625rem;
@@ -12,38 +12,36 @@
   margin-bottom: 1rem;
 }
 
-.title{
+.title {
   font-size: 1.8rem;
   color: var(--neutral-input);
   padding: 1.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  @include for-mobile{
+  @include for-mobile {
     font-size: 1.6rem;
   }
-
 }
 
-.additionalInfo{
+.additionalInfo {
   margin-left: auto;
   font-size: 1.3rem;
-  @include for-mobile{
+  @include for-mobile {
     font-size: 1.2rem;
   }
 }
 
-.icon{
+.icon {
   margin-left: 1rem;
 }
 
-.renderContent{
+.renderContent {
   padding: 0 1.2rem 0 1.2rem;
   max-height: 0;
   transition: max-height 0.2s linear;
 }
 
-.visible{
+.visible {
   max-height: 20rem;
 }
-

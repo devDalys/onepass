@@ -1,7 +1,6 @@
 import axios, {AxiosError} from 'axios';
 import {AUTH_TOKEN} from '@/utils/consts';
 import {redirect} from 'next/navigation';
-import {revalidateCache} from '@/api/revalidatePath';
 
 const isServer = typeof window === 'undefined';
 export const _api = axios.create({

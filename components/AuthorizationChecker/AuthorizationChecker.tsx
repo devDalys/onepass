@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {_api} from '@/api';
-import {getCookie, setCookie} from 'cookies-next';
+import {setCookie} from 'cookies-next';
 import {AUTH_TOKEN, ONE_MONTH} from '@/utils/consts';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
@@ -53,7 +53,7 @@ export default function AuthorizationChecker({onYandexClick}: AuthorizationCheck
             uuid: decodePayload.uuid,
             social: 'VK',
           })
-          .then((data) => {
+          .then(() => {
             showSnackbar('Вы успешно вошли !');
             router.push('/accounts');
           })
