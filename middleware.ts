@@ -14,23 +14,6 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(privateRoutes.accounts, request.url));
     }
   }
-
-  if (request.url.includes('/api')) {
-    let url = request.nextUrl.clone();
-    const _url = new URL('https://127.0.0.1:8888/');
-
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('host', _url.hostname);
-
-    url.protocol = _url.protocol;
-    url.hostname = _url.hostname;
-    url.pathname = pathname.replace('/api', '');
-    url.port = '8888';
-
-    return NextResponse.rewrite(url, {
-      headers: requestHeaders,
-    });
-  }
 }
 
 export const config = {

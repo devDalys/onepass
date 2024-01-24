@@ -11,8 +11,7 @@ import {useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
 import {useStore} from '@/providers/ContextProvider';
-import {revalidateCache, revalidateQuery} from '@/api/revalidatePath';
-import {revalidateTag} from 'next/cache';
+import {revalidateCache} from '@/api/revalidatePath';
 
 interface Props {
   currentAccount?: Partial<IAccountItem>;
@@ -44,7 +43,7 @@ export const AccountCreator = ({
     Boolean((createMode || createMinifiedMode) && !disableEditDefault),
   );
   const [currAccount, setCurrentAccount] = useState(currentAccount);
-  const {refreshData, accounts} = useStore();
+  const {accounts} = useStore();
   const countAccounts = useMemo(() => {
     return accounts?.find((item) => item?.socialName === currAccount?.socialName)?.accountEntries
       .length;
@@ -68,7 +67,7 @@ export const AccountCreator = ({
     _api
       .request<{body: IAccountItem}>({
         data: form,
-        url: createMode || createMinifiedMode ? '/api/accounts/add' : '/api/accounts/update',
+        url: createMode || createMinifiedMode ? '/accounts/add' : '/accounts/update',
         method: createMode || createMinifiedMode ? 'POST' : 'PUT',
         // withCredentials: true,
       })
@@ -93,7 +92,7 @@ export const AccountCreator = ({
 
   const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    _api.delete(`/api/accounts/delete/${currAccount?._id}`).then(() => {
+    _api.delete(`/accounts/delete/${currAccount?._id}`).then(() => {
       showSnackbar('Аккаунт успешно удалён');
       if (createMode) {
         router.push('/accounts?revalidate=1');

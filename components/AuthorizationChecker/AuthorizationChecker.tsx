@@ -1,16 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import {_api} from '@/api';
-import {setCookie} from 'cookies-next';
-import {AUTH_TOKEN, ONE_MONTH} from '@/utils/consts';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
+import {localStorage} from '@vkontakte/vkjs';
+import {AUTHORIZATION_FLAG} from '@/utils/consts';
 
-interface AuthorizationCheckerProps {
-  onYandexClick: () => void;
-}
-
-export default function AuthorizationChecker({onYandexClick}: AuthorizationCheckerProps) {
+export default function AuthorizationChecker() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const {showSnackbar} = useSnackbar();
@@ -27,17 +23,12 @@ export default function AuthorizationChecker({onYandexClick}: AuthorizationCheck
             silence_token: token,
             social: 'Yandex',
           })
-          .then((data) => {
-            setCookie(AUTH_TOKEN, data.data.token, {
-              maxAge: ONE_MONTH,
-              httpOnly: true,
-              secure: true,
-            });
-            onYandexClick();
+          .then(() => {
+            localStorage.setItem(AUTHORIZATION_FLAG, 'true');
             window.close();
           })
           .catch(() => {
-            showSnackbar('Что-то пошло не так, попробуйте ещё раз или вернитесь позже.');
+            localStorage.setItem(AUTHORIZATION_FLAG, 'false');
             setIsLoading(false);
           });
       }
@@ -48,7 +39,7 @@ export default function AuthorizationChecker({onYandexClick}: AuthorizationCheck
         setIsLoading(true);
         const decodePayload = JSON.parse(payload);
         _api
-          .post('/api/auth/login/social', {
+          .post('/auth/login/social', {
             silence_token: decodePayload.token,
             uuid: decodePayload.uuid,
             social: 'VK',

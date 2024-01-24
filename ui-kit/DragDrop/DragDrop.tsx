@@ -1,29 +1,33 @@
-import {useId, useRef, useState} from 'react';
+import {useId, useState} from 'react';
 import styles from './DragDrop.module.scss';
 import {Button, Image} from '@/ui-kit';
-import Delete from '@/assets/images/Delete.svg';
 import classNames from 'classnames';
+import FormData from 'form-data';
+import {_api} from '@/api';
+import {useSnackbar} from '@/providers/SnackbarProvider';
+import {revalidateCache} from '@/api/revalidatePath';
+import Upload from '@/assets/images/Upload.svg';
+import Accept from '@/assets/images/Accept.svg';
+import Cancel from '@/assets/images/Cancel.svg';
+
 export const DragDrop = () => {
   const [value, setValue] = useState<string>('');
   const [file, setFile] = useState<File | undefined>(undefined);
   const [isDrag, setIsDrag] = useState(false);
-  const ref = useRef<HTMLInputElement>(null);
+  const {showSnackbar} = useSnackbar();
   const id = useId();
   const handleDeleteImage = () => {
     setValue('');
     setFile(undefined);
   };
-
   const onDragStart = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDrag(true);
-    console.log('Start');
   };
 
   const onDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDrag(false);
-    console.log('Leave');
   };
 
   const onDrop = (e: React.DragEvent) => {
@@ -34,6 +38,21 @@ export const DragDrop = () => {
     setValue(file.name);
   };
 
+  const handleSubmit = () => {
+    const formData = new FormData();
+    formData.append('image', file);
+    _api
+      .post('/auth/upload', formData, {onUploadProgress: (event) => console.log(event)})
+      .then(() => {
+        handleDeleteImage();
+        showSnackbar('Фото профиля обновлено');
+        revalidateCache();
+      })
+      .catch(() => {
+        showSnackbar('Не удалось обновить фото');
+      });
+  };
+
   return (
     <>
       {file ? (
@@ -42,36 +61,44 @@ export const DragDrop = () => {
             classes={{img: styles.image, loader: styles.image}}
             src={URL.createObjectURL(file)}
           />
-          <button className={styles.deleteButton} onClick={handleDeleteImage}>
-            <Delete />
-          </button>
+          <div className={styles.actions}>
+            <button className={styles.button} onClick={handleDeleteImage}>
+              <Cancel />
+            </button>
+            <button className={styles.button} onClick={handleSubmit}>
+              <Accept />
+            </button>
+          </div>
         </div>
       ) : (
-        <label
-          className={styles.label}
-          htmlFor={id}
-          onDragEnter={onDragStart}
-          onDragLeave={onDragLeave}
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={onDrop}
-        >
-          <div className={classNames(styles.uploadText, {[styles.disableEvents]: isDrag})}>
-            <span className={styles.topSpan}>{isDrag ? 'Отпустите файл' : 'Перетащите фото'}</span>
-            <span className={styles.middleSpan}>или</span>
-            <Button
-              theme="default"
-              className={styles.bottomButton}
-              onClick={() => ref.current?.click()}
-            >
-              Нажмите сюда
-            </Button>
+        <label className={styles.label} htmlFor={id}>
+          <div
+            className={classNames(styles.uploadText, {[styles.disableEvents]: isDrag})}
+            onDragEnter={onDragStart}
+            onDragLeave={onDragLeave}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={onDrop}
+          >
+            {isDrag ? (
+              <div className={styles.draggable}>
+                <span className={styles.topSpan}>Отпустите файл</span>
+                <Upload />
+              </div>
+            ) : (
+              <>
+                <span className={styles.topSpan}>Перетащите фото</span>
+                <span className={styles.middleSpan}>или</span>
+                <Button theme="default" className={styles.bottomButton}>
+                  Нажмите сюда
+                </Button>
+              </>
+            )}
           </div>
           <input
             id={id}
             type="file"
             className={styles.input}
             value={value}
-            ref={ref}
             accept="image/jpeg"
             onChange={(event) => {
               setValue(event.target.value);

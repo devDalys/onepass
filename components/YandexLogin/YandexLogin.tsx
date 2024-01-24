@@ -3,11 +3,10 @@ import React, {useEffect} from 'react';
 
 interface YandexLoginProps {
   CLIENT_ID: string;
-  callback: () => void;
   isDisabled: boolean;
 }
 
-export default function YandexLogin({CLIENT_ID, callback, isDisabled}: YandexLoginProps) {
+export default function YandexLogin({CLIENT_ID, isDisabled}: YandexLoginProps) {
   useEffect(() => {
     // @ts-ignore
     window.YaAuthSuggest.init(
@@ -33,7 +32,6 @@ export default function YandexLogin({CLIENT_ID, callback, isDisabled}: YandexLog
       disabled={isDisabled}
       onClick={(event) => {
         event.preventDefault();
-        callback?.();
       }}
       id="container"
     ></button>

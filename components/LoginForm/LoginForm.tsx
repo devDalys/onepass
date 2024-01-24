@@ -6,15 +6,14 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
 import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
-import {getCookie, setCookie} from 'cookies-next';
-import {ONE_MONTH} from '@/utils/consts';
-import {useRouter} from 'next/navigation';
+import {AUTHORIZATION_FLAG} from '@/utils/consts';
+import {usePathname, useRouter} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
-import {revalidateCache} from '@/api/revalidatePath';
+import {localStorage} from '@vkontakte/vkjs';
 
 interface Form {
   email: string;
@@ -46,14 +45,13 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
 
   const router = useRouter();
   const {showSnackbar} = useSnackbar();
-
+  const pathName = usePathname();
   const onSubmit = async (data: Form) => {
     setLoading(true);
     await _api
-      .post('/api/auth/login', data)
-      .then((data) => {
+      .post('/auth/login', data)
+      .then(() => {
         showSnackbar('Вы успешно вошли !');
-        setCookie('token', data.data.token, {maxAge: ONE_MONTH, httpOnly: true, secure: true});
         router.push('/accounts');
       })
       .catch(() => {
@@ -62,21 +60,27 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
       });
   };
 
-  const onYandexClick = () => {
-    setLoading(true);
+  useEffect(() => {
     const interval = setInterval(() => {
-      const token = getCookie('token');
-      if (token) {
-        clearInterval(interval);
-        showSnackbar('Вы успешно вошли !');
+      const isAuthorized = localStorage.getItem(AUTHORIZATION_FLAG);
+
+      if (isAuthorized === 'true' && pathName === '/login') {
         router.push('/accounts');
+        showSnackbar('Вы успешно вошли');
+        localStorage.removeItem(AUTHORIZATION_FLAG);
+        clearInterval(interval);
       }
-    }, 500);
-  };
+      if (isAuthorized === 'false' && pathName === '/login') {
+        showSnackbar('Что-то пошло не так');
+        localStorage.removeItem(AUTHORIZATION_FLAG);
+        clearInterval(interval);
+      }
+    }, 1000);
+  }, []);
 
   return (
     <>
-      <AuthorizationChecker onYandexClick={onYandexClick} />
+      <AuthorizationChecker />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Controller
           name="email"
@@ -112,7 +116,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
             Login
           </Button>
           <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
-          <YandexLogin CLIENT_ID={CLIENT_ID} isDisabled={isLoading} callback={onYandexClick} />
+          <YandexLogin CLIENT_ID={CLIENT_ID} isDisabled={isLoading} />
         </div>
       </form>
     </>

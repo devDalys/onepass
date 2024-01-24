@@ -4,7 +4,7 @@ import {redirect} from 'next/navigation';
 
 const isServer = typeof window === 'undefined';
 export const _api = axios.create({
-  baseURL: 'https://local.onepass.ru/',
+  baseURL: 'https://backapi.onepass.ru/',
   withCredentials: true,
 });
 _api.interceptors.request.use(async (config) => {

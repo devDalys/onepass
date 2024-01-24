@@ -1,17 +1,9 @@
 'use client';
 import styles from './ProfilePage.module.scss';
-import {Image, Input} from '@/ui-kit';
-import Sun from '@/assets/images/Sun.svg';
-import Moon from '@/assets/images/Moon.svg';
-import LogoutButton from '@/components/LogoutButton/LogoutButton';
-import {useTheme} from '@/providers/ThemeProvider';
-import {useEffect, useMemo, useState} from 'react';
-import {Theme} from '@/providers/ThemeProvider/ThemeContext';
-import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
+import {Button, Input} from '@/ui-kit';
+import {useEffect, useState} from 'react';
 import {useStore} from '@/providers/ContextProvider';
 import {Controller, useForm} from 'react-hook-form';
-import classNames from 'classnames';
-import {log} from 'util';
 import {DragDrop} from '@/ui-kit/DragDrop/DragDrop';
 
 interface Form {
@@ -23,7 +15,7 @@ export const ProfilePage = () => {
   const {profile} = useStore();
   const [isMounted, setIsMounted] = useState(false);
   const [isOnline, setOnline] = useState(false);
-  const {control, formState, reset} = useForm<Form>({
+  const {control, formState, reset, handleSubmit} = useForm<Form>({
     defaultValues: {
       name: profile?.name ?? '',
       email: profile?.email ?? '',
@@ -57,6 +49,8 @@ export const ProfilePage = () => {
 
   return (
     <div className={styles.wrapper}>
+      <DragDrop />
+
       <div className={styles.profile}>
         <span className={styles.span}>
           Статус:
@@ -74,6 +68,7 @@ export const ProfilePage = () => {
             &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString()}
           </span>
         </span>
+
         <form className={styles.form}>
           <Controller
             name="name"
@@ -89,9 +84,20 @@ export const ProfilePage = () => {
               <Input aliasText="Электронная почта" {...inputProps} />
             )}
           />
+          <div className={styles.actions}>
+            <Button
+              theme="outline"
+              onClick={(event) => {
+                event.preventDefault();
+                reset({name: profile.name, email: profile.email});
+              }}
+            >
+              Сбросить
+            </Button>
+            <Button theme="default">Сохранить</Button>
+          </div>
         </form>
       </div>
-      <DragDrop />
     </div>
   );
 };
