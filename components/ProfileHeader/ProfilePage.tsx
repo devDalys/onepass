@@ -5,6 +5,10 @@ import {useEffect, useState} from 'react';
 import {useStore} from '@/providers/ContextProvider';
 import {Controller, useForm} from 'react-hook-form';
 import {DragDrop} from '@/ui-kit/DragDrop/DragDrop';
+import {_api} from '@/api';
+import {useSnackbar} from '@/providers/SnackbarProvider';
+import {revalidateCache} from '@/api/revalidatePath';
+import {AxiosResponse} from 'axios';
 
 interface Form {
   name: string;
@@ -15,12 +19,26 @@ export const ProfilePage = () => {
   const {profile} = useStore();
   const [isMounted, setIsMounted] = useState(false);
   const [isOnline, setOnline] = useState(false);
+  const {showSnackbar} = useSnackbar();
   const {control, formState, reset, handleSubmit} = useForm<Form>({
     defaultValues: {
       name: profile?.name ?? '',
       email: profile?.email ?? '',
     },
   });
+
+  const onSubmit = (props: Form) => {
+    _api
+      .put('/auth/me', props)
+      .then((data: AxiosResponse<Form>) => {
+        showSnackbar('Профиль успешно обновлен');
+        reset({name: data.data.name, email: data.data.email});
+        revalidateCache();
+      })
+      .catch(() => {
+        showSnackbar('Произошла ошибка обновления профиля');
+      });
+  };
 
   useEffect(() => {
     if (profile?.name && !isMounted) {
@@ -69,7 +87,7 @@ export const ProfilePage = () => {
           </span>
         </span>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Controller
             name="name"
             control={control}
@@ -86,6 +104,7 @@ export const ProfilePage = () => {
           />
           <div className={styles.actions}>
             <Button
+              className={styles.button}
               theme="outline"
               onClick={(event) => {
                 event.preventDefault();
@@ -94,7 +113,14 @@ export const ProfilePage = () => {
             >
               Сбросить
             </Button>
-            <Button theme="default">Сохранить</Button>
+            <Button
+              className={styles.button}
+              theme="default"
+              type="submit"
+              disabled={!formState.isValid || !formState.isDirty}
+            >
+              Сохранить
+            </Button>
           </div>
         </form>
       </div>

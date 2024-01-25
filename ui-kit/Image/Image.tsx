@@ -40,6 +40,9 @@ export const Image = ({classes, fallback, ...imageProps}: Props) => {
         })}
         src={imageSrc}
         ref={ref}
+        onErrorCapture={() => {
+          console.log('test');
+        }}
         onError={() => {
           setImageSrc(fallback ?? notFound.src);
           setImageLoading(false);
