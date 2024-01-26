@@ -1,6 +1,6 @@
 'use client';
 import styles from './ProfilePage.module.scss';
-import {Button, Input} from '@/ui-kit';
+import {Button, Input, SuspenseLoader} from '@/ui-kit';
 import {useEffect, useState} from 'react';
 import {useStore} from '@/providers/ContextProvider';
 import {Controller, useForm} from 'react-hook-form';
@@ -63,7 +63,7 @@ export const ProfilePage = () => {
     };
   }, []);
 
-  if (!profile) return <div>Загрузка...</div>;
+  if (!profile) return <SuspenseLoader />;
 
   return (
     <div className={styles.wrapper}>

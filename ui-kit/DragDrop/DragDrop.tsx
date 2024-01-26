@@ -1,15 +1,16 @@
 import {useId, useState} from 'react';
-import styles from './DragDrop.module.scss';
 import {Button, Image} from '@/ui-kit';
 import classNames from 'classnames';
 import FormData from 'form-data';
 import {_api} from '@/api';
+import styles from './DragDrop.module.scss';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {revalidateCache} from '@/api/revalidatePath';
 import Upload from '@/assets/images/Upload.svg';
 import Accept from '@/assets/images/Accept.svg';
 import Cancel from '@/assets/images/Cancel.svg';
 
+const maxSize = 5 * 1024 * 1024;
 export const DragDrop = () => {
   const [value, setValue] = useState<string>('');
   const [file, setFile] = useState<File | undefined>(undefined);
@@ -34,6 +35,10 @@ export const DragDrop = () => {
     setIsDrag(false);
     e.preventDefault();
     const file = e.dataTransfer.files[0];
+    if (!file || file?.size > maxSize || file?.name) {
+      handleDeleteImage();
+      return showSnackbar('Загрузите изображение весом до 5mb и расширением .jpeg');
+    }
     setFile(file);
     setValue(file.name);
   };
@@ -42,7 +47,7 @@ export const DragDrop = () => {
     const formData = new FormData();
     formData.append('image', file);
     _api
-      .post('/auth/upload', formData, {onUploadProgress: (event) => console.log(event)})
+      .post('/auth/upload', formData)
       .then(() => {
         handleDeleteImage();
         showSnackbar('Фото профиля обновлено');

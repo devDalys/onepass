@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import styles from './Image.module.scss';
 import notFound from '@/assets/images/not-found.svg?url';
+import {SuspenseLoader} from '@/ui-kit';
 
 const classes = {
   loader: 'loader',
@@ -31,7 +32,7 @@ export const Image = ({classes, fallback, ...imageProps}: Props) => {
   return (
     <>
       {isImageLoading && (
-        <div className={classNames(styles.avatar, styles.loader, classes?.loader)} />
+        <SuspenseLoader className={classNames(styles.avatar, styles.loader, classes?.loader)} />
       )}
       <img
         {...imageProps}

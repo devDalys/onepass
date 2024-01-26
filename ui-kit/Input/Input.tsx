@@ -41,7 +41,7 @@ export const Input: React.FC<Props> = ({aliasText, className, errorText, ...inpu
       <div className={styles.inputWrapper}>
         <input
           {...inputProps}
-          // type={isPassword && isViewPassword ? inputProps.type : 'text'}
+          type={isPassword && isViewPassword ? inputProps.type : 'text'}
           id={id}
           className={styles.input}
         />
