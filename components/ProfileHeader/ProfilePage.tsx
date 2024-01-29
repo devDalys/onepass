@@ -70,22 +70,24 @@ export const ProfilePage = () => {
       <DragDrop />
 
       <div className={styles.profile}>
-        <span className={styles.span}>
-          Статус:
-          <span className={styles.status}>{isOnline ? 'Online' : 'Offline'}</span>
-        </span>
-        <span className={styles.span}>
-          Дата регистрации:
-          <span className={styles.value}>
-            &nbsp;{new Date(profile.createdAt as Date).toLocaleDateString()}
+        <div className={styles.statusInfo}>
+          <span className={styles.span}>
+            Статус:
+            <span className={styles.status}>{isOnline ? 'Online' : 'Offline'}</span>
           </span>
-        </span>
-        <span className={styles.span}>
-          Последние изменения аккаунта:
-          <span className={styles.value}>
-            &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString()}
+          <span className={styles.span}>
+            Дата регистрации:
+            <span className={styles.value}>
+              &nbsp;{new Date(profile.createdAt as Date).toLocaleDateString()}
+            </span>
           </span>
-        </span>
+          <span className={styles.span}>
+            Последние изменения аккаунта:
+            <span className={styles.value}>
+              &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString()}
+            </span>
+          </span>
+        </div>
 
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Controller

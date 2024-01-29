@@ -1,3 +1,6 @@
+@import '@/app/mixins';
+
+
 .input {
   display: none;
 }
@@ -12,7 +15,10 @@
   justify-content: center;
   cursor: pointer;
   background: var(--neutral-card);
-  border: 2px dashed var(--neutral-text);
+  border: 2px solid var(--neutral-text);
+  @include for-mobile{
+    width: 100%;
+  }
 }
 
 .uploadText {
@@ -53,7 +59,7 @@
 
 .previewWrapper {
   position: relative;
-  width: max-content;
+  width: 11rem;
   height: 15rem;
 }
 

@@ -1,6 +1,10 @@
+'use client';
 import styles from './ProfileMenu.module.scss';
 import Link from 'next/link';
 import classNames from 'classnames';
+import ChevronUp from '@/assets/images/ChevronUp.svg';
+import ChevronDown from '@/assets/images/ChevronDown.svg';
+import {useState} from 'react';
 interface Props {
   currentPage: string;
   children: React.ReactNode;
@@ -15,9 +19,16 @@ const pages = [
 ];
 
 export default function ProfileMenu({currentPage, children}: Props) {
+  const [isOpened, setOpened] = useState(false);
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.menu}>
+      <div className={classNames(styles.menu, {[styles.hideMenu]: !isOpened})}>
+        <div className={styles.mobileMenu} onClick={() => setOpened(!isOpened)}>
+          Меню
+          {isOpened ? <ChevronUp /> : <ChevronDown />}
+        </div>
+
         {pages.map((item) => (
           <Link
             className={classNames(styles.link, {[styles.active]: item.page === currentPage})}
