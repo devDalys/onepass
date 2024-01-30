@@ -1,14 +1,11 @@
 @import '@/app/mixins';
 
-
-
 .wrapper {
   display: flex;
   gap: 1rem;
-  @include for-mobile{
+  @include for-mobile {
     flex-direction: column;
     margin-bottom: 5rem;
-
   }
 }
 .menu {
@@ -21,7 +18,7 @@
   height: max-content;
   max-height: 23.5rem;
   transition: max-height 0.2s linear;
-  @include for-mobile{
+  @include for-mobile {
     width: 100%;
   }
 }
@@ -44,8 +41,8 @@
   padding: 1.2rem;
 }
 
-.mobileMenu{
-  @include for-desktop{
+.mobileMenu {
+  @include for-desktop {
     display: none;
   }
   padding: 1.2rem;
@@ -56,8 +53,8 @@
   align-items: center;
 }
 
-.hideMenu{
-  @include for-mobile{
+.hideMenu {
+  @include for-mobile {
     max-height: 3.875rem;
   }
 }
