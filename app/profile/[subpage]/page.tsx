@@ -1,4 +1,6 @@
 import ProfileMenu from '@/components/ProfileMenu';
+import {lazy, Suspense} from 'react';
+import {SuspenseLoader} from '@/ui-kit';
 
 interface Props {
   params: {
@@ -6,10 +8,17 @@ interface Props {
   };
 }
 
-export default function ProfilePage(props: Props) {
+export default async function ProfilePage(props: Props) {
+  const pages = {
+    security: lazy(() => import('@/components/SecurityPage/SecurityPage')),
+  };
+  const LazyComponent = pages[props.params.subpage as keyof typeof pages];
+
   return (
     <ProfileMenu currentPage={props.params.subpage}>
-      <div></div>
+      <Suspense fallback={<SuspenseLoader />}>
+        <LazyComponent />
+      </Suspense>
     </ProfileMenu>
   );
 }
