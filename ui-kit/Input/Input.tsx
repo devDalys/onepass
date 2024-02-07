@@ -20,7 +20,7 @@ export const Input: React.FC<Props> = ({aliasText, className, errorText, ...inpu
     () => inputProps.readOnly && inputProps.type === 'password',
     [inputProps.readOnly, inputProps.type],
   );
-  const [isViewPassword, setViewPassword] = useState(isPassword);
+  const [isViewPassword, setViewPassword] = useState(inputProps.type !== 'password');
   const {showSnackbar} = useSnackbar();
   const onCopy = async (text: string) => {
     await navigator.clipboard.writeText(text);
@@ -41,11 +41,11 @@ export const Input: React.FC<Props> = ({aliasText, className, errorText, ...inpu
       <div className={styles.inputWrapper}>
         <input
           {...inputProps}
-          type={isPassword && isViewPassword ? inputProps.type : 'text'}
+          type={isViewPassword ? 'text' : inputProps.type}
           id={id}
           className={styles.input}
         />
-        {isPassword && (
+        {inputProps.readOnly && inputProps.type === 'password' && (
           <div className={styles.passwordActions}>
             {isViewPassword ? (
               <EyeOpen onClick={() => setViewPassword((state) => !state)} className={styles.icon} />

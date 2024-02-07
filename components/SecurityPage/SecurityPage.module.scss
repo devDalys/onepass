@@ -1,7 +1,42 @@
 .infoBlock{
   color: var(--neutral-text);
-  background: var(--navmenu-bg);
-  padding: 1rem;
+  border: 2px solid var(--primary-default);
+  font-size: 1rem;
+  padding: 0.5rem;
   border-radius: 0.625rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+
+}
+
+.infoIcon{
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.5rem;
+
+  >svg{
+    width: 3rem;
+    height: 3rem;
+  }
+
+}
+
+.form{
+  margin-top: 1rem;
+}
+
+.actions{
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.button {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.input{
+  width: 100%;
 }

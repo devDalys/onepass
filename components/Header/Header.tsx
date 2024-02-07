@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 import HeaderBlock from '@/components/HeaderBlock';
 import NavMenu from '@/components/NavMenu/NavMenu';
 import {useStore} from '@/providers/ContextProvider';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 import {PageTitle} from '@/ui-kit';
