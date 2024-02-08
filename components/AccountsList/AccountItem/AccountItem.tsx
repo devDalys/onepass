@@ -2,7 +2,7 @@
 import Copy from '@/assets/images/Copy.svg';
 import styles from './AccountItem.module.scss';
 import Link from 'next/link';
-import {AccountsResponse, IAccountItem} from '@/components/AccountsList/AccountsList.types';
+import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 
 interface Props extends AccountsResponse {
   onCopy: (text: string) => void;

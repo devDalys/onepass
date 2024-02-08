@@ -90,6 +90,7 @@
   flex-direction: column;
   align-items: flex-start;
   overflow: hidden;
+  flex: 1;
 
   @include for-mobile {
     padding-left: 0;

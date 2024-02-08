@@ -2,6 +2,7 @@
 import {useState} from 'react';
 import styles from './Accordion.module.scss';
 import classNames from 'classnames';
+
 interface AccordionProps {
   renderProps: () => React.ReactNode;
   title?: string;

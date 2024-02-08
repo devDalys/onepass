@@ -1,6 +1,6 @@
 'use client';
 import styles from './AccountsList.module.scss';
-import AccountItem, {IAccountItem} from '@/components/AccountsList/AccountItem';
+import AccountItem from '@/components/AccountsList/AccountItem';
 import {useEffect, useState} from 'react';
 import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
@@ -10,7 +10,7 @@ import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 import {useRouter, useSearchParams} from 'next/navigation';
-import {revalidateCache, revalidateQuery} from '@/api/revalidatePath';
+import {revalidateCache} from '@/api/revalidatePath';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');

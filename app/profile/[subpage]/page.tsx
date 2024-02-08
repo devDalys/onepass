@@ -1,7 +1,6 @@
 import ProfileMenu from '@/components/ProfileMenu';
 import {lazy, Suspense} from 'react';
 import {SuspenseLoader} from '@/ui-kit';
-import {NotFoundPage} from '@/components/NotFoundPage';
 import {notFound} from 'next/navigation';
 
 interface Props {

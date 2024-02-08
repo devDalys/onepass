@@ -12,7 +12,7 @@ import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
 import Script from 'next/script';
 import React from 'react';
 import {ContextProvider} from '@/providers/ContextProvider/ContextProvider';
-import HeaderWrapper from '@/components/Header/HeaderWrapper';
+
 export const dynamic = 'force-dynamic';
 // export const revalidate = 0;
 
