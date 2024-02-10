@@ -1,22 +1,31 @@
 'use client';
 import styles from './SecurityPage.module.scss';
 import {Controller, useForm} from 'react-hook-form';
-import {Button, Input} from '@/ui-kit';
-import Info from '@/assets/images/Info.svg';
+import {Button, InfoBlock, Input} from '@/ui-kit';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {FormEvent, useRef, useState} from 'react';
 
 const schema = yup.object().shape({
   oldPassword: yup.string().min(5).max(20).required(),
   newPassword: yup.string().min(5).max(20).required(),
-  confirmPassword: yup.string().test({
-    test: (value, context) => context.parent.newPassword === value,
-    message: 'Пароли должны совпадать',
-  }),
+  confirmPassword: yup
+    .string()
+    .test({
+      test: (value, context) => context.parent.newPassword === value,
+      message: 'Пароли должны совпадать',
+    })
+    .required(),
 });
 
+interface SubmitForm {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 export default function SecurityPage() {
-  const {control, handleSubmit, reset, formState} = useForm({
+  const {control, handleSubmit, reset, formState} = useForm<SubmitForm>({
     defaultValues: {
       oldPassword: '',
       newPassword: '',
@@ -26,19 +35,22 @@ export default function SecurityPage() {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
+  const [deleteInput, setDeleteInput] = useState('');
 
-  const onSubmit = () => {};
+  const onSubmit = (form: SubmitForm) => {};
+  const handleDelete = (event: FormEvent) => {
+    event.preventDefault();
+    console.log(deleteInput);
+  };
 
   return (
     <div>
-      <div className={styles.infoBlock}>
-        <div className={styles.infoIcon}>
-          <Info />
-        </div>
-        Обратите внимание на то, что если Вы авторизовывались через социальную сеть - пароль
+      <h2 className={styles.pageTitle}>Смена пароля</h2>
+      <InfoBlock
+        text="Обратите внимание на то, что если Вы авторизовывались через социальную сеть - пароль
         сгенерирован автоматически. Поэтому чтобы сменить его - воспользуйтесь сбросом, а в
-        дальнейшем вы сможете менять его здесь
-      </div>
+        дальнейшем вы сможете менять его здесь"
+      />
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -48,7 +60,7 @@ export default function SecurityPage() {
             <Input
               className={styles.input}
               type="password"
-              aliasText="Старый пароль"
+              aliasText="Текущий пароль"
               errorText={fieldState.error?.message}
               {...inputProps}
             />
@@ -98,6 +110,26 @@ export default function SecurityPage() {
             disabled={!formState.isValid || !formState.isDirty}
           >
             Сохранить
+          </Button>
+        </div>
+      </form>
+
+      <h2 className={styles.pageTitle}>Удаление аккаунта</h2>
+      <InfoBlock text="После удаления аккаунта все ваши данные будут безвозмездно утеряны и не подлежат восстановлению" />
+      <form className={styles.deleteForm} onSubmit={handleDelete}>
+        <Input
+          aliasText="Текущий пароль"
+          value={deleteInput}
+          onChange={(event) => setDeleteInput(event.target.value)}
+        />
+        <div className={styles.actions}>
+          <Button
+            theme="outline"
+            type="submit"
+            className={styles.button}
+            disabled={!deleteInput.length}
+          >
+            Удалить аккаунт
           </Button>
         </div>
       </form>

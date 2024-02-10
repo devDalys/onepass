@@ -1,27 +1,7 @@
-.infoBlock{
-  color: var(--neutral-text);
-  border: 2px solid var(--primary-default);
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.625rem;
-  font-weight: 600;
-  display: flex;
-}
-
-.infoIcon{
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.5rem;
-
-  >svg{
-    width: 2rem;
-    height: 2rem;
-  }
-
-}
 
 .form{
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .actions{
@@ -37,4 +17,17 @@
 
 .input{
   width: 100%;
+}
+
+.pageTitle{
+  color: var(--neutral-text);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.deleteForm{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
