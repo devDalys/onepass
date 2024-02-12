@@ -3,7 +3,7 @@ import {RegisterForm} from '@/components/RegisterForm';
 
 export default function page() {
   return (
-    <AuthPage text="Register">
+    <AuthPage text="Регистрация">
       <RegisterForm />
     </AuthPage>
   );

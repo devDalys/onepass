@@ -13,7 +13,7 @@ type Props = {
 
 export default function page({searchParams}: Props) {
   return (
-    <AuthPage text="Login">
+    <AuthPage text="Вход">
       <LoginForm APP_ID={+APP_ID} CLIENT_ID={CLIENT_ID} redirectUrl={REDIRECT_URL} />
     </AuthPage>
   );

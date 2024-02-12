@@ -29,7 +29,7 @@ export const ProfilePage = () => {
 
   const onSubmit = (props: Form) => {
     _api
-      .put('/auth/me', props)
+      .put('/profile/me', props)
       .then((data: AxiosResponse<Form>) => {
         showSnackbar('Профиль успешно обновлен');
         reset({name: data.data.name, email: data.data.email});

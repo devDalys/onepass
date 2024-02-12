@@ -9,7 +9,7 @@ export const getAccounts = async (): Promise<AccountsResponse[]> => {
 };
 
 export const getProfile = async (): Promise<Profile> => {
-  const data = await _api.get('/auth/me');
+  const data = await _api.get('/profile/me');
 
   return data.data;
 };
@@ -20,7 +20,7 @@ export const getProfile = async (): Promise<Profile> => {
 // };
 //
 // export const getProfile = async (): Promise<Profile> => {
-//   const data = await _api<any>('/api/auth/me');
+//   const data = await _api<any>('/api/profile/me');
 //
 //   return data;
 // };

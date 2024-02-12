@@ -47,7 +47,7 @@ export const DragDrop = () => {
     const formData = new FormData();
     formData.append('image', file);
     _api
-      .post('/auth/upload', formData)
+      .post('/profile/upload', formData)
       .then(() => {
         handleDeleteImage();
         showSnackbar('Фото профиля обновлено');

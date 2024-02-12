@@ -6,7 +6,12 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
 import {Button, Input} from '@/ui-kit';
 import styles from './LoginForm.module.scss';
-import {AUTHORIZATION_FLAG} from '@/utils/consts';
+import {
+  AUTHORIZATION_FLAG,
+  MAX_PASSWORD_LENGTH,
+  MIN_PASSWORD_LENGTH,
+  validationMessages,
+} from '@/utils/consts';
 import {usePathname, useRouter} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
@@ -27,8 +32,12 @@ interface Props {
 }
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(5).max(20).required(),
+  email: yup.string().email(validationMessages.email()).required(validationMessages.required()),
+  password: yup
+    .string()
+    .min(MIN_PASSWORD_LENGTH, validationMessages.min(MIN_PASSWORD_LENGTH))
+    .max(MAX_PASSWORD_LENGTH, validationMessages.max(MAX_PASSWORD_LENGTH))
+    .required(validationMessages.required()),
 });
 
 export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
@@ -113,7 +122,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
         />
         <div className={styles.buttons}>
           <Button className={styles.button} theme="default" type="submit" disabled={isLoading}>
-            Login
+            Войти
           </Button>
           <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
           <YandexLogin CLIENT_ID={CLIENT_ID} isDisabled={isLoading} />

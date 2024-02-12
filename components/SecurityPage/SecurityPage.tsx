@@ -5,17 +5,29 @@ import {Button, InfoBlock, Input} from '@/ui-kit';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {FormEvent, useRef, useState} from 'react';
+import {_api} from '@/api';
+import {useSnackbar} from '@/providers/SnackbarProvider';
+import {useRouter} from 'next/navigation';
+import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, validationMessages} from '@/utils/consts';
 
 const schema = yup.object().shape({
-  oldPassword: yup.string().min(5).max(20).required(),
-  newPassword: yup.string().min(5).max(20).required(),
+  oldPassword: yup
+    .string()
+    .min(MIN_PASSWORD_LENGTH, validationMessages.min(MIN_PASSWORD_LENGTH))
+    .max(MAX_PASSWORD_LENGTH, validationMessages.max(MAX_PASSWORD_LENGTH))
+    .required(validationMessages.required()),
+  newPassword: yup
+    .string()
+    .min(MIN_PASSWORD_LENGTH, validationMessages.min(MIN_PASSWORD_LENGTH))
+    .max(MAX_PASSWORD_LENGTH, validationMessages.max(MAX_PASSWORD_LENGTH))
+    .required(validationMessages.required()),
   confirmPassword: yup
     .string()
     .test({
       test: (value, context) => context.parent.newPassword === value,
-      message: 'Пароли должны совпадать',
+      message: validationMessages.repeatValue('Пароли'),
     })
-    .required(),
+    .required(validationMessages.required()),
 });
 
 interface SubmitForm {
@@ -36,11 +48,37 @@ export default function SecurityPage() {
     resolver: yupResolver(schema),
   });
   const [deleteInput, setDeleteInput] = useState('');
-
-  const onSubmit = (form: SubmitForm) => {};
-  const handleDelete = (event: FormEvent) => {
+  const {showSnackbar} = useSnackbar();
+  const router = useRouter();
+  const onSubmit = (form: SubmitForm) => {
+    _api
+      .put('/profile/me', {
+        currentPassword: form.oldPassword,
+        password: form.newPassword,
+      })
+      .then(() => {
+        showSnackbar('Вы успешно изменили пароль');
+      })
+      .catch(() => {
+        showSnackbar('Что-то пошло не так');
+      });
+  };
+  const handleDelete = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(deleteInput);
+
+    Promise.all([
+      _api.post('/profile/me', {
+        password: deleteInput,
+      }),
+      fetch('/logout'),
+    ])
+      .then(() => {
+        showSnackbar('Аккаунт успешно удалён');
+        router.push('/');
+      })
+      .catch(() => {
+        showSnackbar('Не удалось удалить аккаунт');
+      });
   };
 
   return (
@@ -119,6 +157,7 @@ export default function SecurityPage() {
       <form className={styles.deleteForm} onSubmit={handleDelete}>
         <Input
           aliasText="Текущий пароль"
+          type="password"
           value={deleteInput}
           onChange={(event) => setDeleteInput(event.target.value)}
         />

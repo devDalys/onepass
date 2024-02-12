@@ -19,6 +19,8 @@
   width: 100%;
 }
 .form {
-  padding-left: 10%;
-  padding-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

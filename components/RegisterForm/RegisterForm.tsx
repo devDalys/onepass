@@ -8,6 +8,13 @@ import {_api} from '@/api';
 import React from 'react';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useRouter} from 'next/navigation';
+import {
+  MAX_NAME_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MIN_NAME_LENGTH,
+  MIN_PASSWORD_LENGTH,
+  validationMessages,
+} from '@/utils/consts';
 
 interface Form {
   name: string;
@@ -15,9 +22,17 @@ interface Form {
   password: string;
 }
 const schema = yup.object().shape({
-  name: yup.string().min(3).max(20).required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(5).max(20).required(),
+  name: yup
+    .string()
+    .min(MIN_NAME_LENGTH, validationMessages.min(MIN_NAME_LENGTH))
+    .max(MAX_NAME_LENGTH, validationMessages.max(MAX_NAME_LENGTH))
+    .required(validationMessages.required()),
+  email: yup.string().email(validationMessages.email).required(validationMessages.required),
+  password: yup
+    .string()
+    .min(MIN_PASSWORD_LENGTH, validationMessages.min(MIN_PASSWORD_LENGTH))
+    .max(MAX_PASSWORD_LENGTH, validationMessages.min(MAX_PASSWORD_LENGTH))
+    .required(validationMessages.required()),
 });
 
 export const RegisterForm = () => {
