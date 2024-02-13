@@ -4,7 +4,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {Button, InfoBlock, Input} from '@/ui-kit';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {FormEvent, useRef, useState} from 'react';
+import {FormEvent, useState} from 'react';
 import {_api} from '@/api';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useRouter} from 'next/navigation';

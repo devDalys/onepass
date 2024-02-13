@@ -1,6 +1,5 @@
 import {AUTH_TOKEN} from '@/utils/consts';
 import {redirect} from 'next/navigation';
-import {revalidateCache} from '@/api/revalidatePath';
 
 const isServer = typeof window === 'undefined';
 
