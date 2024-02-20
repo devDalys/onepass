@@ -18,7 +18,6 @@ import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
 import {useEffect, useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
-import {localStorage} from '@vkontakte/vkjs';
 
 interface Form {
   email: string;

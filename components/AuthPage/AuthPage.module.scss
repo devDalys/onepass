@@ -1,7 +1,11 @@
+@import "@/app/mixins";
 .title {
   margin-top: 5%;
   color: var(--neutral-text);
   font-size: 6rem;
+  @include for-mobile{
+    font-size: 3.5rem;
+  }
   font-weight: 700;
   line-height: normal;
 }
@@ -11,6 +15,10 @@
   font-size: 1.5rem;
   color: var(--neutral-grey);
   font-weight: 400;
+  @include for-mobile{
+    text-align: center;
+    font-size: 1.5rem;
+  }
 }
 
 .section {

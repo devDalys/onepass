@@ -1,14 +1,13 @@
 .form {
   display: flex;
   flex-direction: column;
-  max-width: max-content;
   margin-top: 5%;
-  width: 100%;
-}
-.button {
-  min-width: 100%;
-}
+  width: 20rem;
+  .button{
+    max-width: unset;
 
+  }
+}
 .buttons {
   display: flex;
   flex-direction: column;

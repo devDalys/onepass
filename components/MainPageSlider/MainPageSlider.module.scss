@@ -1,7 +1,11 @@
+@import '@/app/mixins';
 .title {
   font-size: 4rem;
   user-select: none;
   pointer-events: none;
+  @include for-mobile{
+    font-size: 3rem;
+  }
   .neutralText {
     color: var(--neutral-text);
   }
@@ -18,6 +22,9 @@
     color: var(--neutral-grey);
     cursor: pointer;
     font-size: 1.5rem;
+    @include for-mobile{
+      font-size: 1rem;
+    }
     &__active {
       color: var(--primary-default);
       font-size: 2rem;
@@ -29,5 +36,8 @@
   color: var(--neutral-grey);
   font-size: 1.5rem;
   font-family: var(--play);
+  @include for-mobile{
+    margin-top: 1rem;
+  }
   font-weight: 400;
 }

@@ -1,3 +1,4 @@
+@import '@/app/mixins';
 
 .form{
   margin-top: 1rem;
@@ -8,12 +9,16 @@
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
+  .button {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+  @include for-mobile{
+    gap: unset;
+    justify-content: space-between;
+  }
 }
 
-.button {
-  font-size: 1rem;
-  padding: 0.5rem;
-}
 
 .input{
   width: 100%;

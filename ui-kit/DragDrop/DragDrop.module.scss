@@ -1,6 +1,5 @@
 @import '@/app/mixins';
 
-
 .input {
   display: none;
 }
@@ -16,8 +15,12 @@
   cursor: pointer;
   background: var(--neutral-card);
   border: 2px solid var(--neutral-text);
-  @include for-mobile{
+  @include for-mobile {
     width: 100%;
+  }
+  .bottomButton {
+    font-size: 1rem;
+    padding: 0.5rem;
   }
 }
 
@@ -31,7 +34,7 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 0.625rem;
-  & > *{
+  & > * {
     pointer-events: none;
   }
 }
@@ -46,11 +49,6 @@
   font-weight: 600;
 }
 
-.bottomButton {
-  font-size: 1rem;
-  padding: 0.5rem;
-}
-
 .image {
   height: 15rem;
   width: 11rem;
@@ -63,7 +61,7 @@
   height: 15rem;
 }
 
-.actions{
+.actions {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -76,14 +74,12 @@
   opacity: 0.6;
   transition: opacity 0.2s;
 
- &:hover{
-   opacity: 1;
- }
-
+  &:hover {
+    opacity: 1;
+  }
 }
 
-
-.button{
+.button {
   cursor: pointer;
   height: 100%;
   padding: 0.5rem;
@@ -92,19 +88,19 @@
   justify-content: center;
   background: #fff;
   border-radius: 50%;
-  & > svg{
+  & > svg {
     width: 20px;
     height: 20px;
     color: var(--primary-default);
   }
 }
 
-.draggable{
+.draggable {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  &>svg{
+  & > svg {
     color: var(--primary-default);
   }
 }

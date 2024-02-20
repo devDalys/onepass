@@ -26,11 +26,11 @@ export const _api = async <T>(url: string, options: RequestOptions = {}): Promis
     }
   }
 
-  return fetch(`https://local.onepass.ru${url}`, defaultOptions)
+  return fetch(`${process.env['NEXT_PUBLIC_BACKAPI']}${url}`, defaultOptions)
     .then(async (response) => {
       if (!response.ok) {
         if (response.status === 403) {
-          redirect('/logout');
+          redirect('/api/logout');
         }
         throw new Error(`Request failed with status: ${response.status}`);
       }

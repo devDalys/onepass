@@ -33,7 +33,7 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'One Pass',
+  title: 'One Password',
   description: 'Единственный менеджер паролей, который вам когда-либо понадобится.',
   icons: {
     icon: favicon.src,

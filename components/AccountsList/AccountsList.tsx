@@ -9,14 +9,13 @@ import {useSnackbar} from '@/providers/SnackbarProvider';
 import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
-import {useRouter, useSearchParams} from 'next/navigation';
+import {useSearchParams} from 'next/navigation';
 import {revalidateCache} from '@/api/revalidatePath';
 
 export default function AccountList() {
   const [inputState, setInputState] = useState<string>('');
-  const {accounts, isLoaded, refreshData} = useStore();
+  const {accounts, isLoaded, profile} = useStore();
   const [accountsState, setAccounts] = useState<AccountsResponse[] | undefined>(accounts);
-  const router = useRouter();
 
   const {showSnackbar} = useSnackbar();
   const isRevalidate = useSearchParams().get('revalidate');
@@ -43,7 +42,7 @@ export default function AccountList() {
     }
   }, [accounts, inputState]);
   if (!isLoaded) return <FullScreenLoading />;
-  if (accounts && !accounts.length) return <WelcomeComponent />;
+  if (accounts && !accounts.length) return <WelcomeComponent name={profile?.name} />;
 
   return (
     <div className={styles.wrapper}>

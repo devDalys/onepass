@@ -9,8 +9,8 @@ interface VkLoginProps {
 
 export default function VkLogin({APP_ID, redirectUrl}: VkLoginProps) {
   VKID.Config.set({
-    app: APP_ID, // Идентификатор приложения.
-    redirectUrl: redirectUrl, // Адрес для перехода после авторизации.
+    app: APP_ID,
+    redirectUrl: redirectUrl,
   });
   const ref = useRef<HTMLDivElement>(null);
   const oneTap = useMemo(() => new VKID.OneTap(), []);

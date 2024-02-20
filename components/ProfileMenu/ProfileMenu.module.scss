@@ -27,6 +27,9 @@
   padding: 1.2rem;
   color: var(--neutral-text);
   font-weight: 700;
+  @include for-mobile{
+    padding: 1rem;
+  }
 }
 
 .active {
@@ -40,6 +43,9 @@
   border-radius: 0.625rem;
   padding: 1.2rem;
   margin-bottom: 2rem;
+  @include for-mobile{
+    padding: 1rem;
+  }
 }
 
 .mobileMenu {
@@ -47,15 +53,18 @@
     display: none;
   }
   padding: 1.2rem;
-  color: #fff;
+  color: var(--neutral-text);
   font-weight: 700;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include for-mobile{
+    padding: 1rem;
+  }
 }
 
 .hideMenu {
   @include for-mobile {
-    max-height: 3.875rem;
+    max-height: 3.6rem;
   }
 }

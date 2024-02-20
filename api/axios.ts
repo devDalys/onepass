@@ -4,7 +4,7 @@ import {redirect} from 'next/navigation';
 
 const isServer = typeof window === 'undefined';
 export const _api = axios.create({
-  baseURL: 'https://backapi.onepass.ru/',
+  baseURL: process.env['NEXT_PUBLIC_BACKAPI'],
   withCredentials: true,
 });
 _api.interceptors.request.use(async (config) => {
@@ -25,7 +25,7 @@ _api.interceptors.response.use(
   },
   async (error: AxiosError) => {
     if (error?.response?.status === 403) {
-      redirect('/logout');
+      redirect('/api/logout');
     }
     return Promise.reject(error);
   },

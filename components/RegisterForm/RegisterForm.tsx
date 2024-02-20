@@ -71,7 +71,7 @@ export const RegisterForm = () => {
         name="name"
         render={({field: {ref, ...field}, fieldState}) => (
           <Input
-            aliasText="Name"
+            aliasText="Имя и фамилия"
             placeholder="Jhon Doe"
             autoComplete="name"
             {...field}
@@ -84,7 +84,7 @@ export const RegisterForm = () => {
         name="email"
         render={({field: {ref, ...field}, fieldState}) => (
           <Input
-            aliasText="Email"
+            aliasText="Почта"
             placeholder="johndoe@email.com"
             autoComplete="email"
             {...field}
@@ -97,7 +97,7 @@ export const RegisterForm = () => {
         name="password"
         render={({field: {ref, ...field}, fieldState}) => (
           <Input
-            aliasText="Password"
+            aliasText="Пароль"
             placeholder="Password"
             type="password"
             autoComplete="new-password"
@@ -107,7 +107,7 @@ export const RegisterForm = () => {
         )}
       />
       <Button isLoading={isLoading} theme="default" type="submit" className={styles.button}>
-        Register
+        Зарегистрироваться
       </Button>
     </form>
   );

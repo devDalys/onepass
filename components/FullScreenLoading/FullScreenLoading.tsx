@@ -16,7 +16,7 @@ export const FullScreenLoading: FC = () => {
         </div>
         <div className={styles.text}>
           <span className={styles.text__left}>One</span>
-          <span className={styles.text__right}>Pass</span>
+          <span className={styles.text__right}>Password</span>
         </div>
       </h1>
       <h2 className={styles.description}>

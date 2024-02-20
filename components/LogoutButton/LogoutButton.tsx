@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import styles from './LogoutButton.module.scss';
 import classNames from 'classnames';
@@ -14,7 +13,7 @@ export default function LogoutButton({className}: LogoutButtonProps) {
   const {showSnackbar} = useSnackbar();
   const router = useRouter();
   const onClick = () => {
-    fetch('/logout').then(() => {
+    fetch('/api/logout').then(() => {
       showSnackbar('Вы успешно вышли из аккаунта');
       router.push('/');
     });

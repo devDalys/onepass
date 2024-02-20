@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H local.onepass.ru -p 443 --experimental-https",
+    "dev": "next dev -H local.onepassword.ru -p 443 --experimental-https",
     "build": "next build",
-    "start": "next start -H local.onepass.ru -p 443",
+    "start": "next start -p 8080",
     "lint": "next lint"
   },
   "dependencies": {

@@ -3,7 +3,6 @@ import {useRouter, useSearchParams} from 'next/navigation';
 import {_api} from '@/api';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {FullScreenLoading} from '@/components/FullScreenLoading';
-import {localStorage} from '@vkontakte/vkjs';
 import {AUTHORIZATION_FLAG} from '@/utils/consts';
 
 export default function AuthorizationChecker() {
