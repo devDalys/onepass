@@ -4,6 +4,7 @@ import LogoutButton from '@/components/LogoutButton/LogoutButton';
 import {ThemeSwitcher} from '@/components/ThemeSwitcher';
 import {Image} from '@/ui-kit';
 import {CounterProps, Profile, Props} from '@/components/HeaderBlock/HeaderBlock.types';
+import {getEndWord} from '@/utils/getEndWord';
 
 const CountsBlock = ({text, length}: CounterProps) => {
   return (
@@ -34,12 +35,14 @@ const ProfileBlock = ({avatarUrl, name, email}: Profile) => {
 };
 
 export default function HeaderBlock({accounts, profile: {name, email, avatarUrl}}: Props) {
+  const length = accounts.flatMap((item) => item.accountEntries).length;
+
   return (
     <div className={styles.wrapper}>
       <ProfileBlock name={name} email={email} avatarUrl={avatarUrl} />
       <CountsBlock
-        length={accounts.flatMap((item) => item.accountEntries).length}
-        text={'Хранящихся аккаунта'}
+        length={length}
+        text={`Хранящи${getEndWord(length, ['йся', 'хся', 'хся'])} аккаунт${getEndWord(length, ['', 'ов', 'а'])}`}
       />
     </div>
   );

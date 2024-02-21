@@ -25,13 +25,14 @@
   justify-content: center;
   height: 3rem;
   border: 1px solid var(--neutral-input);
+  outline: 1px solid transparent;
   background: var(--neutral-card);
-  backdrop-filter: blur(15px);
   border-radius: 0.625rem;
 
   &:active,
   &:focus-within {
-    border: 1px solid var(--primary-default);
+    outline: 2px solid var(--primary-default);
+    border-color: transparent;
     font-family: var(--play);
     color: #fff;
     font-size: 1rem;

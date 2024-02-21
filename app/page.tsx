@@ -17,10 +17,14 @@ export default function Home() {
         </MainPageSlider>
         <nav className={styles.navigation}>
           <Link href={'/register'}>
-            <Button theme="outline">Регистрация</Button>
+            <Button theme="outline" className={styles.button}>
+              Регистрация
+            </Button>
           </Link>
           <Link href={'/login'}>
-            <Button theme="default">Вход</Button>
+            <Button theme="default" className={styles.button}>
+              Вход
+            </Button>
           </Link>
         </nav>
       </main>

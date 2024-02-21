@@ -16,7 +16,7 @@ const pages = [
   {page: 'security', url: '/profile/security', name: 'Безопасность'},
   {page: 'help', url: '/profile/help', name: 'Поддержка'},
   {page: 'about', url: '/profile/about', name: 'О проекте'},
-  {page: '', url: '/logout', name: 'Выйти из аккаунта'},
+  {page: '', url: '/exit', name: 'Выйти из аккаунта'},
 ];
 
 export default function ProfileMenu({currentPage, children}: Props) {

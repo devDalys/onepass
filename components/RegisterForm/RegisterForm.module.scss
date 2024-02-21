@@ -1,8 +1,12 @@
+@import '@/app/mixins';
 .form {
   display: flex;
   flex-direction: column;
   max-width: max-content;
   margin-top: 5%;
+  @include for-mobile{
+    margin-top: 10%;
+  }
 }
 .button {
   min-width: 100%;

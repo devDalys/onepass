@@ -2,5 +2,9 @@
 import {AccountCreator} from '@/components/AccountCreator/AccountCreator';
 
 export default function AddAccountPage() {
-  return <AccountCreator createMode={true} />;
+  return (
+    <div style={{paddingBottom: '5rem'}}>
+      <AccountCreator createMode={true} />
+    </div>
+  );
 }

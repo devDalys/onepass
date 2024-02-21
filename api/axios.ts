@@ -25,7 +25,7 @@ _api.interceptors.response.use(
   },
   async (error: AxiosError) => {
     if (error?.response?.status === 403) {
-      redirect('/api/logout');
+      redirect('/exit');
     }
     return Promise.reject(error);
   },

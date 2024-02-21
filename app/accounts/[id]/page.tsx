@@ -19,7 +19,7 @@ export default function AccountPage({params}: {params: {id: string}}) {
   if (!currAccount) return notFound();
 
   return (
-    <div style={{paddingBottom: '2rem'}}>
+    <div style={{paddingBottom: '5rem'}}>
       {isOneAccount && (
         <AccountCreator
           editMode

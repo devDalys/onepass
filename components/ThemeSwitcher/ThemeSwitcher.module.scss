@@ -3,12 +3,12 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 0.625rem;
-  border: 1px solid var(--neutral-grey);
   cursor: pointer;
   width: 7rem;
   position: relative;
   height: 2.125rem;
   overflow: hidden;
+  background: var(--bg-color);
 }
 
 .icon {
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--neutral-grey);
+  color: var(--neutral-text);
 
   &:before {
     position: absolute;
@@ -72,4 +72,5 @@
 .active {
   background: var(--primary-default);
   color: white;
+  height: 100%;
 }

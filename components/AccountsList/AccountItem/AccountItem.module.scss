@@ -4,15 +4,18 @@
   display: flex;
   align-items: center;
   padding: 1rem 2rem 1rem 1rem;
-  border: 2px solid var(--neutral-input);
+  border: 2px solid var(--neutral-card);
   border-radius: 0.625rem;
   background: var(--neutral-card);
   cursor: pointer;
   transition: all 0.25s;
 
   &:hover {
-    filter: saturate(200%);
     border-color: var(--primary-default);
+
+    .socialName {
+      //font-size: 1.4rem;
+    }
   }
 }
 

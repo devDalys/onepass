@@ -8,15 +8,11 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import {usePathname} from 'next/navigation';
 
-interface NavMenuProps {
-  onlyIsMobile?: boolean;
-}
-
-export default function NavMenu({onlyIsMobile = false}: NavMenuProps) {
+export default function NavMenu() {
   const pathName = usePathname();
 
   return (
-    <div className={classNames(styles.wrapper, {[styles.onlyMobile]: onlyIsMobile})}>
+    <div className={classNames(styles.wrapper)}>
       <Link
         className={classNames(styles.item, {[styles.active]: pathName === '/accounts/add'})}
         href={'/accounts/add'}

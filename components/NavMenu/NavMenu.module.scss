@@ -6,7 +6,7 @@
   flex: 1;
   height: 100%;
   border-radius: 0.625rem;
-  border: 2px solid var(--neutral-input);
+  //border: 2px solid var(--neutral-input);
   @include for-mobile {
     border: none;
     position: fixed;
@@ -25,11 +25,6 @@
   }
 }
 
-.onlyMobile {
-  @include for-desktop {
-    display: none;
-  }
-}
 
 .item {
   display: flex;
@@ -80,7 +75,7 @@
   fill: var(--neutral-text);
   height: 1.5rem;
   @include for-mobile {
-    fill: #fff;
+    fill: var(--neutral-text);
   }
 }
 

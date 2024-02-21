@@ -12,11 +12,9 @@ import {usePathname} from 'next/navigation';
 interface Props {
   profile: Profile;
   accounts: AccountsResponse[];
-  onlyNavMenu?: boolean;
-  onIsMobile?: boolean;
 }
 
-export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Props) {
+export default function Header({profile, accounts}: Props) {
   const {
     setProfile,
     profile: ProfileContext,
@@ -54,8 +52,8 @@ export default function Header({profile, accounts, onlyNavMenu, onIsMobile}: Pro
       <PageTitle>{getTitle()}</PageTitle>
 
       <div className={styles.header}>
-        {!onlyNavMenu && <HeaderBlock accounts={AccountsContext || accounts} profile={profile} />}
-        <NavMenu onlyIsMobile={onIsMobile} />
+        <HeaderBlock accounts={AccountsContext || accounts} profile={profile} />
+        <NavMenu />
       </div>
     </>
   );

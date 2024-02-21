@@ -12,6 +12,8 @@ import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
 import Script from 'next/script';
 import React from 'react';
 import {ContextProvider} from '@/providers/ContextProvider/ContextProvider';
+import HeaderWrapper from '@/components/Header/HeaderWrapper';
+import {AUTH_TOKEN} from '@/utils/consts';
 
 export const dynamic = 'force-dynamic';
 // export const revalidate = 0;
@@ -42,7 +44,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const theme = cookies().get(LOCAL_STORAGE_THEME_KEY)?.value as Theme;
-
   return (
     <html lang="en">
       <Script

@@ -1,6 +1,10 @@
+@import '@/app/mixins';
 .h1 {
   font-size: 4rem;
   line-height: normal;
   font-weight: 700;
   color: var(--neutral-text);
+  @include for-mobile{
+    font-size: 3rem;
+  }
 }

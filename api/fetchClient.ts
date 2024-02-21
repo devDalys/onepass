@@ -30,7 +30,7 @@ export const _api = async <T>(url: string, options: RequestOptions = {}): Promis
     .then(async (response) => {
       if (!response.ok) {
         if (response.status === 403) {
-          redirect('/api/logout');
+          redirect('/exit');
         }
         throw new Error(`Request failed with status: ${response.status}`);
       }

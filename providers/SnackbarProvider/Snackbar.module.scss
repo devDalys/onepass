@@ -31,16 +31,15 @@
     width: 100%;
     left: 0;
     bottom: 0;
-    border-radius: 0.625rem 0.625rem 0 0;
   }
 }
 
 .snackBarvisible {
   display: flex;
-  animation: snackBarAnimation var(--snackbar-delay) forwards;
+  animation: snackBarAnimation var(--snackbar-delay) forwards linear;
 
   @include for-mobile {
-    animation: snackBarAnimationMobile var(--snackbar-delay) forwards;
+    animation: snackBarAnimationMobile var(--snackbar-delay) forwards linear;
   }
 }
 
@@ -65,10 +64,10 @@
     bottom: -10rem;
   }
   20% {
-    bottom: 0;
+    bottom: 1rem;
   }
   80% {
-    bottom: 0;
+    bottom: 1rem;
   }
   100% {
     bottom: -10rem;
