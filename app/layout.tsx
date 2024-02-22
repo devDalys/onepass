@@ -12,11 +12,9 @@ import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
 import Script from 'next/script';
 import React from 'react';
 import {ContextProvider} from '@/providers/ContextProvider/ContextProvider';
-import HeaderWrapper from '@/components/Header/HeaderWrapper';
-import {AUTH_TOKEN} from '@/utils/consts';
+import {YaMetrica} from '@/components/YaMetrica/YaMetrica';
 
 export const dynamic = 'force-dynamic';
-// export const revalidate = 0;
 
 const inter = localFont({
   variable: '--play',
@@ -65,6 +63,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
                     <span className={styles.line} />
                   </div>
                 </Link>
+                <YaMetrica />
                 {children}
               </div>
             </ContextProvider>
