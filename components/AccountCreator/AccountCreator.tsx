@@ -141,7 +141,7 @@ export const AccountCreator = ({
             )}
             {editMode && (
               <div className={styles.checker}>
-                edit mode
+                Редактировать
                 <Checkbox
                   value={isEditMode}
                   setValue={() => {

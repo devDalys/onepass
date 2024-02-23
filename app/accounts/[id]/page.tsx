@@ -43,7 +43,8 @@ export default function AccountPage({params}: {params: {id: string}}) {
             title={`${index + 1}. ${currAccount.socialName}`}
             isDefaultOpened={!index}
             additionalInfo={
-              currAccount.createdAt && 'Added: ' + new Date(account.createdAt).toLocaleDateString()
+              currAccount.createdAt &&
+              'Добавлен: ' + new Date(account.createdAt).toLocaleDateString()
             }
           />
         ))}
@@ -58,7 +59,7 @@ export default function AccountPage({params}: {params: {id: string}}) {
               currentAccount={{socialName: currAccount.socialName}}
             />
           )}
-          title={'Добавление нового аккаунта'}
+          title={'Новый аккаунт'}
         />
       }
     </div>
