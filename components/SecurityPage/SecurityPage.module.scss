@@ -1,11 +1,11 @@
 @import '@/app/mixins';
 
-.form{
+.form {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.actions{
+.actions {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
@@ -13,24 +13,23 @@
     font-size: 1rem;
     padding: 0.5rem;
   }
-  @include for-mobile{
+  @include for-mobile {
     gap: unset;
     justify-content: space-between;
   }
 }
 
-
-.input{
+.input {
   width: 100%;
 }
 
-.pageTitle{
+.pageTitle {
   color: var(--neutral-text);
   font-size: 2rem;
   margin-bottom: 1rem;
 }
 
-.deleteForm{
+.deleteForm {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;

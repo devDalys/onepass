@@ -69,7 +69,6 @@ export const AccountCreator = ({
         data: form,
         url: createMode || createMinifiedMode ? '/accounts/add' : '/accounts/update',
         method: createMode || createMinifiedMode ? 'POST' : 'PUT',
-        // withCredentials: true,
       })
       .then((data) => {
         if (createMode) {

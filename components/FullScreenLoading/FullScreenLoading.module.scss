@@ -99,7 +99,7 @@
   font-weight: 400;
   color: var(--neutral-grey);
   margin-bottom: 20px;
-  @include for-mobile{
+  @include for-mobile {
     text-align: center;
   }
 }

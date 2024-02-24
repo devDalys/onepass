@@ -4,7 +4,6 @@ import {redirect} from 'next/navigation';
 const isServer = typeof window === 'undefined';
 
 interface RequestOptions extends RequestInit {
-  // Добавляем возможность устанавливать другие заголовки
   headers?: Record<string, string>;
 }
 

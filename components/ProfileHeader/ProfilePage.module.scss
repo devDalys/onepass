@@ -6,7 +6,6 @@
     position: relative;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 5rem;
     padding-top: 8rem;
   }
 }
@@ -78,8 +77,6 @@
     padding: 0.5rem;
   }
 }
-
-
 
 .statusInfo {
   @include for-mobile {

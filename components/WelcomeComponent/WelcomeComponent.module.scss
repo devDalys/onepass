@@ -6,7 +6,7 @@
   align-items: center;
   margin-top: 5rem;
   gap: 1.5rem;
-  @include for-mobile{
+  @include for-mobile {
     margin-top: 0;
     text-align: center;
   }

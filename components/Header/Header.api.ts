@@ -1,6 +1,5 @@
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 import {_api} from '@/api';
-// import {_api} from '@/api/fetchClient';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
 export const getAccounts = async (): Promise<AccountsResponse[]> => {

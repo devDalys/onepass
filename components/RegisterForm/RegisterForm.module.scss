@@ -4,7 +4,7 @@
   flex-direction: column;
   max-width: max-content;
   margin-top: 5%;
-  @include for-mobile{
+  @include for-mobile {
     margin-top: 10%;
   }
 }

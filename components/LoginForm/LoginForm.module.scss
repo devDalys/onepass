@@ -4,12 +4,11 @@
   flex-direction: column;
   margin-top: 5%;
   width: 20rem;
-  @include for-mobile{
+  @include for-mobile {
     margin-top: 10%;
   }
-  .button{
+  .button {
     max-width: unset;
-
   }
 }
 .buttons {
