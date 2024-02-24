@@ -60,6 +60,7 @@
   position: relative;
   width: 11rem;
   height: 15rem;
+  overflow: hidden;
 }
 
 .actions {
@@ -122,7 +123,7 @@
   color: var(--neutral-grey);
 }
 
-.loadingStatus{
+.loadingBackground, .loadingText{
   position: absolute;
   top: 0;
   left: 0;
@@ -132,9 +133,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  border-radius: 0.625rem;
   color: var(--bg-color);
-  font-weight: 600;
   background: #ffffff96;
-  border-radius: 0.625rem
+  transition: all 0.2s;
+}
+
+.loadingText{
+  font-weight: 600;
+  font-size: 1rem;
+  width: max-content;
+  padding: 0.3rem;
+  top: 50%;
+  height: max-content;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--primary-default);
+  color: #fff;
 }

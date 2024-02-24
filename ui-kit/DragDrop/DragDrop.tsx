@@ -1,4 +1,4 @@
-import {useId, useRef, useState} from 'react';
+import {useId, useState} from 'react';
 import {Button, Image} from '@/ui-kit';
 import classNames from 'classnames';
 import FormData from 'form-data';
@@ -85,7 +85,15 @@ export const DragDrop = () => {
   if (file)
     return (
       <div className={styles.previewWrapper}>
-        {isLoading && <div className={styles.loadingStatus}>Загрузка... {loadingProgress}%</div>}
+        {isLoading && (
+          <>
+            <div
+              className={styles.loadingBackground}
+              style={{maxHeight: `${105 - loadingProgress}%`}}
+            />
+            <div className={styles.loadingText}>Загрузка... {loadingProgress}%</div>
+          </>
+        )}
         <Image
           classes={{img: styles.image, loader: styles.image}}
           src={URL.createObjectURL(file)}
