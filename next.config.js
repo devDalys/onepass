@@ -5,6 +5,9 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  compiler: {
+    removeConsole: false,
+  },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
     config.module.rules.push(
