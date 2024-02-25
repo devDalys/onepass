@@ -27,6 +27,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          build_args: "NEXT_PUBLIC_BACKAPI=${{ secrets.NEXT_PUBLIC_BACKAPI }},NEXT_PUBLIC_YANDEX_REDIRECT=${{ secrets.NEXT_PUBLIC_YANDEX_REDIRECT }}"
           file: ./Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_IMAGE_TAG}}
+          tags: ${{ secrets.DOCKER_IMAGE_TAG }}
