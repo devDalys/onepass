@@ -30,7 +30,6 @@
   display: flex;
   gap: 0.5rem;
   @include for-mobile {
-    margin-top: 2rem;
     width: 100%;
     display: flex;
     justify-content: space-between;

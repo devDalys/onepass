@@ -50,17 +50,18 @@
   font-weight: 600;
 }
 
-.image {
-  height: 15rem;
-  width: 11rem;
-  border: 2px solid #fff;
-}
 
 .previewWrapper {
   position: relative;
   width: 11rem;
   height: 15rem;
   overflow: hidden;
+
+  .image {
+    height: 15rem;
+    width: 11rem;
+    border: 2px solid #fff;
+  }
 }
 
 .actions {
