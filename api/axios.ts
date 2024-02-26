@@ -7,6 +7,7 @@ export const _api = axios.create({
   baseURL: process.env['NEXT_PUBLIC_BACKAPI'],
   withCredentials: true,
 });
+
 _api.interceptors.request.use(async (config) => {
   if (isServer) {
     const lib = await import('next/headers');

@@ -8,7 +8,7 @@ export const NotFoundPage = () => {
     <div className={styles.layout}>
       <span className={styles.span}>404</span>
       <Link href={'/'}>
-        <Button theme={'outline'}>Go home</Button>
+        <Button theme={'outline'}>Главная</Button>
       </Link>
     </div>
   );

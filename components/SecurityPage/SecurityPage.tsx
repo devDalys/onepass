@@ -9,6 +9,7 @@ import {_api} from '@/api';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useRouter} from 'next/navigation';
 import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, validationMessages} from '@/utils/consts';
+import {useStore} from '@/providers/ContextProvider';
 
 const schema = yup.object().shape({
   oldPassword: yup
@@ -48,6 +49,8 @@ export default function SecurityPage() {
     resolver: yupResolver(schema),
   });
   const [deleteInput, setDeleteInput] = useState('');
+  const [recoveryInput, setRecoveryInput] = useState('');
+  const {profile} = useStore();
   const {showSnackbar} = useSnackbar();
   const router = useRouter();
   const onSubmit = (form: SubmitForm) => {
@@ -63,7 +66,7 @@ export default function SecurityPage() {
         showSnackbar('Что-то пошло не так');
       });
   };
-  const handleDelete = async (event: FormEvent) => {
+  const handleDelete = (event: FormEvent) => {
     event.preventDefault();
 
     Promise.all([
@@ -81,12 +84,28 @@ export default function SecurityPage() {
       });
   };
 
+  const handleRecovery = (event: FormEvent) => {
+    event.preventDefault();
+    if (recoveryInput !== profile?.email) return showSnackbar('Некорректный адрес почты');
+
+    _api
+      .post('/profile/recovery', {
+        email: recoveryInput,
+      })
+      .then(() => {
+        showSnackbar('Письмо сброса отправлено на почту');
+      })
+      .catch(() => {
+        showSnackbar('Не удалось сбросить пароль, попробуйте позже');
+      });
+  };
+
   return (
     <div>
       <h2 className={styles.pageTitle}>Смена пароля</h2>
       <InfoBlock
         text="Обратите внимание на то, что если Вы авторизовывались через социальную сеть - пароль
-        сгенерирован автоматически. Поэтому чтобы сменить его - воспользуйтесь сбросом, а в
+        сгенерирован автоматически. Поэтому чтобы сменить его - воспользуйтесь <a href='#recovery'>сбросом</a>, а в
         дальнейшем вы сможете менять его здесь"
       />
 
@@ -152,6 +171,29 @@ export default function SecurityPage() {
         </div>
       </form>
 
+      <h2 id="recovery" className={styles.pageTitle}>
+        Сброс пароля
+      </h2>
+      <InfoBlock text="Сброс пароля идеально подходит в ситуациях, когда вы вошли через социальную сеть и хотите установить собственный пароль" />
+      <form className={styles.deleteForm} onSubmit={handleRecovery}>
+        <Input
+          aliasText="Электронная почта"
+          type="email"
+          value={recoveryInput}
+          onChange={(event) => setRecoveryInput(event.target.value)}
+        />
+        <div className={styles.actions}>
+          <Button
+            theme="default"
+            type="submit"
+            className={styles.button}
+            disabled={!recoveryInput.length}
+          >
+            Сбросить пароль
+          </Button>
+        </div>
+      </form>
+
       <h2 className={styles.pageTitle}>Удаление аккаунта</h2>
       <InfoBlock text="После удаления аккаунта все ваши данные будут безвозмездно утеряны и не подлежат восстановлению" />
       <form className={styles.deleteForm} onSubmit={handleDelete}>
@@ -163,7 +205,7 @@ export default function SecurityPage() {
         />
         <div className={styles.actions}>
           <Button
-            theme="outline"
+            theme="default"
             type="submit"
             className={styles.button}
             disabled={!deleteInput.length}

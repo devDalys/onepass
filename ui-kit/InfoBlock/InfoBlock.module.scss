@@ -20,7 +20,10 @@
 }
 
 .text{
-  height: auto;
-  display: flex;
-  align-items: center;
+  //height: auto;
+  //display: flex;
+  //align-items: center;
+  & > a{
+    color: var(--primary-default);
+  }
 }

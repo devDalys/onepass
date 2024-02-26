@@ -8,7 +8,8 @@
   border-radius: 0.625rem;
   background: var(--neutral-card);
   cursor: pointer;
-  transition: all 0.25s;
+  transition: border-color 0.25s;
+
 
   &:hover {
     border-color: var(--primary-default);

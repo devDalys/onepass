@@ -42,7 +42,10 @@
   border-radius: 0.625rem;
   padding: 1.2rem;
   margin-bottom: 2rem;
+  min-height: 5rem;
   background: var(--neutral-card);
+  display: flex;
+  align-items: center;
   @include for-mobile {
     padding: 1rem;
   }

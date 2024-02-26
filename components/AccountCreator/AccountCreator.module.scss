@@ -62,7 +62,7 @@
 
 .input {
   div {
-    transition: all 0.3s;
+    transition: border-color 0.3s;
   }
   input {
     cursor: inherit;
@@ -73,7 +73,7 @@
   div {
     border-color: var(--neutral-grey);
     pointer-events: auto;
-    transition: all 0.3s;
+    transition: border-color 0.3s;
     cursor: default;
   }
 }

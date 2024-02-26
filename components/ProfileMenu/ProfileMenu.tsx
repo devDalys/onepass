@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import ChevronUp from '@/assets/images/ChevronUp.svg';
 import ChevronDown from '@/assets/images/ChevronDown.svg';
 import {useState} from 'react';
+import {usePathname} from 'next/navigation';
 
 interface Props {
   currentPage: string;
@@ -21,12 +22,14 @@ const pages = [
 
 export default function ProfileMenu({currentPage, children}: Props) {
   const [isOpened, setOpened] = useState(false);
+  const pathname = usePathname();
+  const pageName = pages.find((page) => page.url === pathname)?.name ?? 'Меню';
 
   return (
     <div className={styles.wrapper}>
       <div className={classNames(styles.menu, {[styles.hideMenu]: !isOpened})}>
         <div className={styles.mobileMenu} onClick={() => setOpened(!isOpened)}>
-          Меню
+          {isOpened ? 'Меню' : pageName}
           {isOpened ? <ChevronUp /> : <ChevronDown />}
         </div>
 
