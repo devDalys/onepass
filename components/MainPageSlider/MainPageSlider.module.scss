@@ -5,26 +5,29 @@
   pointer-events: none;
   @include for-mobile {
     font-size: 3rem;
+    overflow-wrap: break-word;
   }
   .neutralText {
     color: var(--neutral-text);
+    font-weight: 700;
   }
   .primaryText {
     color: var(--primary-default);
+    font-weight: 700;
+
   }
 }
 
 .buttons {
-  margin-top: 11%;
   display: flex;
   gap: 25px;
+  align-items: center;
+    margin-top: 3rem;
   .button {
     color: var(--neutral-grey);
     cursor: pointer;
     font-size: 1.5rem;
-    @include for-mobile {
-      font-size: 1rem;
-    }
+
     &__active {
       color: var(--primary-default);
       font-size: 2rem;
@@ -36,6 +39,7 @@
   color: var(--neutral-grey);
   font-size: 1.5rem;
   font-family: var(--play);
+  margin-top: 2rem;
   @include for-mobile {
     margin-top: 1rem;
   }

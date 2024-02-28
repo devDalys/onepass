@@ -2,7 +2,7 @@ import styles from '@/components/MainPageSlider/MainPageSlider.module.scss';
 
 export const SecondElement = () => {
   return (
-    <>
+    <div className={styles.title}>
       <span className={styles.neutralText}>Все ваши</span>
       <br />
       <span className={styles.primaryText}>
@@ -14,6 +14,6 @@ export const SecondElement = () => {
         Храните и управляйте всеми своими паролями в одном месте. Не запоминайте сотни паролей,
         достаточно помнить один.
       </div>
-    </>
+    </div>
   );
 };

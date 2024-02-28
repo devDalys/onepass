@@ -72,7 +72,7 @@ export const RegisterForm = () => {
         render={({field: {ref, ...field}, fieldState}) => (
           <Input
             aliasText="Имя и фамилия"
-            placeholder="Jhon Doe"
+            placeholder="Vasya Pupkin"
             autoComplete="name"
             {...field}
             errorText={fieldState.error?.message}
@@ -85,7 +85,7 @@ export const RegisterForm = () => {
         render={({field: {ref, ...field}, fieldState}) => (
           <Input
             aliasText="Почта"
-            placeholder="johndoe@email.com"
+            placeholder="vasyapupkin@email.com"
             autoComplete="email"
             {...field}
             errorText={fieldState.error?.message}
@@ -98,7 +98,7 @@ export const RegisterForm = () => {
         render={({field: {ref, ...field}, fieldState}) => (
           <Input
             aliasText="Пароль"
-            placeholder="Password"
+            placeholder="password"
             type="password"
             autoComplete="new-password"
             {...field}
