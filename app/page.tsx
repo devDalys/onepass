@@ -1,7 +1,6 @@
 import styles from './page.module.scss';
 import Link from 'next/link';
 import {MainPageSlider} from '@/components/MainPageSlider/MainPageSlider';
-import * as Slides from '@/components/MainPageSlider/Slides';
 import {Button} from '@/ui-kit';
 
 export const dynamic = 'force-dynamic';
