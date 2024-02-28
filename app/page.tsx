@@ -10,11 +10,7 @@ export default function Home() {
   return (
     <>
       <main className={styles.main}>
-        <MainPageSlider>
-          {Object.values(Slides).map((Slide) => (
-            <Slide key={Slide.toString()} />
-          ))}
-        </MainPageSlider>
+        <MainPageSlider />
         <nav className={styles.navigation}>
           <Link href={'/register'}>
             <Button theme="outline" className={styles.button}>
