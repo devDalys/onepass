@@ -7,7 +7,7 @@ interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
 }
 
-export const _api = async <T>(url: string, options: RequestOptions = {}): Promise<T> => {
+export const _apiFetch = async <T>(url: string, options: RequestOptions = {}): Promise<T> => {
   const defaultOptions: RequestOptions = {
     method: 'GET',
     credentials: 'include',

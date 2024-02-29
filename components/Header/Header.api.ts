@@ -1,11 +1,11 @@
-import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
-import {_api} from '@/api';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
+import {_apiFetch} from '@/api/fetchClient';
+import {_api} from '@/api';
 
-export const getAccounts = async (): Promise<AccountsResponse[]> => {
-  const data = await _api.get('/accounts');
-  return data.data.body;
-};
+// export const getAccounts = async (): Promise<AccountsResponse[]> => {
+//   const data = await _api.get('/accounts');
+//   return data.data.body;
+// };
 
 export const getProfile = async (): Promise<Profile> => {
   const data = await _api.get('/profile/me');
@@ -14,12 +14,10 @@ export const getProfile = async (): Promise<Profile> => {
 };
 
 // export const getAccounts = async (): Promise<AccountsResponse[]> => {
-//   const data = await _api<any>('/api/accounts', {next: {tags: ['someexplaintag']}});
+//   const data = await _apiFetch<any>('/api/accounts', {next: {tags: ['someexplaintag']}});
 //   return data.body;
 // };
 //
 // export const getProfile = async (): Promise<Profile> => {
-//   const data = await _api<any>('/api/profile/me');
-//
-//   return data;
+//   return await _apiFetch<any>('/profile/me', {next: {tags: ['profile'], revalidate: 600}});
 // };

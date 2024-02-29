@@ -6,6 +6,7 @@ export interface Profile {
   avatarUrl: string;
   createdAt?: Date;
   updatedAt?: Date;
+  accounts: AccountsResponse[];
 }
 
 export interface Props {

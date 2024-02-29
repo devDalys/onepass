@@ -11,10 +11,10 @@ import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
 import {useSearchParams} from 'next/navigation';
 import {revalidateCache} from '@/api/revalidatePath';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
-export default function AccountList() {
+export default function AccountList({profile: {accounts, ...profile}}: {profile: Profile}) {
   const [inputState, setInputState] = useState<string>('');
-  const {accounts, isLoaded, profile} = useStore();
   const [accountsState, setAccounts] = useState<AccountsResponse[] | undefined>(accounts);
 
   const {showSnackbar} = useSnackbar();
@@ -41,7 +41,6 @@ export default function AccountList() {
       setAccounts(accounts);
     }
   }, [accounts, inputState]);
-  if (!isLoaded) return <FullScreenLoading />;
   if (accounts && !accounts.length) return <WelcomeComponent name={profile?.name} />;
 
   return (

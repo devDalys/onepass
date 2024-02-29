@@ -16,7 +16,7 @@ const CountsBlock = ({text, length}: CounterProps) => {
   );
 };
 
-const ProfileBlock = ({avatarUrl, name, email}: Profile) => {
+const ProfileBlock = ({avatarUrl, name, email}: Omit<Profile, 'accounts'>) => {
   return (
     <div className={styles.profile}>
       <Image

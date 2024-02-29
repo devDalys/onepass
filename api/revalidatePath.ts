@@ -6,5 +6,5 @@ export const revalidateCache = () => {
 };
 
 export const revalidateQuery = () => {
-  revalidateTag('[someexplaintag]');
+  revalidateTag('profile');
 };

@@ -11,7 +11,7 @@ import {useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
 import {useStore} from '@/providers/ContextProvider';
-import {revalidateCache} from '@/api/revalidatePath';
+import {revalidateCache, revalidateQuery} from '@/api/revalidatePath';
 
 interface Props {
   currentAccount?: Partial<IAccountItem>;
@@ -77,6 +77,7 @@ export const AccountCreator = ({
         }
         if (createMinifiedMode) {
           showSnackbar('Вы успешно добавили аккаунт');
+          console.log('Mifieed');
           revalidateCache();
           reset();
         }

@@ -11,36 +11,20 @@ import {usePathname} from 'next/navigation';
 
 interface Props {
   profile: Profile;
-  accounts: AccountsResponse[];
 }
 
-export default function Header({profile, accounts}: Props) {
-  const {
-    setProfile,
-    profile: ProfileContext,
-    setAccounts,
-    setIsLoaded,
-    accounts: AccountsContext,
-  } = useStore();
+export default function Header({profile}: Props) {
+  const {setProfile, profile: ProfileContext, setAccounts, accounts: AccountsContext} = useStore();
   const pathName = usePathname();
 
   useEffect(() => {
     if (setAccounts) {
-      setAccounts(accounts);
-      setIsLoaded?.(true);
+      setAccounts(profile.accounts);
     }
     if (setProfile) {
       setProfile(profile);
     }
-  }, [
-    AccountsContext?.length,
-    ProfileContext,
-    accounts,
-    profile,
-    setAccounts,
-    setIsLoaded,
-    setProfile,
-  ]);
+  }, [AccountsContext?.length, ProfileContext, profile, setAccounts, setProfile]);
 
   const getTitle = () => {
     if (pathName.startsWith('/profile')) return 'Профиль';
@@ -52,7 +36,7 @@ export default function Header({profile, accounts}: Props) {
       <PageTitle>{getTitle()}</PageTitle>
 
       <div className={styles.header}>
-        <HeaderBlock accounts={AccountsContext || accounts} profile={profile} />
+        <HeaderBlock accounts={profile.accounts} profile={profile} />
         <NavMenu />
       </div>
     </>
