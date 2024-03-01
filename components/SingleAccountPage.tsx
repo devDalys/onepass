@@ -10,10 +10,10 @@ interface Props {
   profile: Profile;
 }
 
-export default function SingleAccountPage({profile: {accounts}, id}: Props) {
+export default function SingleAccountPage({profile, id}: Props) {
   const currAccount = useMemo(() => {
-    return accounts?.find((item) => item._id === id);
-  }, [accounts, id]);
+    return profile?.accounts.find((item) => item._id === id);
+  }, [profile?.accounts, id]);
 
   const isOneAccount = currAccount?.accountEntries?.length === 1;
 
@@ -23,6 +23,7 @@ export default function SingleAccountPage({profile: {accounts}, id}: Props) {
     <div style={{paddingBottom: '5rem'}}>
       {isOneAccount && (
         <AccountCreator
+          profile={profile}
           editMode
           disableEditDefault
           createMinifiedMode
@@ -36,6 +37,7 @@ export default function SingleAccountPage({profile: {accounts}, id}: Props) {
             key={account._id}
             renderProps={() => (
               <AccountCreator
+                profile={profile}
                 editMode
                 withWrapper={false}
                 currentAccount={{...account, socialName: currAccount.socialName}}
@@ -54,6 +56,7 @@ export default function SingleAccountPage({profile: {accounts}, id}: Props) {
         <Accordion
           renderProps={() => (
             <AccountCreator
+              profile={profile}
               createMinifiedMode
               withWrapper={false}
               minifiedTitle

@@ -4,13 +4,9 @@ import AccountItem from '@/components/AccountsList/AccountItem';
 import {useEffect, useState} from 'react';
 import {SearchBar} from '@/ui-kit';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
-import {useStore} from '@/providers/ContextProvider';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import WelcomeComponent from '../WelcomeComponent/WelcomeComponent';
-import {FullScreenLoading} from '@/components/FullScreenLoading';
 import {AccountsResponse} from '@/components/AccountsList/AccountsList.types';
-import {useSearchParams} from 'next/navigation';
-import {revalidateCache} from '@/api/revalidatePath';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
 export default function AccountList({profile: {accounts, ...profile}}: {profile: Profile}) {
@@ -18,12 +14,6 @@ export default function AccountList({profile: {accounts, ...profile}}: {profile:
   const [accountsState, setAccounts] = useState<AccountsResponse[] | undefined>(accounts);
 
   const {showSnackbar} = useSnackbar();
-  const isRevalidate = useSearchParams().get('revalidate');
-  useEffect(() => {
-    if (isRevalidate) {
-      revalidateCache();
-    }
-  }, []);
 
   const onCopy = async (text: string) => {
     await navigator.clipboard.writeText(text);

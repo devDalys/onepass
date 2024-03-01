@@ -13,6 +13,7 @@
   font-weight: 700;
   font-family: var(--play);
   cursor: pointer;
+  overflow: hidden;
 
   &:after {
     position: absolute;
@@ -21,8 +22,6 @@
     bottom: 0;
     width: 100%;
     height: 0.3rem;
-    border-bottom-left-radius: 0.625rem;
-    border-bottom-right-radius: 0.625rem;
     background: #fff;
     animation: progressAnimation var(--snackbar-delay) forwards linear;
   }

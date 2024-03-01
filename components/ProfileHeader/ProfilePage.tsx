@@ -2,21 +2,24 @@
 import styles from './ProfilePage.module.scss';
 import {Button, Input, SuspenseLoader} from '@/ui-kit';
 import {useEffect, useState} from 'react';
-import {useStore} from '@/providers/ContextProvider';
 import {Controller, useForm} from 'react-hook-form';
 import {DragDrop} from '@/ui-kit/DragDrop/DragDrop';
 import {_api} from '@/api';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import {revalidateCache} from '@/api/revalidatePath';
+import {revalidateQuery} from '@/api/revalidatePath';
 import {AxiosResponse} from 'axios';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
 interface Form {
   name: string;
   email: string;
 }
 
-export const ProfilePage = () => {
-  const {profile} = useStore();
+interface Props {
+  profile: Profile;
+}
+
+export const ProfilePage = ({profile}: Props) => {
   const [isMounted, setIsMounted] = useState(false);
   const [isOnline, setOnline] = useState(false);
   const {showSnackbar} = useSnackbar();
@@ -33,7 +36,7 @@ export const ProfilePage = () => {
       .then((data: AxiosResponse<Form>) => {
         showSnackbar('Профиль успешно обновлен');
         reset({name: data.data.name, email: data.data.email});
-        revalidateCache();
+        revalidateQuery();
       })
       .catch(() => {
         showSnackbar('Произошла ошибка обновления профиля');
@@ -93,14 +96,14 @@ export const ProfilePage = () => {
           <Controller
             name="name"
             control={control}
-            render={({field: {ref, ...inputProps}, fieldState, formState}) => (
+            render={({field: {ref, ...inputProps}}) => (
               <Input aliasText="Имя и фамилия" {...inputProps} />
             )}
           />
           <Controller
             name="email"
             control={control}
-            render={({field: {ref, ...inputProps}, fieldState, formState}) => (
+            render={({field: {ref, ...inputProps}}) => (
               <Input aliasText="Электронная почта" {...inputProps} />
             )}
           />

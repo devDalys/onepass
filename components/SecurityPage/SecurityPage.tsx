@@ -9,7 +9,7 @@ import {_api} from '@/api';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useRouter} from 'next/navigation';
 import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, validationMessages} from '@/utils/consts';
-import {useStore} from '@/providers/ContextProvider';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
 const schema = yup.object().shape({
   oldPassword: yup
@@ -37,7 +37,11 @@ interface SubmitForm {
   confirmPassword: string;
 }
 
-export default function SecurityPage() {
+interface Props {
+  profile: Profile;
+}
+
+export default function SecurityPage({profile}: Props) {
   const {control, handleSubmit, reset, formState} = useForm<SubmitForm>({
     defaultValues: {
       oldPassword: '',
@@ -50,7 +54,6 @@ export default function SecurityPage() {
   });
   const [deleteInput, setDeleteInput] = useState('');
   const [recoveryInput, setRecoveryInput] = useState('');
-  const {profile} = useStore();
   const {showSnackbar} = useSnackbar();
   const router = useRouter();
   const onSubmit = (form: SubmitForm) => {
@@ -113,7 +116,7 @@ export default function SecurityPage() {
         <Controller
           name="oldPassword"
           control={control}
-          render={({field: {ref, ...inputProps}, fieldState, formState}) => (
+          render={({field: {ref, ...inputProps}, fieldState}) => (
             <Input
               className={styles.input}
               type="password"
@@ -126,7 +129,7 @@ export default function SecurityPage() {
         <Controller
           name="newPassword"
           control={control}
-          render={({field: {ref, ...inputProps}, fieldState, formState}) => (
+          render={({field: {ref, ...inputProps}, fieldState}) => (
             <Input
               className={styles.input}
               type="password"
@@ -139,7 +142,7 @@ export default function SecurityPage() {
         <Controller
           name="confirmPassword"
           control={control}
-          render={({field: {ref, ...inputProps}, fieldState, formState}) => (
+          render={({field: {ref, ...inputProps}, fieldState}) => (
             <Input
               className={styles.input}
               type="password"

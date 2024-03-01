@@ -10,8 +10,8 @@ import {IAccountItem} from '@/components/AccountsList/AccountItem';
 import {useRouter} from 'next/navigation';
 import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
-import {useStore} from '@/providers/ContextProvider';
-import {revalidateCache, revalidateQuery} from '@/api/revalidatePath';
+import {revalidateQuery} from '@/api/revalidatePath';
+import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 
 interface Props {
   currentAccount?: Partial<IAccountItem>;
@@ -21,6 +21,7 @@ interface Props {
   withWrapper?: boolean;
   disableEditDefault?: boolean;
   minifiedTitle?: boolean;
+  profile?: Profile;
 }
 
 const schema = yup.object().shape({
@@ -37,17 +38,18 @@ export const AccountCreator = ({
   withWrapper = true,
   disableEditDefault = false,
   minifiedTitle = false,
+  profile,
 }: Props) => {
   const {showSnackbar} = useSnackbar();
   const [isEditMode, setIsEditMode] = useState(
     Boolean((createMode || createMinifiedMode) && !disableEditDefault),
   );
   const [currAccount, setCurrentAccount] = useState(currentAccount);
-  const {accounts} = useStore();
+
   const countAccounts = useMemo(() => {
-    return accounts?.find((item) => item?.socialName === currAccount?.socialName)?.accountEntries
-      .length;
-  }, [accounts]);
+    return profile?.accounts?.find((item) => item?.socialName === currAccount?.socialName)
+      ?.accountEntries.length;
+  }, [profile?.accounts]);
   const router = useRouter();
 
   const {control, reset, formState, watch, handleSubmit} = useForm<IAccountItem>({
@@ -70,15 +72,15 @@ export const AccountCreator = ({
         url: createMode || createMinifiedMode ? '/accounts/add' : '/accounts/update',
         method: createMode || createMinifiedMode ? 'POST' : 'PUT',
       })
-      .then((data) => {
+      .then(() => {
+        revalidateQuery();
+
         if (createMode) {
           showSnackbar('Вы успешно добавили аккаунт');
-          router.push('/accounts?revalidate=1');
+          router.push('/accounts');
         }
         if (createMinifiedMode) {
           showSnackbar('Вы успешно добавили аккаунт');
-          console.log('Mifieed');
-          revalidateCache();
           reset();
         }
         if (editMode) {
@@ -94,15 +96,10 @@ export const AccountCreator = ({
     event.preventDefault();
     _api.delete(`/accounts/delete/${currAccount?._id}`).then(() => {
       showSnackbar('Аккаунт успешно удалён');
-      if (createMode) {
-        router.push('/accounts?revalidate=1');
-      }
-      if (editMode) {
-        if (countAccounts === 1) {
-          router.push('/accounts?revalidate=1');
-        } else {
-          revalidateCache();
-        }
+      revalidateQuery();
+
+      if (createMode || (editMode && countAccounts === 1)) {
+        router.push('/accounts');
       }
     });
   };
