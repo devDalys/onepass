@@ -39,6 +39,7 @@ export default function AccountList({profile: {accounts, ...profile}}: {profile:
         placeholder={'Поиск аккаунтов...'}
         value={inputState}
         onChange={(e) => setInputState(e.target.value)}
+        onClearIconClick={() => setInputState('')}
       />
       {!accountsState?.length && <NotSearchFound />}
       {accountsState?.map((item) => <AccountItem key={item._id} {...item} onCopy={onCopy} />)}

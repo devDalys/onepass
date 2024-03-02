@@ -4,4 +4,4 @@ export interface SnackbarContext {
   showSnackbar: (text: string) => void;
 }
 
-export const snackbarContext = createContext<SnackbarContext>({showSnackbar: () => null});
+export const SnackbarContext = createContext<SnackbarContext>({showSnackbar: () => null});

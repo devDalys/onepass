@@ -9,8 +9,8 @@ export default function NotSearchFound({}: NotSearchFoundProps) {
     <article className={styles.wrapper}>
       <NotFound alt="Nothing found" />
 
-      <h2>NO Results</h2>
-      <p>We couldn’t find anything. Try searching for something else.</p>
+      <h2>Ничего не найдено</h2>
+      <p>Мы не смогли найти среди ваших аккаунтов то что вы запросили</p>
     </article>
   );
 }

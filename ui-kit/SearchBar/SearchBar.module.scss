@@ -20,21 +20,35 @@
 }
 
 .form {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 3rem;
-  border: 1px solid var(--neutral-input);
-  outline: 1px solid transparent;
   background: var(--neutral-card);
   border-radius: 0.625rem;
+  outline: 2px solid transparent;
+  transition: outline 0.15s;
 
   &:active,
   &:focus-within {
     outline: 2px solid var(--primary-default);
-    border-color: transparent;
     font-family: var(--play);
     color: #fff;
     font-size: 1rem;
   }
+
+}
+.clearIcon{
+  height: 1.3rem;
+  padding-right: 1rem;
+  > svg{
+    width: 1.3rem;
+    height: 1.3rem;
+    color: #BABABA;
+  }
+}
+
+.hideClearIcon{
+  display: none;
 }
