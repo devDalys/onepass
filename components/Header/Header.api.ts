@@ -1,6 +1,5 @@
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 import {_apiFetch} from '@/api/fetchClient';
-import {_api} from '@/api';
 
 // export const getAccounts = async (): Promise<AccountsResponse[]> => {
 //   const data = await _api.get('/accounts');
@@ -19,5 +18,7 @@ import {_api} from '@/api';
 // };
 //
 export const getProfile = async (): Promise<Profile> => {
-  return await _apiFetch<any>('/profile/me', {next: {tags: ['profile'], revalidate: 600}});
+  return await _apiFetch<Profile>('/profile/me', {
+    next: {tags: ['profile'], revalidate: 600},
+  });
 };

@@ -14,7 +14,6 @@
   .primaryText {
     color: var(--primary-default);
     font-weight: 700;
-
   }
 }
 
@@ -22,7 +21,7 @@
   display: flex;
   gap: 25px;
   align-items: center;
-    margin-top: 3rem;
+  margin-top: 3rem;
   .button {
     color: var(--neutral-grey);
     cursor: pointer;

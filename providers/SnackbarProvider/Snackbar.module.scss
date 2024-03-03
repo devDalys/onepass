@@ -33,11 +33,19 @@
   cursor: pointer;
   overflow: hidden;
   animation: snackBarAnimation var(--snackbar-delay) forwards linear;
+
+  >svg{
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+
   @include for-mobile {
     border-radius: 0;
     animation: snackBarAnimation var(--snackbar-delay) forwards linear;
   }
-
   &:after {
     position: absolute;
     content: '';
@@ -62,7 +70,7 @@
 
 @keyframes snackBarAnimation {
   0% {
-    left: -10rem;
+    left: -100%;
   }
   10% {
     left: 0;

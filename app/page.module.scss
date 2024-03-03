@@ -38,10 +38,10 @@
   margin-top: 20px;
   display: flex;
   gap: 10px;
-  @include for-mobile{
+  @include for-mobile {
     width: 100%;
     justify-content: center;
-    & > a{
+    & > a {
       width: 50%;
     }
   }

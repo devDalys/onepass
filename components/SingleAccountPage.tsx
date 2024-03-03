@@ -18,7 +18,6 @@ export default function SingleAccountPage({profile, id}: Props) {
   const isOneAccount = currAccount?.accountEntries?.length === 1;
 
   if (!currAccount) return notFound();
-
   return (
     <div style={{paddingBottom: '5rem'}}>
       {isOneAccount && (

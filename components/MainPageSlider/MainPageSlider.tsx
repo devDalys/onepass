@@ -5,7 +5,7 @@ import styles from './MainPageSlider.module.scss';
 import classNames from 'classnames';
 import {FirstElement, SecondElement, ThirdElement} from '@/components/MainPageSlider/Slides';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import {Pagination, Autoplay} from 'swiper/modules';
+import {Autoplay, Pagination} from 'swiper/modules';
 import 'swiper/css';
 import type {Swiper as ISwiper} from 'swiper';
 

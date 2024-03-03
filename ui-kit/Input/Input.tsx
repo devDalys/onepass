@@ -1,7 +1,7 @@
 'use client';
 import {v4} from 'uuid';
 import styles from './Input.module.scss';
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useId, useMemo, useState} from 'react';
 import classNames from 'classnames';
 import Copy from '@/assets/images/Copy.svg';
 import EyeOpen from '@/assets/images/eye_open.svg';
@@ -15,23 +15,13 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input: React.FC<Props> = ({aliasText, className, errorText, ...inputProps}) => {
-  const [id, setId] = useState('');
-  const isPassword = useMemo(
-    () => inputProps.readOnly && inputProps.type === 'password',
-    [inputProps.readOnly, inputProps.type],
-  );
+  const id = useId();
   const [isViewPassword, setViewPassword] = useState(inputProps.type !== 'password');
   const {showSnackbar} = useSnackbar();
   const onCopy = async (text: string) => {
     await navigator.clipboard.writeText(text);
     showSnackbar('Пароль скопирован');
   };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setId(v4());
-    }
-  }, []);
 
   return (
     <div className={classNames(styles.wrapper, className)}>

@@ -45,17 +45,18 @@
 }
 
 .value {
-  color: var(--primary-default);
+  color: var(--neutral-text);
+  font-weight: 700;
 }
 
 .status {
   padding-left: 1.5rem;
-  color: var(--primary-default);
+  color: var(--neutral-text);
   display: flex;
   align-items: center;
   position: relative;
   &:before {
-    background: var(--primary-default);
+    background: var(--neutral-text);
     position: absolute;
     left: 0.7rem;
     content: '';
