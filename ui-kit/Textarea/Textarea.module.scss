@@ -1,0 +1,50 @@
+@import "@/app/mixins";
+.wrapper {
+  position: relative;
+  display: flex;
+  padding-bottom: 18px;
+  height: auto;
+}
+
+.error {
+  left: 0.6rem;
+  font-size: 0.8rem;
+  font-family: var(--play);
+  color: var(--primary-default);
+  position: absolute;
+  bottom: 0;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0.6rem;
+  color: var(--neutral-text);
+  font-size: 0.8rem;
+  user-select: none;
+}
+
+.textarea{
+  margin-top: 20px;
+  overflow: auto;
+  outline: none;
+  box-shadow: none;
+  resize: none;
+
+  padding: 0.6rem 0 0.6rem 0.6rem;
+  color: var(--neutral-text);
+  flex: 1 1;
+  background: var(--neutral-card);
+  border: 2px solid var(--neutral-input);
+  border-radius: 0.625rem;
+  width: 100%;
+  height: 10rem;
+
+  &::placeholder {
+    color: var(--neutral-grey);
+    font-family: var(--play);
+  }
+  @include for-mobile{
+    font-size: 16px;
+  }
+}

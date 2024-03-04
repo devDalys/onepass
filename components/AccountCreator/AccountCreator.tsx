@@ -12,6 +12,7 @@ import NotSearchFound from '@/components/NotSearchFound/NotSearchFound';
 import {_api} from '@/api';
 import {revalidateQuery} from '@/api/revalidatePath';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
+import {validationMessages} from '@/utils/consts';
 
 interface Props {
   currentAccount?: Partial<IAccountItem>;
@@ -25,9 +26,21 @@ interface Props {
 }
 
 const schema = yup.object().shape({
-  login: yup.string().required().min(3).max(20),
-  password: yup.string().required().min(3).max(20),
-  socialName: yup.string().required().min(2).max(20),
+  login: yup
+    .string()
+    .required(validationMessages.required())
+    .min(3, validationMessages.min(3))
+    .max(20, validationMessages.max(20)),
+  password: yup
+    .string()
+    .required(validationMessages.required())
+    .min(3, validationMessages.min(3))
+    .max(20, validationMessages.max(20)),
+  socialName: yup
+    .string()
+    .required(validationMessages.required())
+    .min(2, validationMessages.min(2))
+    .max(20, validationMessages.max(20)),
 });
 
 export const AccountCreator = ({

@@ -1,0 +1,25 @@
+@import '@/app/mixins';
+
+
+.pageTitle {
+  color: var(--neutral-text);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  @include for-mobile{
+    font-size: 1.5rem;
+  }
+}
+
+.form{
+  margin-top: 1rem;
+  .actions{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .button {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+

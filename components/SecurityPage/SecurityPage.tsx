@@ -100,6 +100,9 @@ export default function SecurityPage({profile}: Props) {
       })
       .catch(() => {
         showSnackbar('Не удалось сбросить пароль, попробуйте позже');
+      })
+      .finally(() => {
+        setRecoveryInput('');
       });
   };
 

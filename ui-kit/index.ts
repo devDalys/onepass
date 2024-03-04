@@ -7,3 +7,4 @@ export {Image} from './Image';
 export {Accordion} from './Accordion';
 export {SuspenseLoader} from './SuspenseLoader';
 export {InfoBlock} from './InfoBlock';
+export {Textarea} from './Textarea';
