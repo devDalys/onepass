@@ -11,7 +11,10 @@ export const _apiFetch = async <T>(url: string, options: RequestOptions = {}): P
   const defaultOptions: RequestOptions = {
     method: 'GET',
     credentials: 'include',
-    headers: {},
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
     ...options,
   };
 

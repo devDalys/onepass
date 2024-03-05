@@ -6,6 +6,8 @@ import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {validationMessages} from '@/utils/consts';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {_apiFetch} from '@/api/fetchClient';
+import {useSnackbar} from '@/providers/SnackbarProvider';
 
 interface HelpForm {
   reason: string;
@@ -37,9 +39,21 @@ export default function Help({profile}: {profile: Profile}) {
     resolver: yupResolver(scheme),
     mode: 'onChange',
   });
+  const {showSnackbar} = useSnackbar();
 
   const onSubmit = (form: HelpForm) => {
-    console.log(form);
+    _apiFetch('/help/send', {
+      method: 'POST',
+      body: JSON.stringify(form),
+    })
+      .then(() => {
+        reset();
+        showSnackbar('Письмо отправлено, ожидайте ответа');
+      })
+      .catch(() => {
+        reset();
+        showSnackbar('Не удалось отправить письмо');
+      });
   };
 
   return (
