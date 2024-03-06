@@ -14,7 +14,7 @@ export default async function ProfilePage(props: Props) {
   const pages = {
     security: lazy(() => import('@/components/SecurityPage/SecurityPage')),
     help: lazy(() => import('@/components/Help/Help')),
-    // about: lazy(() => import('@/components/Help/Help')),
+    about: lazy(() => import('@/components/AboutPage/AboutPage')),
   };
   const profile = await getProfile();
   const LazyComponent = pages[props.params.subpage as keyof typeof pages] ?? notFound();
