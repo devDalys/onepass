@@ -1,0 +1,11 @@
+.github
+node_modules
+.dockerignore
+Dockerfile
+next.config.js
+package-lock.json
+package.json
+nginx.conf
+.idea
+certificates
+.next

@@ -11,13 +11,12 @@
   margin-bottom: 1rem;
 }
 
-.titleWrapper{
+.titleWrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   padding: 1.2rem;
-
 }
 
 .title {
@@ -47,7 +46,7 @@
   color: var(--neutral-input);
   margin-left: 1rem;
   padding-top: 0.2rem;
-  >svg{
+  > svg {
     transform: scale(1.4);
   }
 }

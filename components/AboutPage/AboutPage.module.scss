@@ -1,45 +1,45 @@
-@import "app/mixins";
+@import 'app/mixins';
 .pageTitle {
   color: var(--neutral-text);
   font-size: 2rem;
   margin-bottom: 1rem;
-  @include for-mobile{
+  @include for-mobile {
     font-size: 1.5rem;
   }
-  &:not(:first-child){
+  &:not(:first-child) {
     margin-top: 2rem;
   }
 }
 
-.description{
+.description {
   color: var(--neutral-text);
   font-size: 1.5rem;
   font-style: italic;
-  @include for-mobile{
+  @include for-mobile {
     font-size: 1rem;
   }
 }
-.contactsWrapper{
+.contactsWrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.contacts{
+.contacts {
   font-size: 1.5rem;
   color: var(--neutral-text);
 
-  @include for-mobile{
+  @include for-mobile {
     font-size: 1rem;
   }
 
-  .contactsLink{
+  .contactsLink {
     color: var(--primary-default);
     font-weight: 600;
   }
 }
 
-.copyright{
+.copyright {
   width: 100%;
   margin-top: 2rem;
   font-size: 1.5rem;
@@ -48,7 +48,7 @@
   font-weight: 600;
 }
 
-.additionalCopy{
+.additionalCopy {
   width: 100%;
   font-size: 1rem;
   color: var(--neutral-text);

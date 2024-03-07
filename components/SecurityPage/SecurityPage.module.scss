@@ -29,7 +29,7 @@
   color: var(--neutral-text);
   font-size: 2rem;
   margin-bottom: 1rem;
-  @include for-mobile{
+  @include for-mobile {
     font-size: 1.5rem;
   }
 }

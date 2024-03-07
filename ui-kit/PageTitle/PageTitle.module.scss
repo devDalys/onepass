@@ -4,7 +4,7 @@
   line-height: normal;
   font-weight: 700;
   color: var(--neutral-text);
-  @include for-mobile{
+  @include for-mobile {
     font-size: 3rem;
   }
 }

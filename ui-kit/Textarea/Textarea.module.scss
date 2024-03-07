@@ -1,4 +1,4 @@
-@import "@/app/mixins";
+@import '@/app/mixins';
 .wrapper {
   position: relative;
   display: flex;
@@ -24,7 +24,7 @@
   user-select: none;
 }
 
-.textarea{
+.textarea {
   margin-top: 20px;
   overflow: auto;
   outline: none;
@@ -44,7 +44,7 @@
     color: var(--neutral-grey);
     font-family: var(--play);
   }
-  @include for-mobile{
+  @include for-mobile {
     font-size: 16px;
   }
 }

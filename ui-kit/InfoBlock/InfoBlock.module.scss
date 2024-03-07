@@ -1,4 +1,4 @@
-.infoBlock{
+.infoBlock {
   color: var(--neutral-text);
   border: 2px solid var(--primary-default);
   font-size: 1rem;
@@ -8,22 +8,22 @@
   display: flex;
 }
 
-.infoIcon{
+.infoIcon {
   width: 2rem;
   height: 2rem;
   margin-right: 0.5rem;
 
-  >svg{
+  > svg {
     width: 2rem;
     height: 2rem;
   }
 }
 
-.text{
+.text {
   //height: auto;
   //display: flex;
   //align-items: center;
-  & > a{
+  & > a {
     color: var(--primary-default);
   }
 }
