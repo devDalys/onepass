@@ -1,7 +1,6 @@
 'use client';
-import {v4} from 'uuid';
 import styles from './Input.module.scss';
-import {useEffect, useId, useMemo, useState} from 'react';
+import {useId, useState} from 'react';
 import classNames from 'classnames';
 import Copy from '@/assets/images/Copy.svg';
 import EyeOpen from '@/assets/images/eye_open.svg';

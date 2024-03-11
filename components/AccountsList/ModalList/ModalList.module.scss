@@ -1,27 +1,48 @@
 @import "app/mixins";
 .wrapper{
-  margin-top: 1rem;
+  margin-top: 1.2rem;
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  @include for-mobile{
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 60%;
+    overflow: hidden;
+  }
 }
 
 .chip{
-  border: 2px solid var(--primary-default);
+  border: 2px solid  var(--neutral-text);
   padding: 0.5rem 1rem;
   border-radius: 0.625rem;
   cursor: pointer;
+  user-select: none;
   transition: border-color 0.2s;
   &:hover{
-    border-color: white;
+    border-color: var(--primary-default);
+  }
+  @include for-mobile{
+    width: 100%;
+  }
+}
+
+.login{
+  white-space: nowrap;
+  @include for-mobile{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
   }
 }
 
 .title{
-  color: white;
+  color: var(--neutral-text);
   font-weight: 600;
   font-size: 1.2rem;
   @include for-mobile{
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 }
 

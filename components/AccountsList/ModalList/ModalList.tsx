@@ -33,7 +33,7 @@ export const ModalList = ({accountEntries, socialName}: Props) => {
               {socialName}&nbsp;{new Date(item.createdAt).toLocaleDateString()}
             </span>
             <br />
-            Логин: {item.login}
+            <span className={styles.login}>Логин: {item.login}</span>
           </span>
         </div>
       ))}

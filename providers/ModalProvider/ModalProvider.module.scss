@@ -35,9 +35,11 @@
   font-size: 2rem;
   font-weight: 600;
   color: var(--neutral-text);
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid var(--primary-default);
   @include for-mobile{
     display: block;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     text-align: center;
     width: 100%;
   }
@@ -47,19 +49,23 @@
   position: absolute;
   border: 1px solid var(--primary-default);
   border-radius: 0.625rem;
-  top: 0.2rem;
-  right: 0.2rem;
+  top: 0.5rem;
+  right: 0.5rem;
   padding: 0.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: white;
+  transition: background-color 0.2s;
   @include for-mobile{
     display: none;
   }
   >svg{
     width: 1.5rem;
     height: 1.5rem;
+  }
+  &:hover{
+    background: var(--primary-default);
   }
 }
