@@ -12,6 +12,7 @@ import {SnackbarProvider} from '@/providers/SnackbarProvider/SnackbarProvider';
 import Script from 'next/script';
 import React from 'react';
 import {YaMetrica} from '@/components/YaMetrica/YaMetrica';
+import {ModalProvider} from '@/providers/ModalProvider';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,20 +51,22 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={classNames(inter.variable)}>
         <ThemeProvider initialTheme={theme}>
           <SnackbarProvider>
-            <div className={'root'}>
-              <Link href="/">
-                <div className={styles.logo}>
-                  <span className={styles.stars}>
-                    <p className={styles.stars__star}>*</p>
-                    <p className={styles.stars__star}>*</p>
-                    <p className={styles.stars__star}>*</p>
-                  </span>
-                  <span className={styles.line} />
-                </div>
-              </Link>
-              <YaMetrica />
-              {children}
-            </div>
+            <ModalProvider>
+              <div className={'root'}>
+                <Link href="/">
+                  <div className={styles.logo}>
+                    <span className={styles.stars}>
+                      <p className={styles.stars__star}>*</p>
+                      <p className={styles.stars__star}>*</p>
+                      <p className={styles.stars__star}>*</p>
+                    </span>
+                    <span className={styles.line} />
+                  </div>
+                </Link>
+                <YaMetrica />
+                {children}
+              </div>
+            </ModalProvider>
           </SnackbarProvider>
         </ThemeProvider>
       </body>

@@ -38,6 +38,7 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
 
   const showSnackbar = (text: string) => {
     const id = v4();
+    console.log(Snackbars);
     if (Object.keys(Snackbars).length >= 5) return false;
     setSnackbars({
       ...Snackbars,

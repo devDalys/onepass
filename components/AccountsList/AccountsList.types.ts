@@ -8,11 +8,11 @@ export interface IAccountItem {
 export interface AccountsResponse {
   socialName: string;
   _id: string;
-  createdAt: string;
+  createdAt: Date;
   accountEntries: {
     login: string;
     password: string;
     _id: string;
-    createdAt: string;
+    createdAt: Date;
   }[];
 }

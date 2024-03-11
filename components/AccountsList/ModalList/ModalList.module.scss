@@ -1,0 +1,30 @@
+@import "app/mixins";
+.wrapper{
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chip{
+  border: 2px solid var(--primary-default);
+  padding: 0.5rem 1rem;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  &:hover{
+    border-color: white;
+  }
+}
+
+.title{
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  @include for-mobile{
+    font-size: 1rem;
+  }
+}
+
+.name{
+  text-transform: uppercase;
+}

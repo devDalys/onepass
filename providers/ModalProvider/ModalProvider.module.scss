@@ -1,0 +1,65 @@
+@import "app/mixins";
+.wrapper{
+  width: 100vw;
+  height: 100vh;
+  background: #0000004d;
+  position: fixed;
+  overflow: hidden;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--play);
+  @include for-mobile{
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}
+
+.modal{
+  width: 50%;
+  min-height: 40%;
+  background: var(--neutral-card);
+  border-radius: 0.625rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 60px 0 rgba(0,0,0,0.4);
+  position: relative;
+
+  @include for-mobile{
+    padding: 1rem;
+    width: 100%;
+  }
+}
+
+.title{
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--neutral-text);
+  @include for-mobile{
+    display: block;
+    font-size: 1.3rem;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.closeIcon{
+  position: absolute;
+  border: 1px solid var(--primary-default);
+  border-radius: 0.625rem;
+  top: 0.2rem;
+  right: 0.2rem;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  @include for-mobile{
+    display: none;
+  }
+  >svg{
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
