@@ -33,25 +33,6 @@
   }
 }
 
-@keyframes modalAnimation {
-  0% {
-    transform: scale(0%);
-  }
-  100% {
-    transform: scale(100%);
-  }
-}
-
-@keyframes mobileModalAnimation {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    @include for-mobile {
-      transform: translateY(0);
-    }
-  }
-}
 
 .childrenWrapper{
   padding: 0 1.5rem 1.5rem;
@@ -82,6 +63,7 @@
 
 .closeIcon{
   position: absolute;
+  z-index: 1;
   border: 1px solid var(--primary-default);
   border-radius: 0.625rem;
   top: 0.5rem;
@@ -105,3 +87,46 @@
   }
 }
 
+.closeAnimation{
+  animation: closeModalAnimation 0.2s linear;
+  @include for-mobile{
+    animation: closeMobileModalAnimation 0.2s linear;
+  }
+}
+//Анимации закрытия
+
+@keyframes closeModalAnimation {
+  0% {
+    transform: scale(100%);
+  }
+  100% {
+    transform: scale(0%);
+  }
+}
+
+@keyframes closeMobileModalAnimation {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+//Анимации открытия
+@keyframes modalAnimation {
+  0% {
+    transform: scale(0%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+
+@keyframes mobileModalAnimation {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
