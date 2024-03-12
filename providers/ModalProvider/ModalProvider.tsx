@@ -26,8 +26,8 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
             <div className={styles.closeIcon} onClick={handleDelete}>
               <Cancel />
             </div>
-            <span className={styles.title}>{modal.title}</span>
-            {modal.children()}
+            <div className={styles.title}>{modal.title}</div>
+            <div className={styles.childrenWrapper}>{modal.children()}</div>
           </div>
         </div>
       )}

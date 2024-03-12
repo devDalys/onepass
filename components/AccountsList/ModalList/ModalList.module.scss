@@ -8,15 +8,16 @@
     flex-direction: column;
     gap: 1rem;
     max-height: 60%;
-    overflow: hidden;
+    overflow: auto;
   }
 }
 
 .chip{
-  border: 2px solid  var(--neutral-text);
+  border: 2px solid  var(--neutral-card);
   padding: 0.5rem 1rem;
   border-radius: 0.625rem;
   cursor: pointer;
+  background: var(--neutral-card);
   user-select: none;
   transition: border-color 0.2s;
   &:hover{

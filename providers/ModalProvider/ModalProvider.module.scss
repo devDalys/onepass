@@ -19,29 +19,64 @@
 .modal{
   width: 50%;
   min-height: 40%;
-  background: var(--neutral-card);
+  max-height: 60%;
+  background: var(--bg-color);
   border-radius: 0.625rem;
-  padding: 1.5rem;
-  box-shadow: 0 0 60px 0 rgba(0,0,0,0.4);
+  box-shadow: 0 0 30px 0 rgba(0,0,0,0.75);
   position: relative;
+  animation: modalAnimation 0.2s linear;
+  overflow: auto;
 
   @include for-mobile{
-    padding: 1rem;
     width: 100%;
+    animation: mobileModalAnimation 0.2s linear;
+  }
+}
+
+@keyframes modalAnimation {
+  0% {
+    transform: scale(0%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+
+@keyframes mobileModalAnimation {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    @include for-mobile {
+      transform: translateY(0);
+    }
+  }
+}
+
+.childrenWrapper{
+  padding: 0 1.5rem 1.5rem;
+  @include for-mobile{
+    padding-top: 0;
   }
 }
 
 .title{
+  padding: 1.5rem 1.5rem 0.2rem;
   font-size: 2rem;
   font-weight: 600;
   color: var(--neutral-text);
-  padding-bottom: 0.2rem;
+  background: var(--bg-color);
+  position: sticky;
+  top: 0;
+  width: 100%;
   border-bottom: 2px solid var(--primary-default);
   @include for-mobile{
+    margin-left: 0;
+    padding-left: 1.5rem;
+    padding-bottom: 1rem;
     display: block;
     font-size: 1.5rem;
     text-align: center;
-    width: 100%;
   }
 }
 
@@ -56,7 +91,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: white;
+  color: var(--neutral-text);
   transition: background-color 0.2s;
   @include for-mobile{
     display: none;
@@ -69,3 +104,4 @@
     background: var(--primary-default);
   }
 }
+
