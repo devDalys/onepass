@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const theme = cookies().get(LOCAL_STORAGE_THEME_KEY)?.value as Theme;
   return (
-    <html lang="en">
+    <html lang="ru">
       <Script
         defer
         src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"

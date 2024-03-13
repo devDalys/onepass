@@ -11,6 +11,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
   const ref = useRef<HTMLDivElement>(null);
   const createModal = (props: CreateModalProps) => {
     setModal(props);
+    document.body.classList.add(styles.hideScroll);
   };
 
   const hideWithAnimation = () => {
