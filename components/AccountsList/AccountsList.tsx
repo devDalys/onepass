@@ -14,7 +14,6 @@ export default function AccountList({profile: {accounts, ...profile}}: {profile:
   const [accountsState, setAccounts] = useState<AccountsResponse[] | undefined>(accounts);
 
   const {showSnackbar} = useSnackbar();
-
   const onCopy = async (text: string) => {
     await navigator.clipboard.writeText(text);
     showSnackbar('Пароль скопирован');

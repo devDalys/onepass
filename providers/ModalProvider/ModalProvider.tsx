@@ -9,6 +9,7 @@ const ANIMATION_NAMES = ['closeModalAnimation', 'closeMobileModalAnimation'];
 export const ModalProvider = ({children}: {children: React.ReactNode}) => {
   const [modal, setModal] = useState<CreateModalProps | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLDivElement>(null);
   const [touchStart, setTouchStart] = useState(0);
 
   const handleDelete = () => {
@@ -30,7 +31,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
   const onTouch = useCallback(
     (event: React.TouchEvent<HTMLDivElement>) => {
       if (
-        event.targetTouches[0].target === event.target &&
+        closeRef.current === event.target &&
         ref.current &&
         event.touches[0].clientY - touchStart > 0
       ) {
@@ -42,8 +43,8 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
 
   const onTouchEnd = useCallback(
     (event: React.TouchEvent<HTMLDivElement>) => {
-      if (ref.current && event.changedTouches[0].target === event.target) {
-        if (event.changedTouches[0].clientY * 0.6 >= touchStart) {
+      if (ref.current && closeRef.current === event.target) {
+        if (event.changedTouches[0].clientY * 0.75 >= touchStart) {
           ref.current.style.transform = `translateY(100%)`;
           ref.current.addEventListener('transitionend', handleDelete);
         } else {
@@ -84,7 +85,9 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
             <div className={styles.closeIcon} onClick={hideWithAnimation}>
               <Cancel />
             </div>
-            <div className={styles.title}>{modal.title}</div>
+            <div className={styles.title} ref={closeRef}>
+              {modal.title}
+            </div>
             <div className={styles.childrenWrapper}>{modal.children()}</div>
           </div>
         </div>
