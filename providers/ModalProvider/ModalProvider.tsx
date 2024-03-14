@@ -1,6 +1,6 @@
 'use client';
 import {CreateModalProps, ModalContext} from '@/providers/ModalProvider/ModalContext';
-import {useRef, useState} from 'react';
+import {useCallback, useRef, useState} from 'react';
 import styles from './ModalProvider.module.scss';
 import Cancel from '@/assets/images/Cancel.svg';
 
@@ -9,19 +9,59 @@ const ANIMATION_NAMES = ['closeModalAnimation', 'closeMobileModalAnimation'];
 export const ModalProvider = ({children}: {children: React.ReactNode}) => {
   const [modal, setModal] = useState<CreateModalProps | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const [touchStart, setTouchStart] = useState(0);
+
+  const handleDelete = () => {
+    setModal(null);
+    ref?.current?.classList.remove(styles.closeAnimation);
+    document.body.classList.remove(styles.hideScroll);
+  };
+
   const createModal = (props: CreateModalProps) => {
     setModal(props);
     document.body.classList.add(styles.hideScroll);
+    ref?.current?.removeEventListener('transitionend', handleDelete);
   };
 
   const hideWithAnimation = () => {
     ref?.current?.classList.add(styles.closeAnimation);
   };
 
-  const handleDelete = () => {
-    setModal(null);
-    ref.current?.classList.remove(styles.closeAnimation);
-  };
+  const onTouch = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      if (
+        event.targetTouches[0].target === event.target &&
+        ref.current &&
+        event.touches[0].clientY - touchStart > 0
+      ) {
+        ref.current.style.top = `translateY(${event.touches[0].clientY - touchStart}px)`;
+      }
+    },
+    [touchStart],
+  );
+
+  const onTouchEnd = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      if (ref.current && event.changedTouches[0].target === event.target) {
+        if (event.changedTouches[0].clientY * 0.6 >= touchStart) {
+          ref.current.style.transform = `translateY(100%)`;
+          ref.current.addEventListener('transitionend', handleDelete);
+        } else {
+          setTouchStart(0);
+          ref.current.style.transform = `translateY(0)`;
+        }
+      }
+    },
+    [touchStart],
+  );
+
+  const onTouchStart = useCallback((event: React.TouchEvent<HTMLDivElement>) => {
+    setTouchStart(event.touches[0].clientY);
+  }, []);
+
+  const onAnimationEnd = useCallback((event: React.AnimationEvent) => {
+    return ANIMATION_NAMES.some((name) => event.animationName.includes(name)) && handleDelete();
+  }, []);
 
   return (
     <ModalContext.Provider value={{createModal, hideModal: hideWithAnimation}}>
@@ -33,14 +73,14 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
           }}
         >
           <div
+            onTouchMove={onTouch}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
             className={styles.modal}
             ref={ref}
-            onAnimationEnd={(event) => {
-              return (
-                ANIMATION_NAMES.some((name) => event.animationName.includes(name)) && handleDelete()
-              );
-            }}
+            onAnimationEnd={onAnimationEnd}
           >
+            <div className={styles.mobileCloseLine} />
             <div className={styles.closeIcon} onClick={hideWithAnimation}>
               <Cancel />
             </div>

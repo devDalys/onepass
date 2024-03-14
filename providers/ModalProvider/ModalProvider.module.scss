@@ -28,6 +28,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: all 50ms linear;
 
   @include for-mobile{
     width: 100%;
@@ -90,6 +91,22 @@
   }
 }
 
+.mobileCloseLine{
+  @include for-desktop{
+    display: none;
+  }
+  position: absolute;
+  background: var(--neutral-text);
+  top: 5px;
+  width: 50%;
+  height: 4px;
+  border-radius: 1rem;
+  z-index: 2;
+  margin: 0 auto;
+  left: 50%;
+  transform: translatex(-50%);
+}
+
 .closeAnimation{
   animation: closeModalAnimation 0.2s linear;
   @include for-mobile{
@@ -100,9 +117,11 @@
 
 @keyframes closeModalAnimation {
   0% {
+    opacity: 1;
     transform: scale(100%);
   }
   100% {
+    opacity: 0;
     transform: scale(0%);
   }
 }
@@ -118,9 +137,11 @@
 //Анимации открытия
 @keyframes modalAnimation {
   0% {
+    opacity: 0;
     transform: scale(0%);
   }
   100% {
+    opacity: 1;
     transform: scale(100%);
   }
 }
