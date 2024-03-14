@@ -34,7 +34,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
         ref.current &&
         event.touches[0].clientY - touchStart > 0
       ) {
-        ref.current.style.top = `translateY(${event.touches[0].clientY - touchStart}px)`;
+        ref.current.style.transform = `translateY(${event.touches[0].clientY - touchStart}px)`;
       }
     },
     [touchStart],
