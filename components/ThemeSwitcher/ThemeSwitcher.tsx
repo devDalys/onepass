@@ -1,5 +1,5 @@
 'use client';
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import styles from './ThemeSwitcher.module.scss';
 import {useTheme} from '@/providers/ThemeProvider';
 import classNames from 'classnames';
@@ -109,7 +109,7 @@ const Soon = (
   </svg>
 );
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = memo(() => {
   const {toggleTheme, theme} = useTheme();
   const [firstRender, setFirstRender] = useState(true);
 
@@ -138,4 +138,5 @@ export const ThemeSwitcher = () => {
       </span>
     </button>
   );
-};
+});
+ThemeSwitcher.displayName = 'ThemeSwitcher';

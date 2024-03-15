@@ -35,7 +35,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
         ref.current &&
         event.touches[0].clientY - touchStart > 0
       ) {
-        ref.current.style.transform = `translateY(${event.touches[0].clientY - touchStart}px)`;
+        ref.current.style.transform = `translateY(${Math.round(event.touches[0].clientY - touchStart)}px)`;
       }
     },
     [touchStart],
@@ -45,10 +45,8 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
     (event: React.TouchEvent<HTMLDivElement>) => {
       if (ref.current && closeRef.current === event.target) {
         if (event.changedTouches[0].clientY * 0.75 >= touchStart) {
-          ref.current.style.transform = `translateY(100%)`;
-          ref.current.addEventListener('transitionend', handleDelete);
+          hideWithAnimation();
         } else {
-          setTouchStart(0);
           ref.current.style.transform = `translateY(0)`;
         }
       }

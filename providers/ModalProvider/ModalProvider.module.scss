@@ -28,14 +28,13 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 50ms linear;
+  will-change: auto;
 
   @include for-mobile{
     width: 100%;
     animation: mobileModalAnimation 0.2s linear;
   }
 }
-
 
 .childrenWrapper{
   padding: 0 1.5rem 1.5rem;
@@ -128,7 +127,7 @@
 
 @keyframes closeMobileModalAnimation {
   0% {
-    transform: translateY(0%);
+    //transform: translateY(0%);
     opacity: 1;
   }
   100% {
