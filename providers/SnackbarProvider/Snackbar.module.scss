@@ -42,7 +42,14 @@
     right: 0.5rem;
     top: 0.5rem;
   }
-
+  &:hover{
+    @include for-desktop{
+      animation-play-state: paused;
+      &:after{
+        animation-play-state: paused;
+      }
+    }
+  }
   &:after {
     position: absolute;
     content: '';

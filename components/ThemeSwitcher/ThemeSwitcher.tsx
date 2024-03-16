@@ -1,5 +1,5 @@
 'use client';
-import React, {memo, useState} from 'react';
+import React, {memo} from 'react';
 import styles from './ThemeSwitcher.module.scss';
 import {useTheme} from '@/providers/ThemeProvider';
 import classNames from 'classnames';
@@ -111,29 +111,16 @@ const Soon = (
 
 export const ThemeSwitcher = memo(() => {
   const {toggleTheme, theme} = useTheme();
-  const [firstRender, setFirstRender] = useState(true);
-
-  const onToggleTheme = () => {
-    firstRender && setFirstRender(false);
-    toggleTheme();
-  };
 
   return (
-    <button onClick={onToggleTheme} className={styles.button}>
-      <span
-        className={classNames(styles.icon, {
-          [styles.active]: theme === Theme.LIGHT && firstRender,
-          [styles.leftAnimation]: theme === Theme.LIGHT && !firstRender,
-        })}
-      >
+    <button
+      onClick={toggleTheme}
+      className={classNames(styles.button, {[styles.darkActive]: theme === Theme.DARK})}
+    >
+      <span className={classNames(styles.icon, {[styles.active]: theme === Theme.LIGHT})}>
         {Soon}
       </span>
-      <span
-        className={classNames(styles.icon, {
-          [styles.active]: theme === Theme.DARK && firstRender,
-          [styles.rightAnimation]: theme === Theme.DARK && !firstRender,
-        })}
-      >
+      <span className={classNames(styles.icon, {[styles.active]: theme === Theme.DARK})}>
         {Moon}
       </span>
     </button>

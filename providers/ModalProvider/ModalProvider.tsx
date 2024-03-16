@@ -14,14 +14,12 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
 
   const handleDelete = () => {
     setModal(null);
-    ref?.current?.classList.remove(styles.closeAnimation);
     document.body.classList.remove(styles.hideScroll);
   };
 
   const createModal = (props: CreateModalProps) => {
     setModal(props);
     document.body.classList.add(styles.hideScroll);
-    ref?.current?.removeEventListener('transitionend', handleDelete);
   };
 
   const hideWithAnimation = () => {

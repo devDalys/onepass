@@ -107,9 +107,10 @@
 }
 
 .closeAnimation{
-  animation: closeModalAnimation 0.2s linear;
+  will-change: auto;
+  animation: closeModalAnimation 0.2s linear forwards;
   @include for-mobile{
-    animation: closeMobileModalAnimation 0.2s linear;
+    animation: closeMobileModalAnimation 0.2s linear forwards;
   }
 }
 //Анимации закрытия
@@ -127,7 +128,6 @@
 
 @keyframes closeMobileModalAnimation {
   0% {
-    //transform: translateY(0%);
     opacity: 1;
   }
   100% {

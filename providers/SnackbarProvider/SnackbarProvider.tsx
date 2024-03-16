@@ -9,7 +9,8 @@ import Cancel from '@/assets/images/Cancel.svg';
 
 const visibleTime = 3000;
 
-type Snackbar = Record<string, {element: React.ReactNode; timer: ReturnType<typeof setTimeout>}>;
+type Snackbar = Record<string, React.ReactNode>;
+const PROGRESS_ANIMATION_NAME = 'progressAnimation';
 
 export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
   const [Snackbars, setSnackbars] = useState<Snackbar>({});
@@ -21,7 +22,6 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
   const handleHide = (id: string) => {
     setSnackbars((state) => {
       const activeSnacks = {...state};
-      clearTimeout(activeSnacks[id]?.timer);
       delete activeSnacks[id];
       return activeSnacks;
     });
@@ -29,7 +29,15 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
 
   const generateSnackbar = (text: string, id: string) => {
     return (
-      <div onClick={() => handleHide(id)} className={classNames(styles.snackbar)}>
+      <div
+        onClick={() => handleHide(id)}
+        className={classNames(styles.snackbar)}
+        onAnimationEnd={(e) => {
+          if (e.animationName.includes(PROGRESS_ANIMATION_NAME)) {
+            handleHide(id);
+          }
+        }}
+      >
         {text}
         <Cancel />
       </div>
@@ -41,20 +49,15 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     if (Object.keys(Snackbars).length >= 5) return false;
     setSnackbars({
       ...Snackbars,
-      [id]: {
-        element: generateSnackbar(text, id),
-        timer: setTimeout(() => {
-          handleHide(id);
-        }, visibleTime),
-      },
+      [id]: generateSnackbar(text, id),
     });
   };
 
   return (
     <SnackbarContext.Provider value={{showSnackbar}}>
       <div className={styles.snackbarWrapper}>
-        {Object.entries(Snackbars).map(([key, item]) => (
-          <Fragment key={key}>{item.element}</Fragment>
+        {Object.entries(Snackbars).map(([key, element]) => (
+          <Fragment key={key}>{element}</Fragment>
         ))}
       </div>
       {children}
