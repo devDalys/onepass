@@ -29,13 +29,13 @@ const schema = yup.object().shape({
   login: yup
     .string()
     .required(validationMessages.required())
-    .min(3, validationMessages.min(3))
-    .max(20, validationMessages.max(20)),
+    .min(1, validationMessages.min(1))
+    .max(50, validationMessages.max(50)),
   password: yup
     .string()
     .required(validationMessages.required())
-    .min(3, validationMessages.min(3))
-    .max(20, validationMessages.max(20)),
+    .min(1, validationMessages.min(1))
+    .max(1, validationMessages.max(50)),
   socialName: yup
     .string()
     .required(validationMessages.required())

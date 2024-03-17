@@ -1,4 +1,5 @@
 import styles from './AboutPage.module.scss';
+import Link from 'next/link';
 
 export default function AboutPage() {
   return (
@@ -6,22 +7,16 @@ export default function AboutPage() {
       <h2 className={styles.pageTitle}>Контакты</h2>
       <div className={styles.contactsWrapper}>
         <span className={styles.contacts}>
-          Для связи с автором проекта&nbsp;-&nbsp;
-          <a className={styles.contactsLink} href="mailto:help@onepassword.ru" target={'_blank'}>
+          Почта для связи&nbsp;-&nbsp;
+          <Link className={styles.contactsLink} href="mailto:help@onepassword.ru" target={'_blank'}>
             help@onepassword.ru
-          </a>
-        </span>
-        <span className={styles.contacts}>
-          GitHub автора&nbsp;-&nbsp;
-          <a className={styles.contactsLink} href="https://github.com/devDalys" target={'_blank'}>
-            @devDalys
-          </a>
+          </Link>
         </span>
         <span className={styles.contacts}>
           По техническим вопросам&nbsp;-&nbsp;
-          <a className={styles.contactsLink} href="/profile/help">
+          <Link className={styles.contactsLink} href="/profile/help">
             поддержка
-          </a>
+          </Link>
         </span>
       </div>
       <h2 className={styles.pageTitle}>О проекте OnePassword</h2>
