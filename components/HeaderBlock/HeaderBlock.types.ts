@@ -7,6 +7,7 @@ export interface Profile {
   createdAt?: Date;
   updatedAt?: Date;
   accounts: AccountsResponse[];
+  isEmailConfirmed: boolean;
 }
 
 export interface Props {

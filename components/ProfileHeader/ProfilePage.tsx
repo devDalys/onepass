@@ -1,6 +1,6 @@
 'use client';
 import styles from './ProfilePage.module.scss';
-import {Button, Input, SuspenseLoader} from '@/ui-kit';
+import {Button, Input} from '@/ui-kit';
 import {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {DragDrop} from '@/ui-kit/DragDrop/DragDrop';
@@ -9,6 +9,7 @@ import {useSnackbar} from '@/providers/SnackbarProvider';
 import {revalidateQuery} from '@/api/revalidatePath';
 import {AxiosResponse} from 'axios';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
+import ConfirmEmail from '@/components/ConfirmEmail/ConfirmEmail';
 
 interface Form {
   name: string;
@@ -48,7 +49,6 @@ export const ProfilePage = ({profile}: Props) => {
       setIsMounted(true);
     }
   }, [profile, reset]);
-
   useEffect(() => {
     setOnline(navigator.onLine);
 
@@ -65,68 +65,73 @@ export const ProfilePage = ({profile}: Props) => {
     };
   }, []);
 
-  if (!profile) return <SuspenseLoader />;
-
   return (
     <div className={styles.wrapper}>
-      <DragDrop />
+      <ConfirmEmail isEmailConfirmed={profile.isEmailConfirmed} email={profile.email} />
+      <div className={styles.profileWrapper}>
+        <DragDrop />
 
-      <div className={styles.profile}>
-        <div className={styles.statusInfo}>
-          <span className={styles.span}>
-            Статус:
-            <span className={styles.status}>{isOnline ? 'Online' : 'Offline'}</span>
-          </span>
-          <span className={styles.span}>
-            Дата регистрации:
-            <span className={styles.value}>
-              &nbsp;{new Date(profile.createdAt as Date).toLocaleDateString()}
+        <div className={styles.profile}>
+          <div className={styles.statusInfo}>
+            <span className={styles.span}>
+              Статус:
+              <span className={styles.status}>{isOnline ? 'Online' : 'Offline'}</span>
             </span>
-          </span>
-          <span className={styles.span}>
-            Последние изменения аккаунта:
-            <span className={styles.value}>
-              &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString()}
+            <span className={styles.span}>
+              Дата регистрации:
+              <span className={styles.value}>
+                &nbsp;{new Date(profile.createdAt as Date).toLocaleDateString()}
+              </span>
             </span>
-          </span>
-        </div>
-
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="name"
-            control={control}
-            render={({field: {ref, ...inputProps}}) => (
-              <Input aliasText="Имя и фамилия" {...inputProps} />
-            )}
-          />
-          <Controller
-            name="email"
-            control={control}
-            render={({field: {ref, ...inputProps}}) => (
-              <Input aliasText="Электронная почта" {...inputProps} />
-            )}
-          />
-          <div className={styles.actions}>
-            <Button
-              className={styles.button}
-              theme="outline"
-              onClick={(event) => {
-                event.preventDefault();
-                reset({name: profile.name, email: profile.email});
-              }}
-            >
-              Сбросить
-            </Button>
-            <Button
-              className={styles.button}
-              theme="default"
-              type="submit"
-              disabled={!formState.isValid || !formState.isDirty}
-            >
-              Сохранить
-            </Button>
+            <span className={styles.span}>
+              Последние изменения аккаунта:
+              <span className={styles.value}>
+                &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString()}
+              </span>
+            </span>
           </div>
-        </form>
+
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="name"
+              control={control}
+              render={({field: {ref, ...inputProps}}) => (
+                <Input aliasText="Имя и фамилия" {...inputProps} />
+              )}
+            />
+            <Controller
+              name="email"
+              control={control}
+              render={({field: {ref, ...inputProps}}) => (
+                <Input
+                  blocked={!profile.isEmailConfirmed}
+                  aliasText="Электронная почта"
+                  {...inputProps}
+                />
+              )}
+            />
+            <div className={styles.actions}>
+              <Button
+                className={styles.button}
+                theme="outline"
+                onClick={(event) => {
+                  event.preventDefault();
+                  reset({name: profile.name, email: profile.email});
+                }}
+              >
+                Сбросить
+              </Button>
+              <Button
+                className={styles.button}
+                theme="default"
+                type="submit"
+                disabled={!formState.isValid || !formState.isDirty}
+              >
+                Сохранить
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

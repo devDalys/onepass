@@ -1,0 +1,29 @@
+@import "app/mixins";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5rem;
+
+  border: 2px solid var(--primary-default);
+  border-radius: 0.625rem;
+  margin-bottom: 1rem;
+  color: var(--neutral-text);
+  font-weight: 600;
+
+  .button {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
+.startConfirm{
+  //border: 1px solid var(--primary-default);
+  width: max-content;
+  color: var(--neutral-text);
+  background: var(--neutral-grey);
+  margin-top: 0.2rem;
+  padding: 0.2rem;
+}
+

@@ -11,9 +11,16 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   aliasText: string;
   errorText?: string;
   className?: string;
+  blocked?: boolean;
 }
 
-export const Input: React.FC<Props> = ({aliasText, className, errorText, ...inputProps}) => {
+export const Input: React.FC<Props> = ({
+  aliasText,
+  className,
+  blocked,
+  errorText,
+  ...inputProps
+}) => {
   const id = useId();
   const [isViewPassword, setViewPassword] = useState(inputProps.type !== 'password');
   const {showSnackbar} = useSnackbar();
@@ -27,9 +34,10 @@ export const Input: React.FC<Props> = ({aliasText, className, errorText, ...inpu
       <label htmlFor={id} className={styles.label}>
         {aliasText}
       </label>
-      <div className={styles.inputWrapper}>
+      <div className={classNames(styles.inputWrapper, {[styles.blocked]: blocked})}>
         <input
           {...inputProps}
+          disabled={inputProps.disabled || blocked}
           type={isViewPassword ? 'text' : inputProps.type}
           id={id}
           className={styles.input}
