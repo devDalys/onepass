@@ -35,8 +35,5 @@ COPY --from=builder /usr/src/app/package.json .
 USER node
 EXPOSE 8080
 
-RUN mkdir -p /app/.next/cache && chown nextjs:nodejs /app/.next/cache
-VOLUME ["/app/.next/cache"]
-
 ENTRYPOINT npm run start
 
