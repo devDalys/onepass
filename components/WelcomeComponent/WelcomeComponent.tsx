@@ -7,7 +7,9 @@ export default function WelcomeComponent({name}: {name?: string}) {
     <div className={styles.wrapper}>
       <h1 className={styles.h1}>Приветствую тебя, {name}</h1>
       <Link href="/accounts/add">
-        <Button theme="outline">Добавить первый аккаунт</Button>
+        <Button theme="outline" className={styles.button}>
+          Добавить первый аккаунт
+        </Button>
       </Link>
     </div>
   );

@@ -6,12 +6,20 @@
   align-items: center;
   margin-top: 5rem;
   gap: 1.5rem;
+  height: 100%;
   @include for-mobile {
     margin-top: 0;
     text-align: center;
+  }
+
+  .button{
+    font-size: 1.25rem;
   }
 }
 
 .h1 {
   color: var(--neutral-text);
+  @include for-mobile{
+    font-size: 1.5rem;
+  }
 }
