@@ -34,12 +34,20 @@ const ProfileBlock = ({avatarUrl, name, email}: Omit<Profile, 'accounts'>) => {
   );
 };
 
-export default function HeaderBlock({accounts, profile: {name, email, avatarUrl}}: Props) {
+export default function HeaderBlock({
+  accounts,
+  profile: {name, email, avatarUrl, isEmailConfirmed},
+}: Props) {
   const length = accounts.flatMap((item) => item.accountEntries).length;
 
   return (
     <div className={styles.wrapper}>
-      <ProfileBlock name={name} email={email} avatarUrl={avatarUrl} />
+      <ProfileBlock
+        name={name}
+        email={email}
+        avatarUrl={avatarUrl}
+        isEmailConfirmed={isEmailConfirmed}
+      />
       <CountsBlock
         length={length}
         text={`Хранящи${getEndWord(length, ['йся', 'хся', 'хся'])} аккаунт${getEndWord(length, ['', 'ов', 'а'])}`}
