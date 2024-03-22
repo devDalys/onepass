@@ -10,6 +10,7 @@ import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useRouter} from 'next/navigation';
 import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, validationMessages} from '@/utils/consts';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
+import Link from 'next/link';
 
 const schema = yup.object().shape({
   oldPassword: yup
@@ -110,11 +111,14 @@ export default function SecurityPage({profile}: Props) {
     <div>
       <h2 className={styles.pageTitle}>Смена пароля</h2>
       <InfoBlock
-        text="Обратите внимание на то, что если Вы авторизовывались через социальную сеть - пароль
-        сгенерирован автоматически. Поэтому чтобы сменить его - воспользуйтесь <a href='#recovery'>сбросом</a>, а в
-        дальнейшем вы сможете менять его здесь"
+        text={
+          <div>
+            Обратите внимание на то, что если Вы авторизовывались через социальную сеть - пароль
+            сгенерирован автоматически. Поэтому чтобы сменить его - воспользуйтесь{' '}
+            <Link href="#recovery">сбросом</Link>, а в дальнейшем вы сможете менять его здесь.
+          </div>
+        }
       />
-
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="oldPassword"
@@ -180,11 +184,26 @@ export default function SecurityPage({profile}: Props) {
       <h2 id="recovery" className={styles.pageTitle}>
         Сброс пароля
       </h2>
-      <InfoBlock text="Сброс пароля идеально подходит в ситуациях, когда вы вошли через социальную сеть и хотите установить собственный пароль" />
+      <InfoBlock
+        text={
+          profile.isEmailConfirmed ? (
+            <>
+              Сброс пароля подходит в ситуации, когда вы вошли через социальную сеть и хотите
+              установить собственный пароль.
+            </>
+          ) : (
+            <>
+              Функция будет доступна после подтверждения почты на странице{' '}
+              <Link href="/profile">профиля</Link>
+            </>
+          )
+        }
+      />
       <form className={styles.deleteForm} onSubmit={handleRecovery}>
         <Input
           aliasText="Электронная почта"
           type="email"
+          blocked={!profile.isEmailConfirmed}
           value={recoveryInput}
           onChange={(event) => setRecoveryInput(event.target.value)}
         />
@@ -193,7 +212,7 @@ export default function SecurityPage({profile}: Props) {
             theme="default"
             type="submit"
             className={styles.button}
-            disabled={!recoveryInput.length}
+            disabled={!recoveryInput.length || !profile.isEmailConfirmed}
           >
             Сбросить пароль
           </Button>
@@ -201,7 +220,7 @@ export default function SecurityPage({profile}: Props) {
       </form>
 
       <h2 className={styles.pageTitle}>Удаление аккаунта</h2>
-      <InfoBlock text="После удаления аккаунта все ваши данные будут безвозмездно утеряны и не подлежат восстановлению" />
+      <InfoBlock text="После удаления аккаунта все ваши данные будут безвозмездно утеряны и не подлежат восстановлению." />
       <form className={styles.deleteForm} onSubmit={handleDelete}>
         <Input
           aliasText="Текущий пароль"

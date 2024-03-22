@@ -1,11 +1,11 @@
 .infoBlock {
-  color: var(--neutral-text);
   border: 2px solid var(--primary-default);
-  font-size: 1rem;
   padding: 0.5rem;
   border-radius: 0.625rem;
-  font-weight: 600;
   display: flex;
+  align-items: center;
+  color: var(--neutral-text);
+
 }
 
 .infoIcon {
@@ -20,10 +20,10 @@
 }
 
 .text {
-  //height: auto;
-  //display: flex;
-  //align-items: center;
-  & > a {
+  font-size: 1rem;
+  font-weight: 600;
+
+  a {
     color: var(--primary-default);
   }
 }

@@ -96,7 +96,11 @@ export const ProfilePage = ({profile}: Props) => {
               name="name"
               control={control}
               render={({field: {ref, ...inputProps}}) => (
-                <Input aliasText="Имя и фамилия" {...inputProps} />
+                <Input
+                  aliasText="Имя и фамилия"
+                  blocked={!profile.isEmailConfirmed}
+                  {...inputProps}
+                />
               )}
             />
             <Controller

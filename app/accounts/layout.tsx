@@ -10,9 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function AccountLayout({children}: {children: React.ReactNode}) {
-  const token = cookies().get(AUTH_TOKEN)?.value;
-
-  if (!token?.length) return <NotFoundPage />;
+  const token = cookies().has(AUTH_TOKEN);
+  if (!token) return <NotFoundPage />;
 
   return (
     <>
