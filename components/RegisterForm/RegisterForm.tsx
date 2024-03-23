@@ -84,7 +84,7 @@ export const RegisterForm = () => {
         name="email"
         render={({field: {ref, ...field}, fieldState}) => (
           <Input
-            aliasText="Почта"
+            aliasText="Электронная почта"
             placeholder="vasiliy@mail.ru"
             autoComplete="email"
             {...field}

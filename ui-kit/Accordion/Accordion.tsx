@@ -24,7 +24,7 @@ export const Accordion = ({
     <div className={styles.wrapper}>
       <div onClick={() => setOpened(!isOpened)} className={styles.titleWrapper}>
         <h3 className={styles.title}>
-          {title}
+          <span className={styles.titleText}>{title}</span>
           <span className={styles.additionalInfo}>{additionalInfo}</span>
         </h3>
         <span className={styles.icon}>{isOpened ? <ChevronUp /> : <ChevronDown />}</span>

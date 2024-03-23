@@ -95,8 +95,8 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
           control={control}
           render={({field: {ref, ...field}, fieldState}) => (
             <Input
-              aliasText="Email"
-              placeholder="vasyapupkin@email.com"
+              aliasText="Электронная почта"
+              placeholder="vasiliy@mail.ru"
               autoComplete="email"
               disabled={isLoading}
               {...field}
@@ -109,8 +109,8 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
           control={control}
           render={({field: {ref, ...field}, fieldState}) => (
             <Input
-              aliasText="Password"
-              placeholder="Password"
+              aliasText="Пароль"
+              placeholder="******"
               autoComplete="current-password"
               disabled={isLoading}
               {...field}

@@ -51,11 +51,12 @@
       position: absolute;
       content: '';
       left: 0;
-      width: 80%;
+      width: 100%;
       transform: translateX(-101%);
       top: 0;
       height: 100%;
-      background: var(--primary-default);
+      background: var(--primary-default-gradient);
+
     }
     &:hover:after{
       transform: translateX(0);

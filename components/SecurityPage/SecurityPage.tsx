@@ -70,18 +70,15 @@ export default function SecurityPage({profile}: Props) {
         showSnackbar('Что-то пошло не так');
       });
   };
-  const handleDelete = (event: FormEvent) => {
+  const handleDelete = async (event: FormEvent) => {
     event.preventDefault();
 
-    Promise.all([
-      _api.post('/profile/me', {
+    _api
+      .post('/profile/me', {
         password: deleteInput,
-      }),
-      fetch('/api/logout'),
-    ])
+      })
       .then(() => {
-        showSnackbar('Аккаунт успешно удалён');
-        router.push('/');
+        router.push('/exit');
       })
       .catch(() => {
         showSnackbar('Не удалось удалить аккаунт');
@@ -193,7 +190,7 @@ export default function SecurityPage({profile}: Props) {
             </>
           ) : (
             <>
-              Функция будет доступна после подтверждения почты на странице{' '}
+              Функция будет доступна после подтверждения почты на странице&nbsp;
               <Link href="/profile">профиля</Link>
             </>
           )

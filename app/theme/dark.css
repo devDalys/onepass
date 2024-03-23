@@ -5,6 +5,7 @@
   --neutral-grey: #bababa;
   --neutral-input: #f1f1f1;
   --neutral-card: #767a90;
+  --primary-default-gradient: linear-gradient(90deg, rgba(255,100,100,1) 0%, rgba(255,100,100,0.5270483193277311) 70%, rgba(255,255,255,0) 100%);
 
   --navmenu-bg: #767a90;
   --navmenu-shadow: #545974;
