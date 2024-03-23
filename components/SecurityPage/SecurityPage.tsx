@@ -77,7 +77,7 @@ export default function SecurityPage({profile}: Props) {
       _api.post('/profile/me', {
         password: deleteInput,
       }),
-      fetch('/logout'),
+      fetch('/api/logout'),
     ])
       .then(() => {
         showSnackbar('Аккаунт успешно удалён');

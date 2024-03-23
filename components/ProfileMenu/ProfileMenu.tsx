@@ -39,7 +39,7 @@ export default function ProfileMenu({currentPage, children}: Props) {
             href={item.url}
             key={item.page}
           >
-            {item.name}
+            <span className={styles.text}>{item.name}</span>
           </Link>
         ))}
       </div>

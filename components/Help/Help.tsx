@@ -8,6 +8,7 @@ import {validationMessages} from '@/utils/consts';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {_apiFetch} from '@/api/fetchClient';
 import {useSnackbar} from '@/providers/SnackbarProvider';
+import Link from 'next/link';
 
 interface HelpForm {
   reason: string;
@@ -59,7 +60,15 @@ export default function Help({profile}: {profile: Profile}) {
   return (
     <div>
       <h2 className={styles.pageTitle}>Запрос в поддержку</h2>
-      <InfoBlock text="Запросы обрататываются в ручном режиме. Пожалуйста, не отправляйте никаких своих личных данных в целях безопасности. При желании вы так же можете написать напрямую на почту <a href='mailto:help@onepassword.ru'>help@onepassword.ru</a>" />
+      <InfoBlock
+        text={
+          <>
+            Запросы обрататываются в ручном режиме. Пожалуйста, не отправляйте никаких своих личных
+            данных в целях безопасности. При желании вы так же можете написать напрямую на почту{' '}
+            <Link href="mailto:help@onepassword.ru">help@onepassword.ru</Link>
+          </>
+        }
+      />
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="reason"

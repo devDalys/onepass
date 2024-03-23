@@ -6,6 +6,7 @@
   flex: 1;
   height: 100%;
   border-radius: 0.625rem;
+  overflow: hidden;
   @include for-mobile {
     border: none;
     position: fixed;
@@ -19,7 +20,7 @@
     border-radius: 0.625rem;
     overflow: hidden;
     box-shadow: 3px 33px 0 50px var(--navmenu-shadow);
-    z-index: 2;
+    z-index: 3;
   }
 }
 
@@ -31,38 +32,54 @@
   padding: 0.9rem;
   background: var(--neutral-card);
   transition: filter 0.5s;
-
-  @include for-desktop {
-    &:first-child {
-      border-radius: 0.625rem 0.625rem 0 0;
-    }
-
-    &:last-child {
-      border-radius: 0 0 0.625rem 0.625rem;
-    }
-  }
+  position: relative;
 
   @include for-mobile {
     display: flex;
     justify-content: center;
     background: var(--navmenu-bg);
-  }
-}
-
-.item {
-  @include for-mobile {
     flex: 1;
     height: 3rem;
     border: 0;
     padding: 0;
   }
+
+  @include for-desktop{
+    &:not(.active):after{
+      z-index: 1;
+      transition: transform 0.2s linear;
+      position: absolute;
+      content: '';
+      left: 0;
+      width: 80%;
+      transform: translateX(-101%);
+      top: 0;
+      height: 100%;
+      background: var(--primary-default);
+    }
+    &:hover:after{
+      transform: translateX(0);
+    }
+    &:hover{
+      .icon{
+        fill: #fff;
+      }
+      .text{
+        color: #fff;
+      }
+    }
+  }
 }
+
 
 .text {
   flex: 1;
   font-weight: 700;
   margin-left: 2rem;
   color: var(--neutral-text);
+  position: relative;
+  z-index: 2;
+  transition: color 0.2s linear;
   @include for-mobile {
     display: none;
   }
@@ -71,6 +88,9 @@
 .icon {
   fill: var(--neutral-text);
   height: 1.5rem;
+  position: relative;
+  z-index: 2;
+  transition: fill 0.2s linear;
   @include for-mobile {
     fill: var(--neutral-text);
   }
@@ -78,9 +98,6 @@
 
 .active {
   background: var(--primary-default);
-  &:hover {
-    filter: none;
-  }
   .text {
     color: #fff;
   }

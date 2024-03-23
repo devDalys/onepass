@@ -32,9 +32,9 @@ export const _apiFetch = async <T>(url: string, options: RequestOptions = {}): P
     .then(async (response) => {
       if (!response.ok) {
         if (response.status === 403) {
-          redirect('/exit');
+          return redirect('/exit');
         }
-        throw new Error(`Request failed with status: ${response.status}`);
+        await Promise.reject(`Request failed with status: ${response.status}`);
       }
 
       return (await response.json()) as T;
