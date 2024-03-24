@@ -33,7 +33,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
         ref.current &&
         event.touches[0].clientY - touchStart > 0
       ) {
-        ref.current.style.transform = `translateY(${Math.round(event.touches[0].clientY - touchStart)}px)`;
+        ref.current.style.transform = `translate3d(0,${Math.round(event.touches[0].clientY - touchStart)}px,0)`;
       }
     },
     [touchStart],
@@ -45,7 +45,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
         if (event.changedTouches[0].clientY * 0.75 >= touchStart) {
           hideWithAnimation();
         } else {
-          ref.current.style.transform = `translateY(0)`;
+          ref.current.style.transform = `translate3d(0,0,0)`;
         }
       }
     },
