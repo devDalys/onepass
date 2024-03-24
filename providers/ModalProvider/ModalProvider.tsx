@@ -45,6 +45,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
         if (event.changedTouches[0].clientY * 0.75 >= touchStart) {
           hideWithAnimation();
         } else {
+          ref?.current?.classList.remove(styles.stopTransition);
           ref.current.style.transform = `translate3d(0,0,0)`;
         }
       }
@@ -54,6 +55,7 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
 
   const onTouchStart = useCallback((event: React.TouchEvent<HTMLDivElement>) => {
     setTouchStart(event.touches[0].clientY);
+    ref?.current?.classList.add(styles.stopTransition);
   }, []);
 
   const onAnimationEnd = useCallback((event: React.AnimationEvent) => {
