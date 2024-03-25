@@ -35,7 +35,7 @@ const schema = yup.object().shape({
     .string()
     .required(validationMessages.required())
     .min(1, validationMessages.min(1))
-    .max(1, validationMessages.max(50)),
+    .max(50, validationMessages.max(50)),
   socialName: yup
     .string()
     .required(validationMessages.required())
