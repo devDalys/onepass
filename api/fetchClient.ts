@@ -37,7 +37,7 @@ export const _apiFetch = async <T>(url: string, options: RequestOptions = {}): P
         await Promise.reject(`Request failed with status: ${response.status}`);
       }
 
-      return (await response.json()) as T;
+      return (await response.json()).body as T;
     })
     .catch((error) => {
       console.error('Fetch error:', error);

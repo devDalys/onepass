@@ -28,8 +28,8 @@ export const DragDrop = () => {
       return showSnackbar('Максимальный вес файла не должен превышать 5 мб');
     }
 
-    if (!['.jpeg', '.jpg'].some((ext) => file.name.endsWith(ext))) {
-      return showSnackbar('Расширение файла должно быть .jpeg или .jpg');
+    if (!['.jpeg', '.jpg', '.heif'].some((ext) => file.name.endsWith(ext))) {
+      return showSnackbar('Расширение файла должно быть .jpeg, .jpg или .heif');
     }
     return setFile(file);
   };
@@ -67,7 +67,7 @@ export const DragDrop = () => {
     formData.append('image', file);
     setIsLoading(true);
     _api
-      .post('/profile/upload', formData, config)
+      .post('/image/upload', formData, config)
       .then(() => {
         showSnackbar('Фото профиля обновлено');
         revalidateCache();
@@ -131,7 +131,7 @@ export const DragDrop = () => {
               Нажмите сюда
             </Button>
             <span className={styles.uploadInfo}>
-              Вес файла не должен быть больше 5мб, а расширение .jpeg
+              Вес файла не должен быть больше 5мб, а расширение .jpeg или .heif
             </span>
           </>
         )}
@@ -141,7 +141,7 @@ export const DragDrop = () => {
         type="file"
         className={styles.input}
         value={file}
-        accept="image/jpeg"
+        accept="image/jpeg, image/heif"
         onChange={(event) => {
           validateFile(event.target.files?.[0]);
         }}
