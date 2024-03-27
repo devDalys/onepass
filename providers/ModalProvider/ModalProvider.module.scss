@@ -46,6 +46,7 @@
 .childrenWrapper{
   padding: 0 1.5rem 1.5rem;
   @include for-mobile{
+    max-height: 35%;
     overflow: auto;
     padding-top: 0;
   }
