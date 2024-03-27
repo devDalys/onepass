@@ -36,6 +36,9 @@
 
   @include for-mobile{
     width: 100%;
+    height: 100%;
+    max-height: 100%;
+    transform: translate3d(0, 50%, 0);
     animation: mobileModalAnimation 0.2s linear;
   }
 }
@@ -153,12 +156,10 @@
 
 @keyframes mobileModalAnimation {
   0% {
-    opacity: 0;
     transform: translate3d(0,100%,0);
   }
   100% {
-    opacity: 1;
-    transform: translate3d(0,0%,0);
+    transform: translate3d(0,50%,0);
   }
 }
 

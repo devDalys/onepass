@@ -7,7 +7,6 @@
   @include for-mobile{
     flex-direction: column;
     gap: 1rem;
-    max-height: 60%;
     overflow: auto;
   }
 }

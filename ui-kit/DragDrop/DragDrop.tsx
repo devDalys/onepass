@@ -5,7 +5,7 @@ import FormData from 'form-data';
 import {_api} from '@/api';
 import styles from './DragDrop.module.scss';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import {revalidateCache} from '@/api/revalidatePath';
+import {revalidateQuery} from '@/api/revalidatePath';
 import Upload from '@/assets/images/Upload.svg';
 import Accept from '@/assets/images/Accept.svg';
 import Cancel from '@/assets/images/Cancel.svg';
@@ -70,7 +70,7 @@ export const DragDrop = () => {
       .post('/image/upload', formData, config)
       .then(() => {
         showSnackbar('Фото профиля обновлено');
-        revalidateCache();
+        revalidateQuery();
       })
       .catch(() => {
         showSnackbar('Не удалось обновить фото');
