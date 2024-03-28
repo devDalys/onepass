@@ -28,7 +28,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  will-change: auto;
+  will-change: transform;
   transition: transform 0.15s linear;
   &.stopTransition{
     transition: none;
@@ -115,7 +115,8 @@
 }
 
 .closeAnimation{
-  will-change: auto;
+  will-change: transform;
+
   animation: closeModalAnimation 0.2s linear forwards;
   @include for-mobile{
     animation: closeMobileModalAnimation 0.2s linear forwards;
@@ -135,11 +136,7 @@
 }
 
 @keyframes closeMobileModalAnimation {
-  0% {
-    opacity: 1;
-  }
   100% {
-    opacity: 0;
     transform: translate3d(0,100%,0);
   }
 }
@@ -166,6 +163,6 @@
 
 .hideScroll{
   @include for-mobile{
-    overflow: hidden;
+    overflow: hidden !important;
   }
 }

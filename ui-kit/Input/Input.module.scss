@@ -25,6 +25,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
+  transition: border-color 100ms linear;
+
+  &:focus-within{
+    border-color: var(--primary-default);
+  }
 }
 
 .input {
@@ -32,7 +38,6 @@
   outline: none;
   color: var(--neutral-text);
   border: none;
-  border-radius: 0.625rem;
   flex: 1;
   background: var(--neutral-card);
   &::placeholder {

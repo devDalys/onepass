@@ -125,7 +125,7 @@ export const DragDrop = () => {
           </div>
         ) : (
           <>
-            <span className={styles.topSpan}>Перетащите фото</span>
+            <span className={styles.topSpan}>Перетащите новое фото профиля</span>
             <span className={styles.middleSpan}>или</span>
             <Button theme="default" className={styles.bottomButton}>
               Нажмите сюда

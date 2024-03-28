@@ -27,7 +27,7 @@
   flex: 1;
   justify-content: space-between;
   @include for-mobile {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -41,7 +41,7 @@
   margin-left: 1rem;
   font-size: 1.3rem;
   @include for-mobile {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-left: 0;
   }
 }

@@ -38,6 +38,9 @@ export const metadata: Metadata = {
   icons: {
     icon: favicon.src,
   },
+  alternates: {
+    canonical: 'https://onepassword.ru',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

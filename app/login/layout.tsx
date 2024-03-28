@@ -1,8 +1,11 @@
 import {Metadata} from 'next';
 
 export const metadata: Metadata = {
-  title: 'Логин',
-  description: 'Вход в аккаунт',
+  title: 'Вход в OnePassword',
+  description: 'Вход в аккаунт OnePassword',
+  alternates: {
+    canonical: 'https://onepassword.ru/login',
+  },
 };
 
 export default function RegisterLayout({children}: {children: React.ReactNode}) {

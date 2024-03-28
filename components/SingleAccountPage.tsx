@@ -46,7 +46,7 @@ export default function SingleAccountPage({profile, id}: Props) {
             isDefaultOpened={!index}
             additionalInfo={
               currAccount.createdAt &&
-              'Добавлен: ' + new Date(account.createdAt).toLocaleDateString()
+              'Добавлен: ' + new Date(account.createdAt).toLocaleDateString('ru')
             }
           />
         ))}
@@ -62,7 +62,7 @@ export default function SingleAccountPage({profile, id}: Props) {
               currentAccount={{socialName: currAccount.socialName}}
             />
           )}
-          title={'Новый аккаунт'}
+          title={`Новый аккаунт ${currAccount.socialName}`}
         />
       }
     </div>
