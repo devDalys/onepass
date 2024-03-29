@@ -28,6 +28,8 @@ body::-webkit-scrollbar-thumb {
   height: 100%;
   font-family: var(--play);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   @include for-mobile {
     padding: 1rem;
   }

@@ -11,3 +11,10 @@
 .button {
   min-width: 100%;
 }
+
+.socials{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}

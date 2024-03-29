@@ -71,7 +71,6 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       const isAuthorized = localStorage.getItem(AUTHORIZATION_FLAG);
-
       if (isAuthorized === 'true' && pathName === '/login') {
         router.push('/accounts');
         showSnackbar('Вы успешно вошли');

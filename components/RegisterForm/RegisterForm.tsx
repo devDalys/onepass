@@ -5,16 +5,19 @@ import {Controller, useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import {useRouter} from 'next/navigation';
+import {usePathname, useRouter} from 'next/navigation';
 import {
+  AUTHORIZATION_FLAG,
   MAX_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
   MIN_NAME_LENGTH,
   MIN_PASSWORD_LENGTH,
   validationMessages,
 } from '@/utils/consts';
+import VkLogin from '@/components/VkLogin/VkLogin';
+import YandexLogin from '@/components/YandexLogin/YandexLogin';
 
 interface Form {
   name: string;
@@ -35,7 +38,13 @@ const schema = yup.object().shape({
     .required(validationMessages.required()),
 });
 
-export const RegisterForm = () => {
+interface Props {
+  CLIENT_ID: string;
+  APP_ID: number;
+  redirectUrl: string;
+}
+
+export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   const {control, handleSubmit} = useForm<Form>({
     defaultValues: {
       email: '',
@@ -49,7 +58,7 @@ export const RegisterForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const {showSnackbar} = useSnackbar();
   const router = useRouter();
-
+  const pathName = usePathname();
   const onSubmit = async (data: Form) => {
     try {
       setIsLoading(true);
@@ -63,6 +72,23 @@ export const RegisterForm = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const isAuthorized = localStorage.getItem(AUTHORIZATION_FLAG);
+      if (isAuthorized === 'true' && pathName === '/register') {
+        router.push('/accounts');
+        showSnackbar('Вы успешно вошли');
+        localStorage.removeItem(AUTHORIZATION_FLAG);
+        clearInterval(interval);
+      }
+      if (isAuthorized === 'false' && pathName === '/register') {
+        showSnackbar('Что-то пошло не так');
+        localStorage.removeItem(AUTHORIZATION_FLAG);
+        clearInterval(interval);
+      }
+    }, 1000);
+  }, []);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -109,6 +135,11 @@ export const RegisterForm = () => {
       <Button isLoading={isLoading} theme="default" type="submit" className={styles.button}>
         Зарегистрироваться
       </Button>
+
+      <div className={styles.socials}>
+        <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
+        <YandexLogin CLIENT_ID={CLIENT_ID} isDisabled={isLoading} />
+      </div>
     </form>
   );
 };
