@@ -6,7 +6,7 @@ import {AUTH_TOKEN} from '@/utils/consts';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'Аккаунты',
+  title: 'OnePassword - Профиль',
 };
 
 export default function AccountLayout({children}: {children: React.ReactNode}) {
