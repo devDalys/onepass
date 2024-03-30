@@ -7,6 +7,8 @@ export function middleware(request: NextRequest) {
     accounts: '/accounts',
     logout: '/logout',
   };
+  const rewriteRoute = 'authorized';
+
   const pathname = request.nextUrl.pathname;
 
   if (request.cookies.has(AUTH_TOKEN)) {
@@ -14,6 +16,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(privateRoutes.accounts, request.url));
     }
   }
+  if (request.url.includes(rewriteRoute)) return NextResponse.error();
 }
 
 export const config = {

@@ -28,6 +28,18 @@ const nextConfig = {
     return config;
   },
   reactStrictMode: false,
+  rewrites(){
+    return [
+      {
+        source: '/profile/:path*',
+        destination: '/authorized/profile/:path*'
+      },
+      {
+        source: '/accounts/:path*',
+        destination: '/authorized/accounts/:path*'
+      },
+    ]
+  }
 };
 
 module.exports = nextConfig;

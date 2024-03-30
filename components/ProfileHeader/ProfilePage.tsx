@@ -21,7 +21,6 @@ interface Props {
 }
 
 export const ProfilePage = ({profile}: Props) => {
-  const [isMounted, setIsMounted] = useState(false);
   const [isOnline, setOnline] = useState(false);
   const {showSnackbar} = useSnackbar();
   const {control, formState, reset, handleSubmit} = useForm<Form>({
@@ -33,9 +32,9 @@ export const ProfilePage = ({profile}: Props) => {
   const onSubmit = (props: Form) => {
     _api
       .put('/profile/me', props)
-      .then((data: AxiosResponse<Form>) => {
+      .then((data: AxiosResponse<{body: Form}>) => {
         showSnackbar('Профиль успешно обновлен');
-        reset({name: data.data.name, email: data.data.email});
+        reset({name: data.data.body.name, email: data.data.body.email});
         revalidateQuery();
       })
       .catch(() => {
@@ -43,12 +42,6 @@ export const ProfilePage = ({profile}: Props) => {
       });
   };
 
-  useEffect(() => {
-    if (profile?.name && !isMounted) {
-      reset({name: profile.name, email: profile.email});
-      setIsMounted(true);
-    }
-  }, [profile, reset]);
   useEffect(() => {
     setOnline(navigator.onLine);
 
@@ -118,6 +111,7 @@ export const ProfilePage = ({profile}: Props) => {
               <Button
                 className={styles.button}
                 theme="outline"
+                type="reset"
                 onClick={(event) => {
                   event.preventDefault();
                   reset({name: profile.name, email: profile.email});
