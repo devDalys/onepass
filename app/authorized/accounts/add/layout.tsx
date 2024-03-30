@@ -2,10 +2,10 @@ import {Metadata} from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'OnePassword - Аккаунты',
-  description: 'Список ваших аккаунтов, которые хранятся в OnePassword.',
+  title: 'OnePassword - Добавить новый аккаунт',
+  description: 'Добавить новый аккаунт в OnePassword',
   alternates: {
-    canonical: 'https://onepassword.ru/accounts',
+    canonical: 'https://onepassword.ru/accounts/add',
   },
 };
 
