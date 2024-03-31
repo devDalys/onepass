@@ -18,6 +18,7 @@
   max-height: 23.5rem;
   transition: max-height 0.2s linear;
   background: var(--neutral-card);
+  box-shadow: var(--wrapper-shadow);
   @include for-mobile {
     width: 100%;
   }

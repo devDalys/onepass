@@ -55,6 +55,7 @@
   width: 11rem;
   height: 15rem;
   overflow: hidden;
+  border-radius: 0.625rem;
   @include for-mobile{
     width: 100%;
     display: flex;
@@ -144,7 +145,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.625rem;
   color: var(--bg-color);
   background: #ffffff96;
   transition: all 0.2s;

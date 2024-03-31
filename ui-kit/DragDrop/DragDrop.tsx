@@ -89,7 +89,7 @@ export const DragDrop = () => {
           <>
             <div
               className={styles.loadingBackground}
-              style={{maxHeight: `${105 - loadingProgress}%`}}
+              style={{transform: `translateY(${-loadingProgress}%)`}}
             />
             <div className={styles.loadingText}>Загрузка... {loadingProgress}%</div>
           </>

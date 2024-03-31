@@ -21,6 +21,7 @@
   border-radius: 0.625rem;
   justify-content: space-between;
   background: var(--neutral-card);
+  box-shadow: var(--wrapper-shadow);
   @include for-mobile {
     padding: 0.5rem;
   }
@@ -53,6 +54,7 @@
 }
 
 .profile {
+  box-shadow: var(--wrapper-shadow);
   width: 60%;
   height: 10rem;
   display: flex;
