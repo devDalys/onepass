@@ -11,6 +11,7 @@ import {useRouter} from 'next/navigation';
 import {MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, validationMessages} from '@/utils/consts';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 import Link from 'next/link';
+import {getErrorMsg} from '@/utils/getErrorMsg';
 
 const schema = yup.object().shape({
   oldPassword: yup
@@ -66,7 +67,11 @@ export default function SecurityPage({profile}: Props) {
       .then(() => {
         showSnackbar('Вы успешно изменили пароль');
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Что-то пошло не так');
       });
   };
@@ -80,7 +85,11 @@ export default function SecurityPage({profile}: Props) {
       .then(() => {
         router.push('/exit');
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Не удалось удалить аккаунт');
       });
   };
@@ -96,7 +105,11 @@ export default function SecurityPage({profile}: Props) {
       .then(() => {
         showSnackbar('Письмо сброса отправлено на почту');
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Не удалось сбросить пароль, попробуйте позже');
       })
       .finally(() => {

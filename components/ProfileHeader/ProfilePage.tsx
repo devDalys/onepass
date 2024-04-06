@@ -10,6 +10,7 @@ import {revalidateQuery} from '@/api/revalidatePath';
 import {AxiosResponse} from 'axios';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 import ConfirmEmail from '@/components/ConfirmEmail/ConfirmEmail';
+import {getErrorMsg} from '@/utils/getErrorMsg';
 
 interface Form {
   name: string;
@@ -37,7 +38,11 @@ export const ProfilePage = ({profile}: Props) => {
         reset({name: data.data.body.name, email: data.data.body.email});
         revalidateQuery();
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Произошла ошибка обновления профиля');
       });
   };

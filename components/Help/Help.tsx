@@ -9,6 +9,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {_apiFetch} from '@/api/fetchClient';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import Link from 'next/link';
+import {getErrorMsg} from '@/utils/getErrorMsg';
 
 interface HelpForm {
   reason: string;
@@ -51,8 +52,12 @@ export default function Help({profile}: {profile: Profile}) {
         reset();
         showSnackbar('Письмо отправлено, ожидайте ответа');
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
         reset();
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Не удалось отправить письмо');
       });
   };

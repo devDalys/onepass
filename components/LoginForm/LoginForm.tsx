@@ -18,6 +18,7 @@ import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
 import {useEffect, useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
+import {getErrorMsg} from '@/utils/getErrorMsg';
 
 interface Form {
   email: string;
@@ -62,8 +63,14 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
         showSnackbar('Вы успешно вошли !');
         router.push('/accounts');
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Неверный логин или пароль');
+      })
+      .finally(() => {
         setLoading(false);
       });
   };

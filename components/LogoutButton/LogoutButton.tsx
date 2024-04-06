@@ -4,6 +4,7 @@ import styles from './LogoutButton.module.scss';
 import classNames from 'classnames';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {useRouter} from 'next/navigation';
+import {Button} from '@/ui-kit';
 
 interface LogoutButtonProps {
   className?: string;
@@ -20,8 +21,8 @@ export default function LogoutButton({className}: LogoutButtonProps) {
   };
 
   return (
-    <button className={classNames(styles.button, className)} onClick={onClick}>
+    <Button theme="default" className={classNames(styles.button, className)} onClick={onClick}>
       Выйти
-    </button>
+    </Button>
   );
 }

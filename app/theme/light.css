@@ -6,6 +6,7 @@
   --neutral-input: #545974;
   --neutral-card: #e6e6e6;
   --primary-default-gradient: linear-gradient(90deg, rgba(255,100,100,1) 0%, rgba(255,100,100,0.5270483193277311) 85%, rgba(255,255,255,0) 100%);
+  --primary-default-hover: #fa7676;
 
   --navmenu-bg: #f1f1f1;
   --navmenu-shadow: #fff;

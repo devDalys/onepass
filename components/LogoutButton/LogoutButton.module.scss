@@ -1,15 +1,6 @@
 @import '@/app/mixins';
 
 .button {
-  padding: 0.5rem;
-  background: var(--primary-default);
-  font-weight: 700;
-  outline: none;
-  border-radius: 0.625rem;
-  cursor: pointer;
-  color: #fff;
-  font-size: 1rem;
-  font-family: var(--play);
   @include for-mobile {
     display: none;
   }

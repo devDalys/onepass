@@ -6,7 +6,7 @@ import {useEffect, useState} from 'react';
 import {revalidateQuery} from '@/api/revalidatePath';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {_api} from '@/api';
-import {AxiosError} from 'axios';
+import {getErrorMsg} from '@/utils/getErrorMsg';
 
 interface Props {
   isEmailConfirmed: boolean;
@@ -32,7 +32,11 @@ export default function ConfirmEmail({isEmailConfirmed, email}: Props) {
       .then(() => {
         showSnackbar('Письмо для подтверждения отправлено на почту');
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Что-то пошло не так, попробуйте позже');
       });
   };
@@ -45,11 +49,12 @@ export default function ConfirmEmail({isEmailConfirmed, email}: Props) {
           revalidateQuery();
           showSnackbar('Почта подтверждена');
         })
-        .catch((err: AxiosError) => {
-          if (err?.response?.status === 401) {
-            return showSnackbar((err?.response?.data as any)?.msg || 'Что-то пошло не так');
+        .catch((e) => {
+          const msg = getErrorMsg(e);
+          if (msg) {
+            return showSnackbar(msg);
           }
-          showSnackbar('Не удалось подтвердить email, попробуйте заново');
+          showSnackbar('Не удалось подтвердить email, попробуйте позже');
         })
         .finally(() => {
           router.push('/profile');

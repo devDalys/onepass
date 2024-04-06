@@ -58,6 +58,7 @@ export const AccountCreator = ({
     Boolean((createMode || createMinifiedMode) && !disableEditDefault),
   );
   const [currAccount, setCurrentAccount] = useState(currentAccount);
+  const [isLoading, setLoading] = useState(false);
 
   const countAccounts = useMemo(() => {
     return profile?.accounts?.find((item) => item?.socialName === currAccount?.socialName)
@@ -79,6 +80,7 @@ export const AccountCreator = ({
   const socialName = watch('socialName') || 'Новый аккаунт';
 
   const handleSubmitForm = (form: IAccountItem) => {
+    setLoading((state) => !state);
     _api
       .request<{body: IAccountItem}>({
         data: form,
@@ -102,6 +104,9 @@ export const AccountCreator = ({
           setCurrentAccount(form);
           setIsEditMode(false);
         }
+      })
+      .finally(() => {
+        setLoading((state) => !state);
       });
   };
 
@@ -125,12 +130,12 @@ export const AccountCreator = ({
           [styles.hidden]: !formState.isDirty || !isEditMode,
         })}
         type="submit"
-        disabled={!formState.isValid}
+        disabled={!formState.isValid || isLoading}
       >
         Сохранить
       </Button>
       {editMode && (
-        <Button theme="outline" onClick={handleDelete}>
+        <Button disabled={isLoading} theme="outline" onClick={handleDelete}>
           Удалить
         </Button>
       )}

@@ -1,15 +1,18 @@
 .button {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-family: var(--play);
   padding: 5px 20px;
   border-radius: 0.625rem;
   min-width: 150px;
   max-width: max-content;
   cursor: pointer;
-  transition: filter 0.3s;
   font-weight: 700;
+  transition: filter 0.3s, background-color 0.2s linear;
   &:disabled {
     filter: grayscale(1);
+  }
+  &:hover{
+    background: var(--primary-default);
   }
 }
 
@@ -20,6 +23,10 @@
 }
 
 .default {
+  &:hover{
+    background: var(--primary-default-hover);
+    border-color: var(--primary-default-hover);
+  }
   background: var(--primary-default);
   color: white;
   border: 2px solid var(--primary-default);

@@ -18,6 +18,7 @@ import {
 } from '@/utils/consts';
 import VkLogin from '@/components/VkLogin/VkLogin';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
+import {getErrorMsg} from '@/utils/getErrorMsg';
 
 interface Form {
   name: string;
@@ -66,7 +67,10 @@ export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
       showSnackbar('Вы успешно зарегистрировались');
       router.push('/login');
     } catch (e) {
-      console.error(e);
+      const msg = getErrorMsg(e);
+      if (msg) {
+        return showSnackbar(msg);
+      }
       showSnackbar('Что-то пошло не так');
     } finally {
       setIsLoading(false);

@@ -10,6 +10,7 @@ import Upload from '@/assets/images/Upload.svg';
 import Accept from '@/assets/images/Accept.svg';
 import Cancel from '@/assets/images/Cancel.svg';
 import {AxiosProgressEvent} from 'axios';
+import {getErrorMsg} from '@/utils/getErrorMsg';
 
 const maxSize = 5 * 1024 * 1024;
 export const DragDrop = () => {
@@ -72,7 +73,11 @@ export const DragDrop = () => {
         showSnackbar('Фото профиля обновлено');
         revalidateQuery();
       })
-      .catch(() => {
+      .catch((e) => {
+        const msg = getErrorMsg(e);
+        if (msg) {
+          return showSnackbar(msg);
+        }
         showSnackbar('Не удалось обновить фото');
       })
       .finally(() => {

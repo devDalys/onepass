@@ -44,4 +44,9 @@
 .copyIcon {
   padding: 1rem 0 1rem 1rem;
   margin-left: auto;
+  transition: color 0.2s linear;
+  color: var(--primary-default);
+  &:hover{
+    color: var(--primary-default-hover);
+  }
 }
