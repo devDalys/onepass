@@ -76,7 +76,7 @@ export const DragDrop = () => {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg);
+          return showSnackbar(msg, false);
         }
         showSnackbar('Не удалось обновить фото');
       })

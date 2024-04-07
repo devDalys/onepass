@@ -27,11 +27,11 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     });
   };
 
-  const generateSnackbar = (text: string, id: string) => {
+  const generateSnackbar = (text: string, id: string, autoClose = true) => {
     return (
       <div
         onClick={() => handleHide(id)}
-        className={classNames(styles.snackbar)}
+        className={classNames(styles.snackbar, {[styles.withoutAnimation]: !autoClose})}
         onAnimationEnd={(e) => {
           if (e.animationName.includes(PROGRESS_ANIMATION_NAME)) {
             handleHide(id);
@@ -44,12 +44,12 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     );
   };
 
-  const showSnackbar = (text: string) => {
+  const showSnackbar = (text: string, autoClose?: boolean) => {
     const id = v4();
     if (Object.keys(Snackbars).length >= 5) return false;
     setSnackbars({
       ...Snackbars,
-      [id]: generateSnackbar(text, id),
+      [id]: generateSnackbar(text, id, autoClose),
     });
   };
 

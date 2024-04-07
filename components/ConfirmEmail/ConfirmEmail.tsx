@@ -35,7 +35,7 @@ export default function ConfirmEmail({isEmailConfirmed, email}: Props) {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg);
+          return showSnackbar(msg, false);
         }
         showSnackbar('Что-то пошло не так, попробуйте позже');
       });
@@ -52,7 +52,7 @@ export default function ConfirmEmail({isEmailConfirmed, email}: Props) {
         .catch((e) => {
           const msg = getErrorMsg(e);
           if (msg) {
-            return showSnackbar(msg);
+            return showSnackbar(msg, false);
           }
           showSnackbar('Не удалось подтвердить email, попробуйте позже');
         })

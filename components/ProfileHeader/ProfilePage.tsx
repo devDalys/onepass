@@ -41,7 +41,7 @@ export const ProfilePage = ({profile}: Props) => {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg);
+          return showSnackbar(msg, false);
         }
         showSnackbar('Произошла ошибка обновления профиля');
       });

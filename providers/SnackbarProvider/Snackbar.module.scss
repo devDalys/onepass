@@ -71,6 +71,17 @@
       display: none;
     }
   }
+
+  &.withoutAnimation{
+    animation: none;
+    &:after{
+      display: none;
+      animation: none;
+    }
+    @include for-mobile{
+      animation: none;
+    }
+  }
 }
 
 
