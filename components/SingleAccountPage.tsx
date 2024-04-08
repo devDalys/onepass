@@ -24,7 +24,6 @@ export default function SingleAccountPage({profile, id}: Props) {
         <AccountCreator
           profile={profile}
           editMode
-          disableEditDefault
           createMinifiedMode
           currentAccount={{...currAccount.accountEntries[0], socialName: currAccount.socialName}}
         />

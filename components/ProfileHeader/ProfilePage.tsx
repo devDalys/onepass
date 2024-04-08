@@ -30,6 +30,7 @@ export const ProfilePage = ({profile}: Props) => {
       email: profile?.email ?? '',
     },
   });
+  console.log(profile);
   const onSubmit = (props: Form) => {
     _api
       .put('/profile/me', props)

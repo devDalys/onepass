@@ -100,22 +100,6 @@
   }
 }
 
-@keyframes snackBarAnimationMobile {
-  0% {
-    opacity: 1;
-    left: -10rem;
-  }
-  20% {
-    left: 1rem;
-  }
-  80% {
-    left: 1rem;
-  }
-  100% {
-    left: -10rem;
-  }
-}
-
 @keyframes progressAnimation {
   0% {
     width: 100%;

@@ -20,7 +20,6 @@ interface Props {
   editMode?: boolean;
   createMinifiedMode?: boolean;
   withWrapper?: boolean;
-  disableEditDefault?: boolean;
   minifiedTitle?: boolean;
   profile?: Profile;
 }
@@ -49,21 +48,18 @@ export const AccountCreator = ({
   editMode = false,
   createMinifiedMode,
   withWrapper = true,
-  disableEditDefault = false,
   minifiedTitle = false,
   profile,
 }: Props) => {
   const {showSnackbar} = useSnackbar();
-  const [isEditMode, setIsEditMode] = useState(
-    Boolean((createMode || createMinifiedMode) && !disableEditDefault),
-  );
+  const [isEditMode, setIsEditMode] = useState(false);
   const [currAccount, setCurrentAccount] = useState(currentAccount);
   const [isLoading, setLoading] = useState(false);
 
   const countAccounts = useMemo(() => {
     return profile?.accounts?.find((item) => item?.socialName === currAccount?.socialName)
       ?.accountEntries.length;
-  }, [profile?.accounts]);
+  }, [currAccount?.socialName, profile?.accounts]);
   const router = useRouter();
 
   const {control, reset, formState, watch, handleSubmit} = useForm<IAccountItem>({
@@ -84,8 +80,8 @@ export const AccountCreator = ({
     _api
       .request<{body: IAccountItem}>({
         data: form,
-        url: createMode || createMinifiedMode ? '/accounts/add' : '/accounts/update',
-        method: createMode || createMinifiedMode ? 'POST' : 'PUT',
+        url: !editMode ? '/accounts/add' : '/accounts/update',
+        method: !editMode ? 'POST' : 'PUT',
       })
       .then(() => {
         revalidateQuery();
@@ -177,7 +173,7 @@ export const AccountCreator = ({
               render={({field: {ref, ...field}, fieldState}) => (
                 <Input
                   aliasText="Название"
-                  readOnly={!isEditMode}
+                  readOnly={editMode && !isEditMode}
                   {...field}
                   className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
                   errorText={fieldState.error?.message}
@@ -191,7 +187,7 @@ export const AccountCreator = ({
             render={({field: {ref, ...field}, fieldState}) => (
               <Input
                 aliasText="Логин"
-                readOnly={!isEditMode}
+                readOnly={editMode && !isEditMode}
                 {...field}
                 className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
                 errorText={fieldState.error?.message}
@@ -204,7 +200,7 @@ export const AccountCreator = ({
             render={({field: {ref, ...field}, fieldState}) => (
               <Input
                 aliasText="Пароль"
-                readOnly={!isEditMode}
+                readOnly={editMode && !isEditMode}
                 type={isEditMode ? 'text' : 'password'}
                 {...field}
                 className={classNames(styles.input, {[styles.editMode]: !isEditMode})}
