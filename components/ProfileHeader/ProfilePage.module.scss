@@ -93,3 +93,46 @@
     left: 0;
   }
 }
+
+.pageTitle {
+  color: var(--neutral-text);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  @include for-mobile {
+    font-size: 1.5rem;
+  }
+  &:not(:first-child) {
+    margin-top: 2rem;
+  }
+}
+
+.historyItem{
+  background: var(--bg-color);
+  color: var(--neutral-text);
+  width: max-content;
+  padding: 0.5rem 1rem;
+  border-radius: 0.625rem;
+  font-weight: 600;
+  outline: 1px solid var(--neutral-grey);
+  cursor: default;
+  @include for-mobile{
+    width: 100%;
+    outline: none;
+    border-radius: 0;
+  }
+}
+
+
+.history{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  @include for-mobile{
+    outline: 2px solid var(--neutral-grey);
+    border-radius: 0.625rem;
+    max-height: 7rem;
+    overflow: scroll;
+    gap: 0.2rem;
+  }
+}

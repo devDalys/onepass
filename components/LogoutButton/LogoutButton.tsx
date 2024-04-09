@@ -16,7 +16,7 @@ export default function LogoutButton({className}: LogoutButtonProps) {
   const onClick = () => {
     fetch('/api/logout').then(() => {
       showSnackbar('Вы успешно вышли из аккаунта');
-      router.push('/');
+      queueMicrotask(() => router.push('/'));
     });
   };
 

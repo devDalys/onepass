@@ -11,6 +11,7 @@ import {AxiosResponse} from 'axios';
 import {Profile} from '@/components/HeaderBlock/HeaderBlock.types';
 import ConfirmEmail from '@/components/ConfirmEmail/ConfirmEmail';
 import {getErrorMsg} from '@/utils/getErrorMsg';
+import {v4} from 'uuid';
 
 interface Form {
   name: string;
@@ -65,6 +66,7 @@ export const ProfilePage = ({profile}: Props) => {
 
   return (
     <div className={styles.wrapper}>
+      <h2 className={styles.pageTitle}>Редактирование профиля</h2>
       <ConfirmEmail isEmailConfirmed={profile.isEmailConfirmed} email={profile.email} />
       <div className={styles.profileWrapper}>
         <DragDrop />
@@ -78,13 +80,13 @@ export const ProfilePage = ({profile}: Props) => {
             <span className={styles.span}>
               Дата регистрации:
               <span className={styles.value}>
-                &nbsp;{new Date(profile.createdAt as Date).toLocaleDateString()}
+                &nbsp;{new Date(profile.createdAt as Date).toLocaleDateString('ru')}
               </span>
             </span>
             <span className={styles.span}>
               Последние изменения аккаунта:
               <span className={styles.value}>
-                &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString()}
+                &nbsp;{new Date(profile.updatedAt as Date).toLocaleDateString('ru')}
               </span>
             </span>
           </div>
@@ -136,6 +138,18 @@ export const ProfilePage = ({profile}: Props) => {
           </form>
         </div>
       </div>
+      {profile?.history?.length && (
+        <>
+          <h2 className={styles.pageTitle}>История изменений аккаунта</h2>
+          <div className={styles.history}>
+            {profile.history.map((action) => (
+              <div key={v4()} className={styles.historyItem}>
+                {action.action}&nbsp;{action.date}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
