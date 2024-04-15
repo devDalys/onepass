@@ -123,7 +123,7 @@ export const AccountCreator = ({
       <Button
         theme="default"
         className={classNames({
-          [styles.hidden]: !formState.isDirty || !isEditMode,
+          [styles.hidden]: !formState.isDirty,
         })}
         type="submit"
         disabled={!formState.isValid || isLoading}
