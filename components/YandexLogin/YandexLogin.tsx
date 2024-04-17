@@ -8,7 +8,6 @@ interface YandexLoginProps {
 
 export default function YandexLogin({CLIENT_ID, isDisabled}: YandexLoginProps) {
   useEffect(() => {
-    console.log(process.env['NEXT_PUBLIC_YANDEX_REDIRECT']);
     // @ts-ignore
     window.YaAuthSuggest.init(
       {
