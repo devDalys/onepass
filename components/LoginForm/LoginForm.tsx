@@ -81,7 +81,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
     const interval = setInterval(() => {
       const isAuthorized = localStorage.getItem(AUTHORIZATION_FLAG);
       if (isAuthorized === 'true' && pathName === '/login' && !params.size) {
-        router.push('/accounts');
+        router.replace('/accounts');
         showSnackbar('Вы успешно вошли');
         localStorage.removeItem(AUTHORIZATION_FLAG);
         clearInterval(interval);
