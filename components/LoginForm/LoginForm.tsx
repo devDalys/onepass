@@ -12,13 +12,14 @@ import {
   MIN_PASSWORD_LENGTH,
   validationMessages,
 } from '@/utils/consts';
-import {usePathname, useRouter} from 'next/navigation';
+import {usePathname, useRouter, useSearchParams} from 'next/navigation';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import VkLogin from '@/components/VkLogin/VkLogin';
 import {useEffect, useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
 import {getErrorMsg} from '@/utils/getErrorMsg';
+import Link from 'next/link';
 
 interface Form {
   email: string;
@@ -55,6 +56,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   const router = useRouter();
   const {showSnackbar} = useSnackbar();
   const pathName = usePathname();
+  const params = useSearchParams();
   const onSubmit = async (data: Form) => {
     setLoading(true);
     await _api
@@ -78,19 +80,19 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       const isAuthorized = localStorage.getItem(AUTHORIZATION_FLAG);
-      if (isAuthorized === 'true' && pathName === '/login') {
+      if (isAuthorized === 'true' && pathName === '/login' && !params.size) {
         router.push('/accounts');
         showSnackbar('Вы успешно вошли');
         localStorage.removeItem(AUTHORIZATION_FLAG);
         clearInterval(interval);
       }
-      if (isAuthorized === 'false' && pathName === '/login') {
+      if (isAuthorized === 'false' && pathName === '/login' && !params.size) {
         showSnackbar('Что-то пошло не так');
         localStorage.removeItem(AUTHORIZATION_FLAG);
         clearInterval(interval);
       }
     }, 1000);
-  }, []);
+  }, [params, pathName, router, showSnackbar]);
 
   return (
     <>
@@ -129,6 +131,9 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
           <Button className={styles.button} theme="default" type="submit" disabled={isLoading}>
             Войти
           </Button>
+          <Link href="/recovery" className={styles.recoveryLink}>
+            Забыли пароль?
+          </Link>
           <VkLogin APP_ID={APP_ID} redirectUrl={redirectUrl} />
           <YandexLogin CLIENT_ID={CLIENT_ID} isDisabled={isLoading} />
         </div>

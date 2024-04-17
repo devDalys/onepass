@@ -13,9 +13,9 @@ export default function YandexLogin({CLIENT_ID, isDisabled}: YandexLoginProps) {
       {
         client_id: CLIENT_ID,
         response_type: 'token',
-        redirect_uri: process.env['PUBLIC_YANDEX_REDIRECT'],
+        redirect_uri: process.env['NEXT_PUBLIC_YANDEX_REDIRECT'],
       },
-      process.env['PUBLIC_YANDEX_REDIRECT'],
+      process.env['NEXT_PUBLIC_YANDEX_REDIRECT'],
       {
         view: 'button',
         parentId: 'container',
