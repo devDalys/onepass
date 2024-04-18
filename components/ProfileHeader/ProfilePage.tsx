@@ -138,7 +138,7 @@ export const ProfilePage = ({profile}: Props) => {
           </form>
         </div>
       </div>
-      {profile?.history?.length && (
+      {!!profile?.history?.length && (
         <>
           <h2 className={styles.pageTitle}>История изменений аккаунта</h2>
           <div className={styles.history}>
