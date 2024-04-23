@@ -4,7 +4,7 @@ import React from 'react';
 import {checkAuthCookie} from '@/utils/checkAuthCookie';
 
 export default function AccountLayout({children}: {children: React.ReactNode}) {
-  if (checkAuthCookie()) return <NotFoundPage />;
+  if (!checkAuthCookie()) return <NotFoundPage />;
 
   return (
     <>

@@ -3,7 +3,6 @@ import {lazy, Suspense} from 'react';
 import {SuspenseLoader} from '@/ui-kit';
 import {notFound} from 'next/navigation';
 import {getProfile} from '@/components/Header/Header.api';
-import {checkAuthCookie} from '@/utils/checkAuthCookie';
 
 interface Props {
   params: {
@@ -17,7 +16,6 @@ export default async function ProfilePage(props: Props) {
     help: lazy(() => import('@/components/Help/Help')),
     about: lazy(() => import('@/components/AboutPage/AboutPage')),
   };
-  if (!checkAuthCookie()) return notFound();
   const profile = await getProfile();
   const LazyComponent = pages[props.params.subpage as keyof typeof pages] ?? notFound();
 
