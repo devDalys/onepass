@@ -99,7 +99,7 @@ export default function SecurityPage({profile}: Props) {
     if (recoveryInput !== profile?.email) return showSnackbar('Некорректный адрес почты');
 
     _api
-      .post('/auth/recovery', {
+      .post('/profile/recovery', {
         email: recoveryInput,
       })
       .then(() => {
