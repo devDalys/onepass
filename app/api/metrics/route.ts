@@ -1,5 +1,5 @@
 import {collectDefaultMetrics, Counter, register} from 'prom-client';
-import {NextApiRequest} from 'next';
+import {NextRequest} from 'next/server';
 
 collectDefaultMetrics();
 const httpRequestCount = new Counter({
@@ -8,7 +8,7 @@ const httpRequestCount = new Counter({
   labelNames: ['method', 'route', 'statusCode'],
 });
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
   try {
     httpRequestCount.inc({
       method: req.method,
