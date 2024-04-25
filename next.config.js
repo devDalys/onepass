@@ -38,6 +38,10 @@ const nextConfig = {
         source: '/accounts/:path*',
         destination: '/authorized/accounts/:path*'
       },
+      {
+        source: '/metrics',
+        destination: '/api/metrics'
+      }
     ]
   }
 };
