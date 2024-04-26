@@ -78,20 +78,15 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const isAuthorized = localStorage.getItem(AUTHORIZATION_FLAG);
-      if (isAuthorized === 'true' && pathName === '/login' && !params.size) {
+    const authBroadcast = new BroadcastChannel(AUTHORIZATION_FLAG);
+    authBroadcast.onmessage = (msg) => {
+      if (msg.data === true) {
         router.push('/accounts');
         showSnackbar('Вы успешно вошли');
-        localStorage.removeItem(AUTHORIZATION_FLAG);
-        clearInterval(interval);
-      }
-      if (isAuthorized === 'false' && pathName === '/login' && !params.size) {
+      } else {
         showSnackbar('Что-то пошло не так');
-        localStorage.removeItem(AUTHORIZATION_FLAG);
-        clearInterval(interval);
       }
-    }, 1000);
+    };
   }, [params, pathName, router, showSnackbar]);
 
   return (

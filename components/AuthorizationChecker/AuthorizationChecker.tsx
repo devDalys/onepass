@@ -17,17 +17,20 @@ export default function AuthorizationChecker() {
       if (isTokenExist) {
         setIsLoading(true);
         const token = window.location.hash.split('&')[0].replace('#access_token=', '');
+        const authBroadcast = new BroadcastChannel(AUTHORIZATION_FLAG);
         _api
           .post('/auth/login/social', {
             silence_token: token,
             social: 'Yandex',
           })
           .then(() => {
-            localStorage.setItem(AUTHORIZATION_FLAG, 'true');
-            window.close();
+            authBroadcast.postMessage(true);
           })
           .catch(() => {
-            localStorage.setItem(AUTHORIZATION_FLAG, 'false');
+            authBroadcast.postMessage(false);
+          })
+          .finally(() => {
+            window.close();
             setIsLoading(false);
           });
       }

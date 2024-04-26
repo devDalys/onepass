@@ -7,7 +7,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {_api} from '@/api';
 import React, {useEffect} from 'react';
 import {useSnackbar} from '@/providers/SnackbarProvider';
-import {usePathname, useRouter} from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import {
   AUTHORIZATION_FLAG,
   MAX_NAME_LENGTH,
@@ -59,7 +59,6 @@ export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const {showSnackbar} = useSnackbar();
   const router = useRouter();
-  const pathName = usePathname();
   const onSubmit = async (data: Form) => {
     try {
       setIsLoading(true);
@@ -78,21 +77,16 @@ export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const isAuthorized = localStorage.getItem(AUTHORIZATION_FLAG);
-      if (isAuthorized === 'true' && pathName === '/register') {
+    const authBroadcast = new BroadcastChannel(AUTHORIZATION_FLAG);
+    authBroadcast.onmessage = (msg) => {
+      if (msg.data === true) {
         router.push('/accounts');
         showSnackbar('Вы успешно вошли');
-        localStorage.removeItem(AUTHORIZATION_FLAG);
-        clearInterval(interval);
-      }
-      if (isAuthorized === 'false' && pathName === '/register') {
+      } else {
         showSnackbar('Что-то пошло не так');
-        localStorage.removeItem(AUTHORIZATION_FLAG);
-        clearInterval(interval);
       }
-    }, 1000);
-  }, []);
+    };
+  }, [router, showSnackbar]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
