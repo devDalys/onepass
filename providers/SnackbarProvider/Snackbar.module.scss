@@ -73,6 +73,7 @@
   }
 
   &.withoutAnimation{
+    background: var(--primary-default);
     animation: none;
     &:after{
       display: none;

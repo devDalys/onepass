@@ -24,6 +24,7 @@ interface Form {
   name: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 const schema = yup.object().shape({
   name: yup
@@ -36,6 +37,13 @@ const schema = yup.object().shape({
     .string()
     .min(MIN_PASSWORD_LENGTH, validationMessages.min(MIN_PASSWORD_LENGTH))
     .max(MAX_PASSWORD_LENGTH, validationMessages.min(MAX_PASSWORD_LENGTH))
+    .required(validationMessages.required()),
+  confirmPassword: yup
+    .string()
+    .test({
+      test: (value, context) => context.parent.password === value,
+      message: validationMessages.repeatValue('Пароли'),
+    })
     .required(validationMessages.required()),
 });
 
@@ -51,6 +59,7 @@ export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
       email: '',
       name: '',
       password: '',
+      confirmPassword: '',
     },
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
@@ -59,7 +68,7 @@ export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const {showSnackbar} = useSnackbar();
   const router = useRouter();
-  const onSubmit = async (data: Form) => {
+  const onSubmit = async ({confirmPassword, ...data}: Form) => {
     try {
       setIsLoading(true);
       await _api.post('/auth/register', data);
@@ -125,6 +134,20 @@ export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
             placeholder="******"
             type="password"
             autoComplete="new-password"
+            {...field}
+            errorText={fieldState.error?.message}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="confirmPassword"
+        render={({field: {ref, ...field}, fieldState}) => (
+          <Input
+            aliasText="Пароль повторно"
+            placeholder="******"
+            type="password"
+            autoComplete="off"
             {...field}
             errorText={fieldState.error?.message}
           />
