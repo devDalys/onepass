@@ -92,7 +92,7 @@ export default function Help({profile}: {profile: Profile}) {
           control={control}
           render={({field: {ref, ...inputProps}, fieldState}) => (
             <Input
-              placeholder="vasiliy@mail.ru"
+              placeholder="вашапочта@mail.ru"
               aliasText="Почта для ответа"
               errorText={fieldState.error?.message}
               {...inputProps}

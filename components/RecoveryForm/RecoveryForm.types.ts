@@ -11,6 +11,6 @@ interface SecondStepForm {
 interface Props {
   recovery?: {
     email: string;
-    staleTime: string;
+    staleTime: Date;
   };
 }

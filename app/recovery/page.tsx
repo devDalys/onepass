@@ -10,6 +10,7 @@ export default function RecoveryPage() {
   if (cookie) {
     try {
       recovery = JSON.parse(decodeURIComponent(cookie));
+      recovery.staleTime = new Date(recovery.staleTime);
     } catch (e) {
       recovery = undefined;
     }

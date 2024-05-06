@@ -99,7 +99,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
           render={({field: {ref, ...field}, fieldState}) => (
             <Input
               aliasText="Электронная почта"
-              placeholder="vasiliy@mail.ru"
+              placeholder="вашапочта@mail.ru"
               autoComplete="email"
               disabled={isLoading}
               {...field}

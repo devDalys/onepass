@@ -41,3 +41,35 @@
   align-items: center;
   flex-direction: column;
 }
+
+.actionBlock{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.repeatText{
+  font-weight: 500;
+  color: var(--neutral-text);
+  max-width: 70%;
+  text-align: center;
+}
+.repeatButton,
+.changeEmail{
+  color: var(--primary-default);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+  &:hover{
+    color: var(--neutral-text);
+  }
+}
+
+.changeEmail{
+  color: var(--neutral-grey);
+  &:hover{
+    color: var(--neutral-text);
+  }
+}

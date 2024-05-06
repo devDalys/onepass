@@ -8,7 +8,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {useSnackbar} from '@/providers/SnackbarProvider';
 import {getErrorMsg} from '@/utils/getErrorMsg';
 import {_api} from '@/api';
-import {useState} from 'react';
+import {useLayoutEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
 
 const scheme = yup.object().shape({
@@ -36,6 +36,9 @@ const sentCodeScheme = yup.object().shape({
 
 export default function RecoveryForm({recovery}: Props) {
   const [codeSentEmail, setCodeSentEmail] = useState(recovery?.email);
+  const [timer, setTimer] = useState(0);
+  const [cookieTime, setCookieTime] = useState(recovery?.staleTime);
+  const [isPageRendered, setPageRendered] = useState(false);
   const router = useRouter();
   const {control: firstStepControl, handleSubmit: firstStepSubmit} = useForm<FirstStepForm>({
     defaultValues: {
@@ -52,10 +55,36 @@ export default function RecoveryForm({recovery}: Props) {
     resolver: yupResolver(sentCodeScheme),
   });
   const {showSnackbar} = useSnackbar();
+  useLayoutEffect(() => {
+    setPageRendered(true);
+    if (cookieTime && !timer) {
+      const dateToCode = new Date(cookieTime.setMinutes(cookieTime.getMinutes() - 8));
+      const currDate = new Date();
+      const currentDiff = Math.round((dateToCode.getTime() - currDate.getTime()) / 1000);
+      if (currentDiff > 0) {
+        setTimer(currentDiff);
+
+        const interval = setInterval(() => {
+          let currNumber;
+          setTimer((timer) => {
+            currNumber = --timer;
+            if (currNumber <= 0) {
+              clearInterval(interval);
+              return 0;
+            }
+            return currNumber;
+          });
+        }, 1000);
+      }
+    }
+  }, [cookieTime, timer]);
+
   const onPostEmail = (form: FirstStepForm) => {
     _api
       .post('/auth/recovery', form)
       .then(() => {
+        const currDate = new Date();
+        setCookieTime(new Date(currDate.setMinutes(currDate.getMinutes() + 10)));
         setCodeSentEmail(form.email);
         showSnackbar('Письмо с кодом отправлено на почту');
       })
@@ -98,7 +127,7 @@ export default function RecoveryForm({recovery}: Props) {
               <Input
                 {...field}
                 aliasText="Адрес электронной почты"
-                placeholder="vasiliy@mail.ru"
+                placeholder="вашапочта@mail.ru"
                 errorText={fieldState.error?.message}
               />
             )}
@@ -145,7 +174,38 @@ export default function RecoveryForm({recovery}: Props) {
               />
             )}
           />
-          <Button theme="default">Сменить пароль</Button>
+          <div className={styles.actionBlock}>
+            {!!timer && (
+              <span className={styles.repeatText}>
+                Повторная отправка кода будет доступна через {timer}
+              </span>
+            )}
+            {!timer && (
+              <button
+                className={styles.repeatButton}
+                disabled={!!timer || !isPageRendered}
+                onClick={(event) => {
+                  event.preventDefault();
+                  onPostEmail({email: codeSentEmail});
+                }}
+              >
+                Отправить код ещё раз
+              </button>
+            )}
+            <button
+              className={styles.changeEmail}
+              disabled={!isPageRendered}
+              onClick={(event) => {
+                event.preventDefault();
+                setCodeSentEmail('');
+                setTimer(0);
+                setCookieTime(undefined);
+              }}
+            >
+              Ввести другой адрес
+            </button>
+            <Button theme="default">Сменить пароль</Button>
+          </div>
         </form>
       )}
     </div>
