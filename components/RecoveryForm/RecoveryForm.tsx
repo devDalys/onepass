@@ -40,7 +40,11 @@ export default function RecoveryForm({recovery}: Props) {
   const [cookieTime, setCookieTime] = useState(recovery?.staleTime);
   const [isPageRendered, setPageRendered] = useState(false);
   const router = useRouter();
-  const {control: firstStepControl, handleSubmit: firstStepSubmit} = useForm<FirstStepForm>({
+  const {
+    control: firstStepControl,
+    handleSubmit: firstStepSubmit,
+    reset,
+  } = useForm<FirstStepForm>({
     defaultValues: {
       email: recovery?.email ?? '',
     },
@@ -91,7 +95,7 @@ export default function RecoveryForm({recovery}: Props) {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg, false);
+          return showSnackbar(msg, true);
         }
         showSnackbar('Что-то пошло не так');
       });
@@ -106,7 +110,7 @@ export default function RecoveryForm({recovery}: Props) {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg, false);
+          return showSnackbar(msg, true);
         }
         showSnackbar('Что-то пошло не так');
       });
@@ -199,6 +203,7 @@ export default function RecoveryForm({recovery}: Props) {
                 event.preventDefault();
                 setCodeSentEmail('');
                 setTimer(0);
+                reset({email: ''});
                 setCookieTime(undefined);
               }}
             >

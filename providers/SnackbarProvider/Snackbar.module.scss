@@ -72,15 +72,13 @@
     }
   }
 
-  &.withoutAnimation{
+  &.withError{
     background: var(--primary-default);
-    animation: none;
+    animation-duration: var(--snackbar-error-delay);
+    color: #fff;
     &:after{
-      display: none;
-      animation: none;
-    }
-    @include for-mobile{
-      animation: none;
+      background: #fff;
+      animation-duration: var(--snackbar-error-delay);
     }
   }
 }

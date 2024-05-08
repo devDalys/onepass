@@ -56,7 +56,7 @@ export default function Help({profile}: {profile: Profile}) {
         const msg = getErrorMsg(e);
         reset();
         if (msg) {
-          return showSnackbar(msg, false);
+          return showSnackbar(msg, true);
         }
         showSnackbar('Не удалось отправить письмо');
       });

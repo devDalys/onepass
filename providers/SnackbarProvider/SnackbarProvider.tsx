@@ -7,7 +7,8 @@ import classNames from 'classnames';
 import {v4} from 'uuid';
 import Cancel from '@/assets/images/Cancel.svg';
 
-const visibleTime = 3000;
+const VISIBLE_TIME = 3000;
+const ERROR_VISIBLE_TIME = 4500;
 
 type Snackbar = Record<string, React.ReactNode>;
 const PROGRESS_ANIMATION_NAME = 'progressAnimation';
@@ -16,7 +17,8 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
   const [Snackbars, setSnackbars] = useState<Snackbar>({});
 
   useEffect(() => {
-    document.body.style.setProperty('--snackbar-delay', visibleTime.toString() + 'ms');
+    document.body.style.setProperty('--snackbar-delay', VISIBLE_TIME.toString() + 'ms');
+    document.body.style.setProperty('--snackbar-error-delay', ERROR_VISIBLE_TIME.toString() + 'ms');
   }, []);
 
   const handleHide = (id: string) => {
@@ -27,11 +29,11 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     });
   };
 
-  const generateSnackbar = (text: string, id: string, autoClose = true) => {
+  const generateSnackbar = (text: string, id: string, isError = false) => {
     return (
       <div
         onClick={() => handleHide(id)}
-        className={classNames(styles.snackbar, {[styles.withoutAnimation]: !autoClose})}
+        className={classNames(styles.snackbar, {[styles.withError]: isError})}
         onAnimationEnd={(e) => {
           if (e.animationName.includes(PROGRESS_ANIMATION_NAME)) {
             handleHide(id);
@@ -44,12 +46,12 @@ export const SnackbarProvider = ({children}: {children: React.ReactNode}) => {
     );
   };
 
-  const showSnackbar = (text: string, autoClose?: boolean) => {
+  const showSnackbar = (text: string, isError?: boolean) => {
     const id = v4();
     if (Object.keys(Snackbars).length >= 5) return false;
     setSnackbars({
       ...Snackbars,
-      [id]: generateSnackbar(text, id, autoClose),
+      [id]: generateSnackbar(text, id, isError),
     });
   };
 

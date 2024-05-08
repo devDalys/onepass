@@ -70,7 +70,7 @@ export default function SecurityPage({profile}: Props) {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg, false);
+          return showSnackbar(msg, true);
         }
         showSnackbar('Что-то пошло не так');
       });
@@ -88,7 +88,7 @@ export default function SecurityPage({profile}: Props) {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg, false);
+          return showSnackbar(msg, true);
         }
         showSnackbar('Не удалось удалить аккаунт');
       });
@@ -108,7 +108,7 @@ export default function SecurityPage({profile}: Props) {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg, false);
+          return showSnackbar(msg, true);
         }
         showSnackbar('Не удалось сбросить пароль, попробуйте позже');
       })

@@ -68,7 +68,7 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
       .catch((e) => {
         const msg = getErrorMsg(e);
         if (msg) {
-          return showSnackbar(msg, false);
+          return showSnackbar(msg, true);
         }
         showSnackbar('Неверный логин или пароль');
       })
