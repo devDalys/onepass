@@ -2,7 +2,7 @@
 import {useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import styles from './Image.module.scss';
-import notFound from '@/assets/images/not-found.svg?url';
+import notFound from '@/assets/images/no-profile.svg?url';
 import {SuspenseLoader} from '@/ui-kit';
 
 const classes = {

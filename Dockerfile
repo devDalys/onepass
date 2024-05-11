@@ -32,6 +32,11 @@ COPY --from=builder /usr/src/app/next.config.js ./
 COPY --from=builder /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/package.json .
+
+RUN mkdir -p /usr/src/app/.next/cache
+RUN ln -s /tmp /usr/src/app/.next/cache/fetch-cache
+RUN chown -R node /usr/src/app
+
 USER node
 EXPOSE 8080
 
