@@ -9,7 +9,7 @@ interface YandexLoginProps {
 export default function YandexLogin({CLIENT_ID, isDisabled}: YandexLoginProps) {
   useEffect(() => {
     // @ts-ignore
-    window.YaAuthSuggest.init(
+    window?.YaAuthSuggest?.init(
       {
         client_id: CLIENT_ID,
         response_type: 'token',

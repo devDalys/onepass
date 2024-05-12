@@ -19,6 +19,7 @@ import {
 import VkLogin from '@/components/VkLogin/VkLogin';
 import YandexLogin from '@/components/YandexLogin/YandexLogin';
 import {getErrorMsg} from '@/utils/getErrorMsg';
+import {delay} from '@/utils/delay';
 
 interface Form {
   name: string;
@@ -87,8 +88,9 @@ export const RegisterForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
 
   useEffect(() => {
     const authBroadcast = new BroadcastChannel(AUTHORIZATION_FLAG);
-    authBroadcast.onmessage = (msg) => {
+    authBroadcast.onmessage = async (msg) => {
       if (msg.data === true) {
+        await delay(500);
         router.push('/accounts');
         showSnackbar('Вы успешно вошли');
       } else {

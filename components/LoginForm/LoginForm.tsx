@@ -20,6 +20,7 @@ import {useEffect, useState} from 'react';
 import AuthorizationChecker from '@/components/AuthorizationChecker/AuthorizationChecker';
 import {getErrorMsg} from '@/utils/getErrorMsg';
 import Link from 'next/link';
+import {delay} from '@/utils/delay';
 
 interface Form {
   email: string;
@@ -79,8 +80,9 @@ export const LoginForm = ({CLIENT_ID, redirectUrl, APP_ID}: Props) => {
 
   useEffect(() => {
     const authBroadcast = new BroadcastChannel(AUTHORIZATION_FLAG);
-    authBroadcast.onmessage = (msg) => {
+    authBroadcast.onmessage = async (msg) => {
       if (msg.data === true) {
+        await delay(500);
         router.push('/accounts');
         showSnackbar('Вы успешно вошли');
       } else {
